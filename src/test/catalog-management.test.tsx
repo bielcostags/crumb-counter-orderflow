@@ -46,7 +46,7 @@ describe("Gestão administrativa do cardápio", () => {
     await screen.findByRole("heading", { name: "Categorias", level: 1 });
     fireEvent.click(screen.getByRole("link", { name: "Produtos" }));
     await screen.findByRole("heading", { name: "Produtos", level: 1 });
-    expect(screen.getByLabelText("Atendimento no balcão: em breve")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Atendimento no balcão" })).toBeInTheDocument();
   });
   it("cadastra produto e mostra no cardápio público", async () => {
     const router = await openCatalog();

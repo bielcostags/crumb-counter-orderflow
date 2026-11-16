@@ -122,7 +122,8 @@
   --sidebar-ring: var(--gold);
 
   --shadow-soft: 0 1px 2px oklch(0.365 0.048 44.2 / 6%), 0 2px 8px oklch(0.365 0.048 44.2 / 6%);
-  --shadow-card: 0 1px 2px oklch(0.365 0.048 44.2 / 8%), 0 8px 24px -12px oklch(0.365 0.048 44.2 / 18%);
+  --shadow-card:
+    0 1px 2px oklch(0.365 0.048 44.2 / 8%), 0 8px 24px -12px oklch(0.365 0.048 44.2 / 18%);
 }
 
 @layer base {
@@ -161,4 +162,25 @@
 
 @utility scrollbar-thin {
   scrollbar-width: thin;
+}
+
+/* Comprovante demonstrativo: impressão nativa, sem integrações fiscais. */
+@media print {
+  body:has(.pos-receipt) * {
+    visibility: hidden !important;
+  }
+  body:has(.pos-receipt) .pos-receipt,
+  body:has(.pos-receipt) .pos-receipt * {
+    visibility: visible !important;
+  }
+  body:has(.pos-receipt) .pos-receipt {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: white;
+    color: black;
+  }
 }

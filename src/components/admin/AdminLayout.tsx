@@ -19,13 +19,15 @@ export function AdminLayout({ children }: { children: ReactNode }) {
   const { signOut } = useAdminSession();
   const pathname = useLocation({ select: (l) => l.pathname });
   const now = useAdminClock();
-  const section = pathname.endsWith("produtos")
-    ? "Produtos"
-    : pathname.endsWith("categorias")
-      ? "Categorias"
-      : pathname.endsWith("pedidos")
-        ? "Gerenciamento de pedidos"
-        : "Visão geral";
+  const section = pathname.endsWith("balcao")
+    ? "Atendimento no balcão"
+    : pathname.endsWith("produtos")
+      ? "Produtos"
+      : pathname.endsWith("categorias")
+        ? "Categorias"
+        : pathname.endsWith("pedidos")
+          ? "Gerenciamento de pedidos"
+          : "Visão geral";
   const overview = section === "Visão geral";
   return (
     <div className="min-h-screen md:flex">
@@ -78,6 +80,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
             [
               { to: "/admin/produtos", label: "Produtos", Icon: ShoppingBag },
               { to: "/admin/categorias", label: "Categorias", Icon: Tags },
+              { to: "/admin/balcao", label: "Atendimento no balcão", Icon: Store },
             ] as const
           ).map(({ to, label, Icon }) => (
             <Button key={to} asChild variant={section === label ? "secondary" : "ghost"}>
@@ -91,17 +94,6 @@ export function AdminLayout({ children }: { children: ReactNode }) {
               </Link>
             </Button>
           ))}
-          <div
-            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground"
-            aria-label="Atendimento no balcão: em breve"
-          >
-            <Store className="h-4 w-4 shrink-0" aria-hidden />
-            {expanded && (
-              <span>
-                Atendimento no balcão <span className="block text-xs">Em breve</span>
-              </span>
-            )}
-          </div>
           <Button asChild variant="outline">
             <Link to="/" aria-label="Voltar ao cardápio">
               <ShoppingBag />

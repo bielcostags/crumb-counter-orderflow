@@ -183,7 +183,7 @@ const orders: OrderService = {
     cartStore.set([]);
     return order;
   },
-  async createCounterOrder(rawInput) {
+  async createCounterOrder(rawInput, expectedItems) {
     await delay();
     const parsed = counterOrderSchema.safeParse(rawInput);
     if (!parsed.success)
@@ -191,6 +191,14 @@ const orders: OrderService = {
     const input = parsed.data;
     const { products, categories, orders: all } = dataStore.get();
     const items = buildOrderItems(input.lines, products, categories);
+    if (expectedItems)
+      assertOrderQuote(
+        expectedItems,
+        items.map((item) => ({
+          ...item,
+          categoryId: products.find((p) => p.id === item.productId)!.categoryId,
+        })),
+      );
     const now = new Date().toISOString();
     const order: Order = {
       id: newId("o"),

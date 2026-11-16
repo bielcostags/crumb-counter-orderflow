@@ -6,7 +6,7 @@
  * com cálculo de preços/totais e transições de status validados no servidor
  * e políticas RLS protegendo cada tabela. A UI não precisa mudar.
  */
-import type { CheckoutInput, CounterOrderInput } from "@/lib/orders";
+import type { CheckoutInput, CounterOrderInput, OrderQuoteItem } from "@/lib/orders";
 import type { CartLine, Category, ID, Order, OrderItem, OrderStatus, Product } from "@/types";
 
 export interface CategoryInput {
@@ -43,7 +43,7 @@ export interface OrderService {
     expectedItems?: OrderItem[],
   ): Promise<Order>;
   /** Pedido presencial registrado no balcão. Entra na mesma fila. */
-  createCounterOrder(input: CounterOrderInput): Promise<Order>;
+  createCounterOrder(input: CounterOrderInput, expectedItems?: OrderQuoteItem[]): Promise<Order>;
   updateStatus(orderId: ID, to: OrderStatus): Promise<Order>;
   markPaid(orderId: ID): Promise<Order>;
 }

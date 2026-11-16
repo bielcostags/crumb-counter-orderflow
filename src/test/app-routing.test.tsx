@@ -17,6 +17,7 @@ describe("App routing", () => {
     "/admin/pedidos",
     "/admin/produtos",
     "/admin/categorias",
+    "/admin/balcao",
   ])("matches a page for %s instead of falling back to not found", (path) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
 

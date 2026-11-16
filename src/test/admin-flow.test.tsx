@@ -142,7 +142,10 @@ describe("Sessão e layout administrativo", () => {
   it("reutiliza sessão e recolhe o menu sem disponibilizar funcionalidades futuras", async () => {
     await open("/admin/");
     await screen.findByRole("heading", { name: "Visão geral", level: 1 });
-    expect(screen.getByLabelText("Atendimento no balcão: em breve")).toHaveTextContent("Em breve");
+    expect(screen.getByRole("link", { name: "Atendimento no balcão" })).toHaveAttribute(
+      "href",
+      "/admin/balcao",
+    );
     expect(screen.getByRole("link", { name: "Produtos" })).toHaveAttribute(
       "href",
       "/admin/produtos",
