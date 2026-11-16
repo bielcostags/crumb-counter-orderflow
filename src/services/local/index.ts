@@ -212,6 +212,8 @@ const orders: OrderService = {
     const order = findOrder(orderId);
     if (order.status === "cancelado")
       throw new OrderValidationError("Pedido cancelado não pode ser marcado como pago.");
+    if (order.paymentStatus === "pago")
+      throw new OrderValidationError("Pedido já marcado como pago.");
     const updated: Order = { ...order, paymentStatus: "pago", updatedAt: new Date().toISOString() };
     replaceOrder(updated);
     return updated;

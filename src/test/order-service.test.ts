@@ -141,3 +141,27 @@ describe("Revalidação do pedido online", () => {
     ).rejects.toThrow();
   });
 });
+
+describe("Recebimento demonstrativo", () => {
+  it("bloqueia recebimento repetido sem alterar valor nem histórico", async () => {
+    const order = await complete(localServices.orders.createOnlineOrder(checkout, lines));
+    const paid = await complete(localServices.orders.markPaid(order.id));
+    await expect(complete(localServices.orders.markPaid(order.id))).rejects.toThrow(
+      "já marcado como pago",
+    );
+    expect(dataStore.get().orders[0]).toEqual(paid);
+    expect(paid.totalCents).toBe(order.totalCents);
+    expect(paid.history).toEqual(order.history);
+  });
+  it("mantém recebimento independente da conclusão do preparo", async () => {
+    const order = await complete(localServices.orders.createOnlineOrder(checkout, lines));
+    for (const status of ["em_preparacao", "pronto", "concluido"] as const)
+      await complete(localServices.orders.updateStatus(order.id, status));
+    const paid = await complete(localServices.orders.markPaid(order.id));
+    expect(paid).toMatchObject({
+      status: "concluido",
+      paymentStatus: "pago",
+      totalCents: order.totalCents,
+    });
+  });
+});
