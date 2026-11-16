@@ -107,13 +107,22 @@ export function buildOrderItems(
   categories: Category[],
 ): OrderItem[] {
   if (lines.length === 0) throw new OrderValidationError("O pedido precisa ter ao menos um item.");
+  const seen = new Set<string>();
   return lines.map((line) => {
+    if (seen.has(line.productId)) throw new OrderValidationError("Produto repetido no pedido.");
+    seen.add(line.productId);
     const product = products.find((p) => p.id === line.productId);
     if (!product) throw new OrderValidationError("Um dos produtos não existe mais no cardápio.");
     if (!isProductSellable(product, categories))
       throw new OrderValidationError(`"${product.name}" está indisponível no momento.`);
     if (!isValidQuantity(line.quantity))
       throw new OrderValidationError(`Quantidade inválida para "${product.name}".`);
+    if (
+      !Number.isSafeInteger(product.priceCents) ||
+      product.priceCents <= 0 ||
+      !Number.isSafeInteger(product.priceCents * line.quantity)
+    )
+      throw new OrderValidationError(`Preço inválido para "${product.name}".`);
     const notes = line.notes?.trim().slice(0, MAX_NOTES_LENGTH) || undefined;
     return {
       productId: product.id,
@@ -127,7 +136,16 @@ export function buildOrderItems(
 }
 
 export function calcTotalCents(items: Pick<OrderItem, "subtotalCents">[]): number {
-  return items.reduce((sum, i) => sum + i.subtotalCents, 0);
+  return items.reduce((sum, i) => {
+    const total = sum + i.subtotalCents;
+    if (
+      !Number.isSafeInteger(i.subtotalCents) ||
+      i.subtotalCents < 0 ||
+      !Number.isSafeInteger(total)
+    )
+      throw new OrderValidationError("Total do pedido inválido.");
+    return total;
+  }, 0);
 }
 
 export function countItems(items: { quantity: number }[]): number {
@@ -146,12 +164,10 @@ export const checkoutSchema = z
       .trim()
       .min(2, "Informe um nome (fictício) com ao menos 2 letras.")
       .max(60, "Nome muito longo."),
-    customerPhone: z
-      .string()
-      .refine((v) => {
-        const d = onlyDigits(v);
-        return d.length === 10 || d.length === 11;
-      }, "Informe um telefone com DDD (10 ou 11 dígitos)."),
+    customerPhone: z.string().refine((v) => {
+      const d = onlyDigits(v);
+      return d.length === 10 || d.length === 11;
+    }, "Informe um telefone com DDD (10 ou 11 dígitos)."),
     fulfillment: z.enum(["retirada", "entrega"], {
       errorMap: () => ({ message: "Escolha retirada ou entrega." }),
     }),
@@ -172,6 +188,22 @@ export const checkoutSchema = z
   });
 
 export type CheckoutInput = z.infer<typeof checkoutSchema>;
+
+export const counterOrderSchema = z.object({
+  customerName: z.string().trim().max(60).optional(),
+  notes: z.string().trim().max(MAX_NOTES_LENGTH).optional(),
+  paymentMethod: z.enum(["pix", "dinheiro", "cartao"]),
+  paid: z.boolean(),
+  lines: z
+    .array(
+      z.object({
+        productId: z.string().min(1),
+        quantity: z.number().int().min(1).max(MAX_ITEM_QUANTITY),
+        notes: z.string().max(MAX_NOTES_LENGTH).optional(),
+      }),
+    )
+    .min(1, "O pedido precisa ter ao menos um item."),
+});
 
 export interface CounterOrderInput {
   customerName?: string;

@@ -53,7 +53,9 @@ export function ProductCard({ product, sellable }: { product: Product; sellable:
               addItem(product.id);
               toast.success(`${product.name} adicionado ao carrinho`);
             }}
-            aria-label={sellable ? `Adicionar ${product.name} ao carrinho` : `${product.name} indisponível`}
+            aria-label={
+              sellable ? `Adicionar ${product.name} ao carrinho` : `${product.name} indisponível`
+            }
           >
             {inCart ? <Check /> : <Plus />}
             {sellable ? (inCart ? `${inCart} no carrinho` : "Adicionar") : "Indisponível"}

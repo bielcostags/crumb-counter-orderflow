@@ -30,12 +30,7 @@ export type PaymentMethod = "pix" | "dinheiro" | "cartao";
 export type PaymentStatus = "pendente" | "pago";
 
 export type OrderStatus =
-  | "pendente"
-  | "em_preparacao"
-  | "pronto"
-  | "saiu_para_entrega"
-  | "concluido"
-  | "cancelado";
+  "pendente" | "em_preparacao" | "pronto" | "saiu_para_entrega" | "concluido" | "cancelado";
 
 /** Snapshot do produto no momento do pedido (nome e preço não mudam depois). */
 export interface OrderItem {

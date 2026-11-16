@@ -8,6 +8,7 @@ import {
   calcTotalCents,
   canTransition,
   checkoutSchema,
+  counterOrderSchema,
   MAX_NOTES_LENGTH,
   nextOrderNumber,
   OrderValidationError,
@@ -30,7 +31,10 @@ function findOrder(id: string): Order {
 }
 
 function replaceOrder(updated: Order) {
-  dataStore.set((s) => ({ ...s, orders: s.orders.map((o) => (o.id === updated.id ? updated : o)) }));
+  dataStore.set((s) => ({
+    ...s,
+    orders: s.orders.map((o) => (o.id === updated.id ? updated : o)),
+  }));
 }
 
 const catalog: CatalogService = {
@@ -50,8 +54,16 @@ const catalog: CatalogService = {
     if (id) {
       const current = categories.find((c) => c.id === id);
       if (!current) throw new OrderValidationError("Categoria não encontrada.");
-      saved = { ...current, name, description: input.description?.trim() || undefined, active: input.active };
-      dataStore.set((s) => ({ ...s, categories: s.categories.map((c) => (c.id === id ? saved : c)) }));
+      saved = {
+        ...current,
+        name,
+        description: input.description?.trim() || undefined,
+        active: input.active,
+      };
+      dataStore.set((s) => ({
+        ...s,
+        categories: s.categories.map((c) => (c.id === id ? saved : c)),
+      }));
     } else {
       saved = {
         id: newId("cat"),
@@ -69,7 +81,10 @@ const catalog: CatalogService = {
     const current = dataStore.get().categories.find((c) => c.id === id);
     if (!current) throw new OrderValidationError("Categoria não encontrada.");
     const saved = { ...current, active };
-    dataStore.set((s) => ({ ...s, categories: s.categories.map((c) => (c.id === id ? saved : c)) }));
+    dataStore.set((s) => ({
+      ...s,
+      categories: s.categories.map((c) => (c.id === id ? saved : c)),
+    }));
     return saved;
   },
   async listProducts() {
@@ -80,7 +95,7 @@ const catalog: CatalogService = {
     await delay();
     const name = input.name.trim();
     if (name.length < 2) throw new OrderValidationError("Nome do produto muito curto.");
-    if (!Number.isInteger(input.priceCents) || input.priceCents <= 0)
+    if (!Number.isSafeInteger(input.priceCents) || input.priceCents <= 0)
       throw new OrderValidationError("O preço deve ser maior que zero.");
     if (!dataStore.get().categories.some((c) => c.id === input.categoryId))
       throw new OrderValidationError("Selecione uma categoria válida.");
@@ -118,7 +133,8 @@ const orders: OrderService = {
   async createOnlineOrder(rawInput, lines) {
     await delay();
     const parsed = checkoutSchema.safeParse(rawInput);
-    if (!parsed.success) throw new OrderValidationError(parsed.error.issues[0]?.message ?? "Dados inválidos.");
+    if (!parsed.success)
+      throw new OrderValidationError(parsed.error.issues[0]?.message ?? "Dados inválidos.");
     const input = parsed.data;
     const { products, categories, orders: all } = dataStore.get();
     const items = buildOrderItems(lines, products, categories);
@@ -145,8 +161,12 @@ const orders: OrderService = {
     cartStore.set([]);
     return order;
   },
-  async createCounterOrder(input) {
+  async createCounterOrder(rawInput) {
     await delay();
+    const parsed = counterOrderSchema.safeParse(rawInput);
+    if (!parsed.success)
+      throw new OrderValidationError(parsed.error.issues[0]?.message ?? "Dados inválidos.");
+    const input = parsed.data;
     const { products, categories, orders: all } = dataStore.get();
     const items = buildOrderItems(input.lines, products, categories);
     const now = new Date().toISOString();
@@ -178,14 +198,20 @@ const orders: OrderService = {
       );
     }
     const now = new Date().toISOString();
-    const updated: Order = { ...order, status: to, updatedAt: now, history: [...order.history, { status: to, at: now }] };
+    const updated: Order = {
+      ...order,
+      status: to,
+      updatedAt: now,
+      history: [...order.history, { status: to, at: now }],
+    };
     replaceOrder(updated);
     return updated;
   },
   async markPaid(orderId) {
     await delay();
     const order = findOrder(orderId);
-    if (order.status === "cancelado") throw new OrderValidationError("Pedido cancelado não pode ser marcado como pago.");
+    if (order.status === "cancelado")
+      throw new OrderValidationError("Pedido cancelado não pode ser marcado como pago.");
     const updated: Order = { ...order, paymentStatus: "pago", updatedAt: new Date().toISOString() };
     replaceOrder(updated);
     return updated;

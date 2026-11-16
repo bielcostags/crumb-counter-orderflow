@@ -18,12 +18,14 @@ export const Route = createFileRoute("/")({
       { title: "Cardápio — Padaria Digital" },
       {
         name: "description",
-        content: "Pães, bolos, salgados e bebidas. Peça online para retirada ou entrega (demonstração).",
+        content:
+          "Pães, bolos, salgados e bebidas. Peça online para retirada ou entrega (demonstração).",
       },
       { property: "og:title", content: "Cardápio — Padaria Digital" },
       {
         property: "og:description",
-        content: "Pães, bolos, salgados e bebidas. Peça online para retirada ou entrega (demonstração).",
+        content:
+          "Pães, bolos, salgados e bebidas. Peça online para retirada ou entrega (demonstração).",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -33,7 +35,11 @@ export const Route = createFileRoute("/")({
 });
 
 const normalize = (s: string) =>
-  s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
 
 function MenuPage() {
   const catalog = usePublicCatalog();
@@ -67,9 +73,18 @@ function MenuPage() {
               Pães, bolos e cafés para levar ou receber em casa
             </h1>
             <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
-              <li className="flex items-center gap-1.5"><ShoppingBag className="h-4 w-4 text-success" aria-hidden />Retirada no balcão</li>
-              <li className="flex items-center gap-1.5"><Bike className="h-4 w-4 text-success" aria-hidden />Entrega na região</li>
-              <li className="flex items-center gap-1.5"><Wallet className="h-4 w-4 text-success" aria-hidden />Pague ao receber</li>
+              <li className="flex items-center gap-1.5">
+                <ShoppingBag className="h-4 w-4 text-success" aria-hidden />
+                Retirada no balcão
+              </li>
+              <li className="flex items-center gap-1.5">
+                <Bike className="h-4 w-4 text-success" aria-hidden />
+                Entrega na região
+              </li>
+              <li className="flex items-center gap-1.5">
+                <Wallet className="h-4 w-4 text-success" aria-hidden />
+                Pague ao receber
+              </li>
             </ul>
             <DemoNotice compact className="mt-5" />
           </div>
@@ -86,7 +101,10 @@ function MenuPage() {
       <div className="mx-auto max-w-6xl px-4 pb-28 pt-6">
         <div className="sticky top-16 z-20 -mx-4 space-y-3 bg-background/95 px-4 py-3 backdrop-blur">
           <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+            <Search
+              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+              aria-hidden
+            />
             <Input
               type="search"
               value={query}
@@ -106,7 +124,11 @@ function MenuPage() {
               </button>
             )}
           </div>
-          <div className="scrollbar-thin -mx-4 flex gap-2 overflow-x-auto px-4 pb-1" role="group" aria-label="Filtrar por categoria">
+          <div
+            className="scrollbar-thin -mx-4 flex gap-2 overflow-x-auto px-4 pb-1"
+            role="group"
+            aria-label="Filtrar por categoria"
+          >
             {[{ id: "all", name: "Todos" }, ...(catalog?.categories ?? [])].map((c) => {
               const active = categoryId === c.id;
               return (
@@ -117,7 +139,9 @@ function MenuPage() {
                   onClick={() => setCategoryId(c.id)}
                   className={cn(
                     "shrink-0 rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2",
-                    active ? "border-primary bg-primary text-primary-foreground" : "bg-card text-foreground hover:bg-accent",
+                    active
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "bg-card text-foreground hover:bg-accent",
                   )}
                 >
                   {c.name}
@@ -133,7 +157,11 @@ function MenuPage() {
           <EmptyState
             className="mt-6"
             icon={SearchX}
-            title={catalog.products.length === 0 ? "Cardápio vazio no momento" : "Nenhum produto encontrado"}
+            title={
+              catalog.products.length === 0
+                ? "Cardápio vazio no momento"
+                : "Nenhum produto encontrado"
+            }
             description={
               catalog.products.length === 0
                 ? "Nenhuma categoria ativa com produtos. Volte mais tarde."
@@ -141,7 +169,13 @@ function MenuPage() {
             }
             action={
               (query || categoryId !== "all") && (
-                <Button variant="outline" onClick={() => { setQuery(""); setCategoryId("all"); }}>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setQuery("");
+                    setCategoryId("all");
+                  }}
+                >
                   Limpar filtros
                 </Button>
               )

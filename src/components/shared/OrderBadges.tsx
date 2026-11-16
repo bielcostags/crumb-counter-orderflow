@@ -4,7 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { FULFILLMENT_LABELS, STATUS_LABELS } from "@/lib/orders";
 import type { FulfillmentType, OrderChannel, OrderStatus, PaymentStatus } from "@/types";
 
-const STATUS_VARIANT: Record<OrderStatus, "warning" | "caramel" | "success" | "gold" | "muted" | "destructive"> = {
+const STATUS_VARIANT: Record<
+  OrderStatus,
+  "warning" | "caramel" | "success" | "gold" | "muted" | "destructive"
+> = {
   pendente: "warning",
   em_preparacao: "caramel",
   pronto: "success",

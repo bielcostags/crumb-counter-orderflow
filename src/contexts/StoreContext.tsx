@@ -18,7 +18,9 @@ const getServerSnapshot = () => null;
 export function StoreProvider({ children }: { children: ReactNode }) {
   const data = useSyncExternalStore(dataStore.subscribe, dataStore.get, getServerSnapshot);
   return (
-    <StoreContext.Provider value={{ data, services: localServices }}>{children}</StoreContext.Provider>
+    <StoreContext.Provider value={{ data, services: localServices }}>
+      {children}
+    </StoreContext.Provider>
   );
 }
 

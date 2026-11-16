@@ -86,13 +86,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Padaria Digital — Protótipo de demonstração" },
       {
         name: "description",
-        content: "Cardápio digital e gestão de pedidos online e de balcão para padarias (demonstração).",
+        content:
+          "Cardápio digital e gestão de pedidos online e de balcão para padarias (demonstração).",
       },
       { name: "author", content: "Padaria Digital" },
       { property: "og:title", content: "Padaria Digital — Protótipo de demonstração" },
       {
         property: "og:description",
-        content: "Cardápio digital e gestão de pedidos online e de balcão para padarias (demonstração).",
+        content:
+          "Cardápio digital e gestão de pedidos online e de balcão para padarias (demonstração).",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

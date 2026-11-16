@@ -14,9 +14,15 @@ export const Route = createFileRoute("/carrinho")({
   head: () => ({
     meta: [
       { title: "Carrinho — Padaria Digital" },
-      { name: "description", content: "Revise itens, quantidades e observações do seu pedido (demonstração)." },
+      {
+        name: "description",
+        content: "Revise itens, quantidades e observações do seu pedido (demonstração).",
+      },
       { property: "og:title", content: "Carrinho — Padaria Digital" },
-      { property: "og:description", content: "Revise itens, quantidades e observações do seu pedido." },
+      {
+        property: "og:description",
+        content: "Revise itens, quantidades e observações do seu pedido.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -28,10 +34,18 @@ function CartPage() {
   const catalog = usePublicCatalog();
   const { lines, setQuantity, setNotes, removeItem } = useCart();
 
-  if (!catalog || !lines) return <PublicLayout><LoadingBlock /></PublicLayout>;
+  if (!catalog || !lines)
+    return (
+      <PublicLayout>
+        <LoadingBlock />
+      </PublicLayout>
+    );
 
   const rows = lines.map((l) => ({ line: l, product: catalog.productById(l.productId) }));
-  const total = rows.reduce((s, r) => s + (r.product ? r.product.priceCents * r.line.quantity : 0), 0);
+  const total = rows.reduce(
+    (s, r) => s + (r.product ? r.product.priceCents * r.line.quantity : 0),
+    0,
+  );
 
   return (
     <PublicLayout>
@@ -43,7 +57,11 @@ function CartPage() {
             icon={ShoppingBasket}
             title="Seu carrinho está vazio"
             description="Adicione produtos do cardápio para fazer um pedido."
-            action={<Button asChild><Link to="/">Ver cardápio</Link></Button>}
+            action={
+              <Button asChild>
+                <Link to="/">Ver cardápio</Link>
+              </Button>
+            }
           />
         ) : (
           <>
@@ -53,15 +71,30 @@ function CartPage() {
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="font-semibold">{product?.name ?? "Produto removido"}</p>
-                      {product && <p className="text-sm text-muted-foreground">{formatBRL(product.priceCents)} cada</p>}
+                      {product && (
+                        <p className="text-sm text-muted-foreground">
+                          {formatBRL(product.priceCents)} cada
+                        </p>
+                      )}
                     </div>
-                    <Button variant="ghost" size="icon" onClick={() => removeItem(line.productId)} aria-label="Remover item">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => removeItem(line.productId)}
+                      aria-label="Remover item"
+                    >
                       <Trash2 />
                     </Button>
                   </div>
                   <div className="mt-3 flex items-center justify-between gap-3">
-                    <QuantityStepper value={line.quantity} onChange={(q) => setQuantity(line.productId, q)} label={product?.name ?? "item"} />
-                    <p className="font-semibold tabular-nums">{product ? formatBRL(product.priceCents * line.quantity) : "—"}</p>
+                    <QuantityStepper
+                      value={line.quantity}
+                      onChange={(q) => setQuantity(line.productId, q)}
+                      label={product?.name ?? "item"}
+                    />
+                    <p className="font-semibold tabular-nums">
+                      {product ? formatBRL(product.priceCents * line.quantity) : "—"}
+                    </p>
                   </div>
                   <Textarea
                     className="mt-3"
@@ -75,7 +108,9 @@ function CartPage() {
             </ul>
             <div className="mt-6 flex items-center justify-between rounded-xl border bg-card p-4">
               <span className="font-medium">Total</span>
-              <span className="font-display text-xl font-semibold text-primary tabular-nums">{formatBRL(total)}</span>
+              <span className="font-display text-xl font-semibold text-primary tabular-nums">
+                {formatBRL(total)}
+              </span>
             </div>
             <p className="mt-3 text-sm text-muted-foreground">
               A finalização do pedido (checkout) ainda não foi concluída nesta versão do protótipo.

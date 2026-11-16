@@ -12,7 +12,11 @@ interface Props {
 
 export function QuantityStepper({ value, onChange, label, min = 1 }: Props) {
   return (
-    <div className="inline-flex items-center rounded-lg border bg-card" role="group" aria-label={`Quantidade de ${label}`}>
+    <div
+      className="inline-flex items-center rounded-lg border bg-card"
+      role="group"
+      aria-label={`Quantidade de ${label}`}
+    >
       <Button
         type="button"
         variant="ghost"

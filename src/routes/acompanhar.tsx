@@ -8,7 +8,10 @@ export const Route = createFileRoute("/acompanhar")({
   head: () => ({
     meta: [
       { title: "Acompanhar pedido — Padaria Digital" },
-      { name: "description", content: "Acompanhe o status do seu pedido pelo número (demonstração)." },
+      {
+        name: "description",
+        content: "Acompanhe o status do seu pedido pelo número (demonstração).",
+      },
       { property: "og:title", content: "Acompanhar pedido — Padaria Digital" },
       { property: "og:description", content: "Acompanhe o status do seu pedido pelo número." },
       { property: "og:type", content: "website" },
@@ -22,7 +25,11 @@ function TrackPage() {
   return (
     <PublicLayout>
       <div className="mx-auto max-w-3xl px-4 py-8">
-        <EmptyState icon={ClipboardList} title="Acompanhamento em construção" description="Esta tela ainda não foi concluída no protótipo." />
+        <EmptyState
+          icon={ClipboardList}
+          title="Acompanhamento em construção"
+          description="Esta tela ainda não foi concluída no protótipo."
+        />
       </div>
     </PublicLayout>
   );
