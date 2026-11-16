@@ -90,3 +90,54 @@ describe("Serviço local de pedidos", () => {
     ).rejects.toThrow();
   });
 });
+
+describe("Revalidação do pedido online", () => {
+  it("rejeita carrinho vazio sem registrar pedido", async () => {
+    const before = dataStore.get();
+    await expect(complete(localServices.orders.createOnlineOrder(checkout, []))).rejects.toThrow();
+    expect(dataStore.get()).toBe(before);
+  });
+  it("revalida disponibilidade e preserva o carrinho ao falhar", async () => {
+    cartStore.set(lines);
+    dataStore.set((s) => ({ ...s, products: s.products.map((p) => ({ ...p, available: false })) }));
+    const before = dataStore.get();
+    await expect(complete(localServices.orders.createOnlineOrder(checkout, lines))).rejects.toThrow(
+      "indisponível",
+    );
+    expect(cartStore.get()).toEqual(lines);
+    expect(dataStore.get()).toBe(before);
+  });
+  it("recalcula o preço atual do catálogo no registro", async () => {
+    dataStore.set((s) => ({
+      ...s,
+      products: s.products.map((p) =>
+        p.id === lines[0]!.productId ? { ...p, priceCents: 150 } : p,
+      ),
+    }));
+    const order = await complete(localServices.orders.createOnlineOrder(checkout, lines));
+    expect(order.totalCents).toBe(300);
+    expect(order.items[0]?.unitPriceCents).toBe(150);
+    expect(await complete(localServices.orders.getOrderByNumber(order.number))).toEqual(order);
+    expect(await complete(localServices.orders.getOrderByNumber(999999))).toBeNull();
+  });
+  it.each(["retirada", "entrega"] as const)("executa todo o fluxo de %s", async (fulfillment) => {
+    const order = await complete(
+      localServices.orders.createOnlineOrder(
+        { ...checkout, fulfillment, address: "Rua Fictícia, 123" },
+        lines,
+      ),
+    );
+    const statuses =
+      fulfillment === "entrega"
+        ? (["em_preparacao", "pronto", "saiu_para_entrega", "concluido"] as const)
+        : (["em_preparacao", "pronto", "concluido"] as const);
+    for (const status of statuses)
+      await complete(localServices.orders.updateStatus(order.id, status));
+    const saved = await complete(localServices.orders.getOrderByNumber(order.number));
+    expect(saved?.status).toBe("concluido");
+    expect(saved?.history.map((e) => e.status)).toEqual(["pendente", ...statuses]);
+    await expect(
+      complete(localServices.orders.updateStatus(order.id, "cancelado")),
+    ).rejects.toThrow();
+  });
+});

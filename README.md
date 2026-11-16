@@ -27,7 +27,7 @@ bun run preview
 
 - React 19 e TypeScript, com TanStack Start/Router para SSR e rotas por arquivo.
 - Tailwind CSS v4, shadcn/ui, Radix e Lucide. Identidade visual em `src/styles.css`: marrom, caramelo, dourado, bege e verde; fontes Poppins e Inter.
-- `src/routes/`: cardápio (`/`), carrinho (`/carrinho`), acompanhamento (`/acompanhar`) e equipe (`/admin`). O arquivo `routeTree.gen.ts` é gerado pelo TanStack e não deve ser editado manualmente.
+- `src/routes/`: cardápio (`/`), carrinho (`/carrinho`), checkout (`/checkout`), acompanhamento (`/acompanhar`) e equipe (`/admin`). O arquivo `routeTree.gen.ts` é gerado pelo TanStack e não deve ser editado manualmente.
 - `src/types/`: tipos de catálogo, carrinho e pedidos.
 - `src/lib/orders.ts`: regras puras de validação, totais, fluxo de status e métricas.
 - `src/services/contracts.ts`: contratos de catálogo, pedidos e restauração da demo.
@@ -43,7 +43,13 @@ Os contratos facilitam uma futura implementação remota. A leitura reativa atua
 
 O cardápio possui pesquisa, filtro por categoria e bloqueio de produtos indisponíveis. O carrinho permite alterar quantidades, remover itens e registrar observações por produto.
 
-Os serviços já suportam pedidos online e de balcão na mesma coleção, alteração de status, pagamento demonstrativo e manutenção do catálogo. Essas operações ainda não possuem todas as telas: checkout, acompanhamento, login demonstrativo, dashboard, Kanban, produtos, categorias e balcão permanecem pendentes. As rotas de acompanhamento e equipe exibem avisos de construção.
+O fluxo online está disponível: cardápio → carrinho → `/checkout` → confirmação → `/acompanhar?numero=1015` (exemplo de número). O checkout valida os dados com `checkoutSchema`, mostra o resumo e usa `createOnlineOrder`, que revalida preços, quantidades e disponibilidade antes do registro. Durante o envio, os campos ficam bloqueados e uma trava síncrona impede submissões repetidas. O carrinho é limpo pelo serviço somente após a criação bem-sucedida; erros preservam os itens e permitem nova tentativa.
+
+A confirmação mostra o número, itens, total, recebimento, pagamento e status, com links para acompanhamento e cardápio. O acompanhamento consulta os pedidos do store reativo pelo número, mostra status, linha do tempo e histórico, inclusive cancelamento, sem renderizar nome, telefone, endereço ou observações potencialmente pessoais. Alterações locais são refletidas sem recarregar. A consulta é local e não sincroniza entre dispositivos.
+
+Para experimentar, adicione produtos disponíveis, finalize com nome/telefone fictícios e escolha retirada ou entrega (com endereço fictício). O pagamento é apenas uma seleção de como pagar ao receber: não existe cobrança online. A consulta também permite ver os pedidos fictícios iniciais, números 1001 a 1014. Não há estimativas de entrega.
+
+Os serviços também suportam pedidos de balcão, alteração de status, pagamento demonstrativo e manutenção do catálogo. Login demonstrativo, dashboard, Kanban, produtos, categorias e balcão ainda não possuem telas completas; a rota da equipe continua em construção.
 
 ## Regras de pedidos
 
@@ -75,8 +81,8 @@ O build pode emitir avisos do scaffold sobre `vite-tsconfig-paths` e `inlineDyna
 - O parser do store persistido verifica apenas a estrutura externa; validação profunda e recuperação de registros corrompidos ainda precisam ser tratadas.
 - A sincronização entre abas não fornece transações: edições simultâneas podem sobrescrever dados. Não existe sincronização entre dispositivos.
 - Os dados iniciais são criados ao iniciar/restaurar a demo; não mudam de dia automaticamente. Datas e métricas usam o fuso do navegador.
-- Os testes desta etapa não incluem navegação ponta a ponta nem auditoria visual no navegador.
-- A próxima etapa funcional pode conectar checkout e acompanhamento aos serviços e implementar a fila administrativa. Essa implementação não faz parte desta validação.
+- A validação inicial não incluiu navegação ponta a ponta. A Sprint 02 adiciona integração de telas e navegação com TanStack Router em memória/jsdom, sem auditoria visual ou teste ponta a ponta em navegador real.
+- Checkout e acompanhamento foram implementados na Sprint 02. A próxima etapa recomendada é a fila administrativa demonstrativa, seguida do balcão. Veja [relatório da Sprint 02](docs/sprints/SPRINT-02.md).
 - Antes de produção: backend com validação e cálculo server-side, numeração transacional, Supabase Auth, autorização por papéis/RLS, validação completa dos dados e proteção das informações pessoais.
 
 ## Integração Lovable
