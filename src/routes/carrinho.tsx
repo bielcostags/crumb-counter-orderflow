@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShoppingBasket, Trash2 } from "lucide-react";
 
+import { CartPriceNotice } from "@/components/public/CartPriceNotice";
 import { PublicLayout } from "@/components/public/PublicLayout";
 import { QuantityStepper } from "@/components/shared/QuantityStepper";
 import { EmptyState, LoadingBlock } from "@/components/shared/States";
@@ -65,12 +66,20 @@ function CartPage() {
           />
         ) : (
           <>
+            <div className="mt-4">
+              <CartPriceNotice />
+            </div>
             <ul className="mt-6 space-y-3">
               {rows.map(({ line, product }) => (
                 <li key={line.productId} className="rounded-xl border bg-card p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="font-semibold">{product?.name ?? "Produto removido"}</p>
+                      {product && !catalog.isSellable(product) && (
+                        <p role="alert" className="text-sm text-destructive">
+                          Indisponível: remova ou revise este item antes de confirmar.
+                        </p>
+                      )}
                       {product && (
                         <p className="text-sm text-muted-foreground">
                           {formatBRL(product.priceCents)} cada

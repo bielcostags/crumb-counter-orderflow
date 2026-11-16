@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Croissant } from "lucide-react";
 
+import { isValidProductImage } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -12,8 +13,8 @@ interface Props {
 
 /** Imagem de produto com fallback quando a URL falha. */
 export function ProductImage({ src, alt, className, eager }: Props) {
-  const [failed, setFailed] = useState(false);
-  if (failed || !src) {
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  if (failedSrc === src || !src || !isValidProductImage(src)) {
     return (
       <div
         role="img"
@@ -31,7 +32,7 @@ export function ProductImage({ src, alt, className, eager }: Props) {
       loading={eager ? "eager" : "lazy"}
       width={816}
       height={816}
-      onError={() => setFailed(true)}
+      onError={() => setFailedSrc(src)}
       className={cn("object-cover", className)}
     />
   );

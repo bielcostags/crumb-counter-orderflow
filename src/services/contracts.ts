@@ -7,7 +7,7 @@
  * e políticas RLS protegendo cada tabela. A UI não precisa mudar.
  */
 import type { CheckoutInput, CounterOrderInput } from "@/lib/orders";
-import type { CartLine, Category, ID, Order, OrderStatus, Product } from "@/types";
+import type { CartLine, Category, ID, Order, OrderItem, OrderStatus, Product } from "@/types";
 
 export interface CategoryInput {
   name: string;
@@ -37,7 +37,11 @@ export interface OrderService {
   listOrders(): Promise<Order[]>;
   getOrderByNumber(number: number): Promise<Order | null>;
   /** Pedido online do cliente: preços recalculados a partir do catálogo. */
-  createOnlineOrder(input: CheckoutInput, lines: CartLine[]): Promise<Order>;
+  createOnlineOrder(
+    input: CheckoutInput,
+    lines: CartLine[],
+    expectedItems?: OrderItem[],
+  ): Promise<Order>;
   /** Pedido presencial registrado no balcão. Entra na mesma fila. */
   createCounterOrder(input: CounterOrderInput): Promise<Order>;
   updateStatus(orderId: ID, to: OrderStatus): Promise<Order>;

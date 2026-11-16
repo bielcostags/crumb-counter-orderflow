@@ -19,6 +19,14 @@ export function AdminLayout({ children }: { children: ReactNode }) {
   const { signOut } = useAdminSession();
   const pathname = useLocation({ select: (l) => l.pathname });
   const now = useAdminClock();
+  const section = pathname.endsWith("produtos")
+    ? "Produtos"
+    : pathname.endsWith("categorias")
+      ? "Categorias"
+      : pathname.endsWith("pedidos")
+        ? "Gerenciamento de pedidos"
+        : "Visão geral";
+  const overview = section === "Visão geral";
   return (
     <div className="min-h-screen md:flex">
       <a
@@ -50,12 +58,8 @@ export function AdminLayout({ children }: { children: ReactNode }) {
           className={`${expanded ? "flex" : "hidden md:flex"} flex-col gap-2 p-3`}
           aria-label="Área administrativa"
         >
-          <Button asChild variant={pathname.endsWith("pedidos") ? "ghost" : "secondary"}>
-            <Link
-              to="/admin"
-              aria-label="Visão geral"
-              aria-current={!pathname.endsWith("pedidos") ? "page" : undefined}
-            >
+          <Button asChild variant={overview ? "secondary" : "ghost"}>
+            <Link to="/admin" aria-label="Visão geral" aria-current={overview ? "page" : undefined}>
               <LayoutDashboard />
               {expanded && "Visão geral"}
             </Link>
@@ -72,26 +76,32 @@ export function AdminLayout({ children }: { children: ReactNode }) {
           </Button>
           {(
             [
-              [ShoppingBag, "Produtos"],
-              [Tags, "Categorias"],
-              [Store, "Atendimento no balcão"],
+              { to: "/admin/produtos", label: "Produtos", Icon: ShoppingBag },
+              { to: "/admin/categorias", label: "Categorias", Icon: Tags },
             ] as const
-          ).map(([Symbol, label]) => {
-            return (
-              <div
-                key={String(label)}
-                className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground"
-                aria-label={`${label}: em breve`}
+          ).map(({ to, label, Icon }) => (
+            <Button key={to} asChild variant={section === label ? "secondary" : "ghost"}>
+              <Link
+                to={to}
+                aria-label={label}
+                aria-current={section === label ? "page" : undefined}
               >
-                <Symbol className="h-4 w-4 shrink-0" aria-hidden />
-                {expanded && (
-                  <span>
-                    {String(label)} <span className="block text-xs">Em breve</span>
-                  </span>
-                )}
-              </div>
-            );
-          })}
+                <Icon />
+                {expanded && label}
+              </Link>
+            </Button>
+          ))}
+          <div
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground"
+            aria-label="Atendimento no balcão: em breve"
+          >
+            <Store className="h-4 w-4 shrink-0" aria-hidden />
+            {expanded && (
+              <span>
+                Atendimento no balcão <span className="block text-xs">Em breve</span>
+              </span>
+            )}
+          </div>
           <Button asChild variant="outline">
             <Link to="/" aria-label="Voltar ao cardápio">
               <ShoppingBag />
@@ -110,9 +120,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
             <p className="text-xs font-semibold uppercase tracking-wide text-caramel">
               Padaria Digital · Ambiente demonstrativo · Equipe
             </p>
-            <p className="font-display font-semibold text-primary">
-              {pathname.endsWith("pedidos") ? "Gerenciamento de pedidos" : "Visão geral"}
-            </p>
+            <p className="font-display font-semibold text-primary">{section}</p>
           </div>
           <time dateTime={now.toISOString()} className="text-sm text-muted-foreground">
             {now.toLocaleDateString("pt-BR", { dateStyle: "full" })}

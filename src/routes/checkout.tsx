@@ -2,6 +2,8 @@ import { useRef, useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShoppingBasket, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
+import { CartPriceNotice } from "@/components/public/CartPriceNotice";
+import { useCartPriceReview } from "@/hooks/use-cart-price-review";
 import { PublicLayout } from "@/components/public/PublicLayout";
 import { OrderSummary } from "@/components/public/OrderSummary";
 import { DemoNotice } from "@/components/shared/DemoNotice";
@@ -29,6 +31,7 @@ export const Route = createFileRoute("/checkout")({
 
 function CheckoutPage() {
   const { lines } = useCart();
+  const { changes } = useCartPriceReview();
   const { data, services } = useStore();
   const [input, setInput] = useState<CheckoutInput>({
     customerName: "",
@@ -70,15 +73,24 @@ function CheckoutPage() {
       return;
     }
     setErrors({});
-    if (!lines?.length || catalogError) {
-      setError(catalogError || "Seu carrinho está vazio.");
+    if (!lines?.length || catalogError || changes.length) {
+      setError(
+        catalogError ||
+          (changes.length
+            ? "Revise os preços atualizados antes de confirmar."
+            : "Seu carrinho está vazio."),
+      );
       return;
     }
     sending.current = true;
     setBusy(true);
     try {
       // Serviço revalida catálogo, quantidades e preços; limpa o carrinho após criar.
-      const order = await services.orders.createOnlineOrder(parsed.data, structuredClone(lines));
+      const order = await services.orders.createOnlineOrder(
+        parsed.data,
+        structuredClone(lines),
+        structuredClone(preview),
+      );
       setCompleted(order);
       toast.success(`Pedido #${order.number} registrado na demonstração.`);
     } catch (err) {
@@ -161,6 +173,7 @@ function CheckoutPage() {
                 Revisar carrinho
               </Link>
             </section>
+            <CartPriceNotice disabled={busy} />
             <form onSubmit={submit} noValidate className="space-y-4" aria-busy={busy}>
               <fieldset disabled={busy} className="space-y-4">
                 <legend className="mb-4 font-semibold">Dados fictícios para demonstração</legend>
@@ -258,7 +271,7 @@ function CheckoutPage() {
                   {error}
                 </p>
               )}
-              <Button type="submit" disabled={busy || !!catalogError}>
+              <Button type="submit" disabled={busy || !!catalogError || changes.length > 0}>
                 {busy ? "Registrando pedido…" : "Confirmar pedido demonstrativo"}
               </Button>
             </form>
