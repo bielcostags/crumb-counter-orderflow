@@ -33,6 +33,7 @@ bun run preview
 - `src/services/contracts.ts`: contratos de catálogo, pedidos e restauração da demo.
 - `src/services/local/`: implementação local dos contratos, com latência simulada de 250 ms.
 - `src/lib/persistent-store.ts`: armazenamento externo consumido por `useSyncExternalStore`, persistido em localStorage e sincronizado entre abas do mesmo navegador.
+- `src/components/admin/`: layout, dashboard, fila, detalhes, tabela compartilhada e coordenação de operações administrativas.
 - `src/contexts/`: catálogo/serviços, carrinho e sessão demonstrativa. Durante SSR, os providers expõem estado de carregamento para evitar divergência de hidratação.
 - `src/data/mock.ts`: quatro categorias, 12 produtos e 14 pedidos fictícios iniciais.
 - `src/server.ts`, `src/start.ts` e `src/lib/error-*`: tratamento de falhas SSR e middleware CSRF do scaffold.
@@ -49,7 +50,15 @@ A confirmação mostra o número, itens, total, recebimento, pagamento e status,
 
 Para experimentar, adicione produtos disponíveis, finalize com nome/telefone fictícios e escolha retirada ou entrega (com endereço fictício). O pagamento é apenas uma seleção de como pagar ao receber: não existe cobrança online. A consulta também permite ver os pedidos fictícios iniciais, números 1001 a 1014. Não há estimativas de entrega.
 
-Os serviços também suportam pedidos de balcão, alteração de status, pagamento demonstrativo e manutenção do catálogo. Login demonstrativo, dashboard, Kanban, produtos, categorias e balcão ainda não possuem telas completas; a rota da equipe continua em construção.
+A área da equipe está disponível em `/admin`, com acesso demonstrativo em `/admin/acesso` e fila em `/admin/pedidos`. Não há senha ou autenticação real: o botão de entrada grava a sessão demo existente no navegador. Sair encerra essa sessão e as rotas administrativas redirecionam para o acesso no fluxo normal da interface. Isso não constitui segurança de produção.
+
+O dashboard exibe indicadores de hoje, evolução dos últimos sete dias com Recharts, origem, distribuição por status e pedidos recentes. Os valores vêm do estado atual, com exclusão de cancelados dos totais de pedidos/vendas e distinção entre valor pedido e valor pago. A data usa o fuso do navegador e é atualizada enquanto a tela fica aberta.
+
+A fila permite alternar Kanban/lista e filtrar por número ou cliente, status, origem, recebimento, pagamento e data local de criação. Os detalhes administrativos mostram os dados fictícios do cliente, itens, observações e histórico. As ações usam os serviços existentes para avançar somente uma etapa, cancelar com confirmação e marcar como pago com confirmação. Operações em processamento ficam bloqueadas. Pedidos finais não avançam nem são cancelados; o recebimento demonstrativo é independente do preparo e pode ser registrado após a conclusão, caso ainda esteja pendente. Pagamento já registrado ou pedido cancelado não aceita novo recebimento.
+
+O cancelamento preserva os dados e, se o pedido estiver pago, mantém essa marcação sem estorno. Esse pedido deixa de compor as vendas pagas do dashboard. Nenhuma cobrança ou movimentação financeira real ocorre.
+
+Produtos, categorias e atendimento de balcão aparecem como “Em breve”, sem links ou ações de cadastro nesta sprint. Os respectivos serviços locais continuam disponíveis para evolução futura. Veja [relatório da Sprint 03](docs/sprints/SPRINT-03.md).
 
 ## Regras de pedidos
 
@@ -74,6 +83,12 @@ O build e o typecheck iniciais já passavam; o lint inicial apresentou 86 erros 
 
 O build pode emitir avisos do scaffold sobre `vite-tsconfig-paths` e `inlineDynamicImports`. Os plugins são geridos pela configuração Lovable e não foram duplicados ou removidos.
 
+## Validação da Sprint 03
+
+A suíte completa passou com 65 testes em 5 arquivos, preservando os 46 casos da Sprint 02. Inclui sessão demo, indicadores reativos, filtros, detalhes, transições, confirmação de cancelamento/pagamento e integração checkout → equipe → acompanhamento. `bun run typecheck`, `bun run build` e `git diff --check` passaram; o lint terminou com zero erros e nove avisos preexistentes de Fast Refresh.
+
+A revisão visual desktop/mobile foi tentada, mas o acesso ao navegador estava indisponível; essa verificação permanece pendente. Veja os detalhes e limitações no [relatório da Sprint 03](docs/sprints/SPRINT-03.md).
+
 ## Limitações e próximas etapas
 
 - Nenhum Supabase, backend de negócios, autenticação real, estoque, emissão fiscal ou pagamento online foi conectado.
@@ -82,7 +97,7 @@ O build pode emitir avisos do scaffold sobre `vite-tsconfig-paths` e `inlineDyna
 - A sincronização entre abas não fornece transações: edições simultâneas podem sobrescrever dados. Não existe sincronização entre dispositivos.
 - Os dados iniciais são criados ao iniciar/restaurar a demo; não mudam de dia automaticamente. Datas e métricas usam o fuso do navegador.
 - A validação inicial não incluiu navegação ponta a ponta. A Sprint 02 adiciona integração de telas e navegação com TanStack Router em memória/jsdom, sem auditoria visual ou teste ponta a ponta em navegador real.
-- Checkout e acompanhamento foram implementados na Sprint 02. A próxima etapa recomendada é a fila administrativa demonstrativa, seguida do balcão. Veja [relatório da Sprint 02](docs/sprints/SPRINT-02.md).
+- Checkout/acompanhamento foram implementados na [Sprint 02](docs/sprints/SPRINT-02.md) e painel/fila administrativa na [Sprint 03](docs/sprints/SPRINT-03.md). A próxima etapa recomendada é o balcão na mesma fila, seguido da gestão de catálogo, conforme novo escopo.
 - Antes de produção: backend com validação e cálculo server-side, numeração transacional, Supabase Auth, autorização por papéis/RLS, validação completa dos dados e proteção das informações pessoais.
 
 ## Integração Lovable

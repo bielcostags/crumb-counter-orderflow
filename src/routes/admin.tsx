@@ -1,45 +1,24 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { LayoutDashboard } from "lucide-react";
-
-import { DemoNotice } from "@/components/shared/DemoNotice";
-import { EmptyState } from "@/components/shared/States";
-import { Button } from "@/components/ui/button";
+import { createFileRoute, Navigate, Outlet, useLocation } from "@tanstack/react-router";
+import { AdminLayout } from "@/components/admin/AdminLayout";
+import { LoadingBlock } from "@/components/shared/States";
+import { useAdminSession } from "@/contexts/AdminSessionContext";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
-    meta: [
-      { title: "Área da equipe (demo) — Padaria Digital" },
-      {
-        name: "description",
-        content: "Gestão de pedidos, produtos e balcão — acesso de demonstração.",
-      },
-      { property: "og:title", content: "Área da equipe (demo) — Padaria Digital" },
-      {
-        property: "og:description",
-        content: "Gestão de pedidos, produtos e balcão — acesso de demonstração.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "robots", content: "noindex" },
-      { name: "twitter:card", content: "summary" },
-    ],
+    meta: [{ title: "Área da equipe — Padaria Digital" }, { name: "robots", content: "noindex" }],
   }),
   component: AdminPage,
 });
 
 function AdminPage() {
+  const { status } = useAdminSession();
+  const pathname = useLocation({ select: (l) => l.pathname });
+  if (status === "loading") return <LoadingBlock />;
+  if (pathname === "/admin/acesso") return <Outlet />;
+  if (status !== "signed-in") return <Navigate to="/admin/acesso" replace />;
   return (
-    <div className="mx-auto max-w-3xl space-y-4 px-4 py-10">
-      <DemoNotice />
-      <EmptyState
-        icon={LayoutDashboard}
-        title="Área da equipe em construção"
-        description="Painel, fila de pedidos, produtos, categorias e balcão ainda não foram concluídos nesta versão."
-        action={
-          <Button asChild variant="outline">
-            <Link to="/">Voltar ao cardápio</Link>
-          </Button>
-        }
-      />
-    </div>
+    <AdminLayout>
+      <Outlet />
+    </AdminLayout>
   );
 }
