@@ -135,8 +135,10 @@ export function buildOrderItems(
   });
 }
 
+export type OrderQuoteItem = OrderItem & { categoryId?: string };
+
 /** Rejeita mudanças entre a prévia confirmada e o registro, inclusive durante a latência local. */
-export function assertOrderQuote(expected: OrderItem[], current: OrderItem[]): void {
+export function assertOrderQuote(expected: OrderQuoteItem[], current: OrderQuoteItem[]): void {
   const signature = (items: OrderItem[]) =>
     JSON.stringify(
       items.map((item) => [
@@ -147,7 +149,11 @@ export function assertOrderQuote(expected: OrderItem[], current: OrderItem[]): v
         item.notes ?? "",
       ]),
     );
-  if (signature(expected) !== signature(current))
+  const categoryChanged = expected.some(
+    (item, index) =>
+      item.categoryId !== undefined && item.categoryId !== current[index]?.categoryId,
+  );
+  if (signature(expected) !== signature(current) || categoryChanged)
     throw new OrderValidationError(
       "O cardápio mudou durante a confirmação. Revise os itens e o total atualizado antes de confirmar novamente.",
     );

@@ -59,7 +59,7 @@ A fila permite alternar Kanban/lista e filtrar por número ou cliente, status, o
 
 O cancelamento preserva os dados e, se o pedido estiver pago, mantém essa marcação sem estorno. Esse pedido deixa de compor as vendas pagas do dashboard. Nenhuma cobrança ou movimentação financeira real ocorre.
 
-Produtos e categorias estão disponíveis em `/admin/produtos` e `/admin/categorias`, protegidos pelo mesmo acesso demonstrativo. Atendimento no balcão permanece “Em breve”.
+Produtos e categorias estão disponíveis em `/admin/produtos` e `/admin/categorias`, protegidos pelo mesmo acesso demonstrativo. O PDV está disponível em `/admin/balcao`, com a mesma proteção demonstrativa.
 
 Produtos: cadastro/edição, preço em reais convertido para centavos, descrição, categoria, imagem e disponibilidade; pesquisa por nome/descrição, filtros por categoria/disponibilidade e ordenação por nome/preço. Novos produtos e transferências exigem categoria ativa; a edição pode manter a categoria inativa atual, com aviso de venda bloqueada. Não há exclusão definitiva.
 
@@ -68,6 +68,20 @@ Categorias: cadastro/edição, pesquisa, filtro de situação e contagens de pro
 Imagens podem ser escolhidas na galeria local ou informadas por URL HTTPS sem credenciais. Outros protocolos, base64 e caminhos locais desconhecidos são rejeitados. A prévia e o cardápio usam `ProductImage`, com fallback e recuperação ao mudar a fonte. Imagens remotas dependem da disponibilidade dos servidores de origem; não há upload nem armazenamento remoto.
 
 Os formulários bloqueiam envios repetidos e pedem confirmação ao fechar com alterações não salvas. As operações usam os serviços de catálogo e atualizam o estado compartilhado; nenhum componente acessa localStorage diretamente. Veja [relatório da Sprint 04](docs/sprints/SPRINT-04.md).
+
+## Atendimento no balcão
+
+O PDV tem pesquisa por nome/descrição, categorias ativas, grade de produtos e pedido atual independente do carrinho público. Itens repetidos são consolidados, com quantidades de 1 a 99, observações por item, remoção, nome fictício opcional e observações gerais. Não exige cadastro, CPF, telefone ou endereço.
+
+Ao finalizar, a equipe revisa o resumo, escolhe Pix/dinheiro/cartão e pagamento pendente/recebido. Dinheiro recebido permite informar valor entregue opcional, validado em centavos, com troco não negativo. Trocar forma ou situação limpa esse campo. Valor entregue e troco são auxiliares do atendimento; não alteram o total da venda ou o faturamento.
+
+O serviço `createCounterOrder` revalida itens, disponibilidade e categoria e recebe a prévia confirmada. Nome/preço/categoria alterados exigem revisão; mudanças durante a latência rejeitam o registro, preservando o pedido para nova tentativa. O pedido usa o modelo Order e a mesma sequência/fila dos pedidos online: origem balcão, retirada, status pendente, pagamento escolhido e snapshots dos itens.
+
+O rascunho completo e a referência da última venda são persistidos em `padaria-digital:demo:counter-cart:v1`, separadamente do carrinho público. Navegar, sair e entrar na sessão demo não descarta o atendimento, que é compartilhado neste navegador, não por operador. Limpar exige confirmação. Após sucesso, os itens são limpos e a confirmação/comprovante continuam acessíveis ao retornar/recarregar; nenhuma venda é enviada automaticamente. “Nova venda” inicia o próximo atendimento. O troco auxiliar fica associado apenas à última confirmação, sem novo campo no modelo Order.
+
+A confirmação oferece acesso aos pedidos e aos detalhes existentes. O comprovante tem a identificação “COMPROVANTE DEMONSTRATIVO — SEM VALOR FISCAL” e botão de impressão nativa com CSS específico. Não há integração fiscal, impressora térmica ou processamento financeiro. A impressão real ainda requer validação no navegador.
+
+Pedidos de balcão seguem pendente → em preparação → pronto → concluído; podem ser cancelados ou pagos depois pelos serviços existentes. O dashboard distingue valores registrados/pagos e agrupa vendas pagas pela data de criação do pedido. Veja [Sprint 05](docs/sprints/SPRINT-05.md) e [estado consolidado do MVP frontend](docs/MVP-FRONTEND.md).
 
 ## Regras de pedidos
 
@@ -110,6 +124,10 @@ A revisão visual desktop/mobile foi tentada, mas o acesso ao navegador estava i
 
 Os 65 testes anteriores foram preservados e a suíte completa passou com 109 testes em 7 arquivos (44 casos adicionais). Foram executados instalação com lockfile congelado, typecheck, lint, testes, build e `git diff --check`. Lint: zero erros e nove avisos preexistentes; demais verificações aprovadas. A revisão visual desktop/mobile foi tentada novamente, mas o acesso ao navegador continuava indisponível. Veja o [relatório completo da Sprint 04](docs/sprints/SPRINT-04.md).
 
+## Validação da Sprint 05
+
+A suíte completa passou com 146 testes em 9 arquivos: 109 anteriores e 37 novos, cobrindo PDV, pagamentos/troco, persistência independente, revisão do catálogo, fila/indicadores e regressões anteriores. Instalação com lockfile congelado, typecheck, build e diff passaram; lint teve zero erros e nove avisos preexistentes. A homologação visual desktop/tablet/celular e impressão real continuam pendentes porque o acesso ao navegador estava indisponível. Veja [Sprint 05](docs/sprints/SPRINT-05.md) e [MVP frontend consolidado](docs/MVP-FRONTEND.md).
+
 ## Limitações e próximas etapas
 
 - Nenhum Supabase, backend de negócios, autenticação real, estoque, emissão fiscal ou pagamento online foi conectado.
@@ -118,7 +136,7 @@ Os 65 testes anteriores foram preservados e a suíte completa passou com 109 tes
 - A sincronização entre abas não fornece transações: edições simultâneas podem sobrescrever dados. Não existe sincronização entre dispositivos.
 - Os dados iniciais são criados ao iniciar/restaurar a demo; não mudam de dia automaticamente. Datas e métricas usam o fuso do navegador.
 - A validação inicial não incluiu navegação ponta a ponta. A Sprint 02 adiciona integração de telas e navegação com TanStack Router em memória/jsdom, sem auditoria visual ou teste ponta a ponta em navegador real.
-- Checkout/acompanhamento foram implementados na [Sprint 02](docs/sprints/SPRINT-02.md), painel/fila administrativa na [Sprint 03](docs/sprints/SPRINT-03.md) e gestão de cardápio na [Sprint 04](docs/sprints/SPRINT-04.md). A próxima etapa recomendada é o balcão na mesma fila, conforme novo escopo.
+- Checkout/acompanhamento foram implementados na [Sprint 02](docs/sprints/SPRINT-02.md), painel/fila administrativa na [Sprint 03](docs/sprints/SPRINT-03.md) e gestão de cardápio na [Sprint 04](docs/sprints/SPRINT-04.md). O PDV foi integrado na [Sprint 05](docs/sprints/SPRINT-05.md). A próxima etapa recomendada é homologação visual/ponta a ponta e preparação dos contratos para backend, conforme novo escopo.
 - Antes de produção: backend com validação e cálculo server-side, numeração transacional, Supabase Auth, autorização por papéis/RLS, validação completa dos dados e proteção das informações pessoais.
 
 ## Integração Lovable

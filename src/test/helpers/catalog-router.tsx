@@ -10,6 +10,9 @@ import {
 import { StoreProvider } from "@/contexts/StoreContext";
 import { CartProvider } from "@/contexts/CartContext";
 import { AdminSessionProvider } from "@/contexts/AdminSessionContext";
+import { Route as Counter } from "@/routes/admin.balcao";
+import { Route as Orders } from "@/routes/admin.pedidos";
+import { Route as Track } from "@/routes/acompanhar";
 import { Route as Admin } from "@/routes/admin";
 import { Route as Access } from "@/routes/admin.acesso";
 import { Route as Dashboard } from "@/routes/admin.index";
@@ -37,6 +40,12 @@ export async function openCatalog(path = "/admin/produtos") {
     component: Admin.options.component!,
   });
   const routes = [
+    createRoute({
+      getParentRoute: () => root,
+      path: "/acompanhar",
+      component: Track.options.component!,
+      validateSearch: Track.options.validateSearch!,
+    }),
     createRoute({ getParentRoute: () => root, path: "/", component: Menu.options.component! }),
     createRoute({
       getParentRoute: () => root,
@@ -49,6 +58,16 @@ export async function openCatalog(path = "/admin/produtos") {
       component: Checkout.options.component!,
     }),
     admin.addChildren([
+      createRoute({
+        getParentRoute: () => admin,
+        path: "/balcao",
+        component: Counter.options.component!,
+      }),
+      createRoute({
+        getParentRoute: () => admin,
+        path: "/pedidos",
+        component: Orders.options.component!,
+      }),
       createRoute({
         getParentRoute: () => admin,
         path: "/",
