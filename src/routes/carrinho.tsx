@@ -112,9 +112,9 @@ function CartPage() {
                 {formatBRL(total)}
               </span>
             </div>
-            <p className="mt-3 text-sm text-muted-foreground">
-              A finalização do pedido (checkout) ainda não foi concluída nesta versão do protótipo.
-            </p>
+            <Button asChild className="mt-4">
+              <Link to="/checkout">Finalizar pedido</Link>
+            </Button>
           </>
         )}
       </div>
