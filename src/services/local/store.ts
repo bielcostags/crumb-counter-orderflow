@@ -8,21 +8,23 @@ export const STORE_KEY = "padaria-digital:demo:store:v1";
 export const CART_KEY = "padaria-digital:demo:cart:v1";
 export const ADMIN_SESSION_KEY = "padaria-digital:demo:admin-session:v1";
 
+/** Parser compartilhado pela carga inicial e testes de reidratação. */
+export function parseStoreData(raw: unknown): StoreData | null {
+  if (
+    isObj(raw) &&
+    raw["version"] === STORE_VERSION &&
+    Array.isArray(raw["categories"]) &&
+    Array.isArray(raw["products"]) &&
+    Array.isArray(raw["orders"])
+  )
+    return raw as unknown as StoreData;
+  return null;
+}
+
 export const dataStore = createPersistentStore<StoreData>(
   STORE_KEY,
   () => createSeedStore(new Date()),
-  (raw) => {
-    if (
-      isObj(raw) &&
-      raw["version"] === STORE_VERSION &&
-      Array.isArray(raw["categories"]) &&
-      Array.isArray(raw["products"]) &&
-      Array.isArray(raw["orders"])
-    ) {
-      return raw as unknown as StoreData;
-    }
-    return null;
-  },
+  parseStoreData,
 );
 
 export const cartStore = createPersistentStore<CartLine[]>(

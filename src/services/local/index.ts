@@ -2,9 +2,16 @@
  * Implementação LOCAL dos contratos de serviço (somente demonstração).
  * Simula uma pequena latência de rede para exercitar estados de carregamento.
  */
+import {
+  categoryInputSchema,
+  productInputSchema,
+  canAssignCategory,
+  cleanCatalogText,
+} from "@/lib/catalog";
 import type { AppServices, CatalogService, DemoService, OrderService } from "@/services/contracts";
 import {
   buildOrderItems,
+  assertOrderQuote,
   calcTotalCents,
   canTransition,
   checkoutSchema,
@@ -42,12 +49,21 @@ const catalog: CatalogService = {
     await delay();
     return dataStore.get().categories;
   },
-  async saveCategory(input, id) {
+  async saveCategory(rawInput, id) {
     await delay();
-    const name = input.name.trim();
-    if (name.length < 2) throw new OrderValidationError("Nome da categoria muito curto.");
+    const parsed = categoryInputSchema.safeParse(rawInput);
+    if (!parsed.success)
+      throw new OrderValidationError(parsed.error.issues[0]?.message ?? "Categoria inválida.");
+    const input = parsed.data;
+    const name = input.name;
     const { categories } = dataStore.get();
-    if (categories.some((c) => c.id !== id && c.name.toLowerCase() === name.toLowerCase())) {
+    if (
+      categories.some(
+        (c) =>
+          c.id !== id &&
+          cleanCatalogText(c.name).toLocaleLowerCase("pt-BR") === name.toLocaleLowerCase("pt-BR"),
+      )
+    ) {
       throw new OrderValidationError("Já existe uma categoria com esse nome.");
     }
     let saved: Category;
@@ -91,14 +107,19 @@ const catalog: CatalogService = {
     await delay();
     return dataStore.get().products;
   },
-  async saveProduct(input, id) {
+  async saveProduct(rawInput, id) {
     await delay();
-    const name = input.name.trim();
-    if (name.length < 2) throw new OrderValidationError("Nome do produto muito curto.");
-    if (!Number.isSafeInteger(input.priceCents) || input.priceCents <= 0)
-      throw new OrderValidationError("O preço deve ser maior que zero.");
-    if (!dataStore.get().categories.some((c) => c.id === input.categoryId))
-      throw new OrderValidationError("Selecione uma categoria válida.");
+    const parsed = productInputSchema.safeParse(rawInput);
+    if (!parsed.success)
+      throw new OrderValidationError(parsed.error.issues[0]?.message ?? "Produto inválido.");
+    const input = parsed.data;
+    const name = input.name;
+    const current = id ? dataStore.get().products.find((p) => p.id === id) : undefined;
+    if (id && !current) throw new OrderValidationError("Produto não encontrado.");
+    if (!canAssignCategory(dataStore.get().categories, input.categoryId, current))
+      throw new OrderValidationError(
+        "Selecione uma categoria existente e ativa. A categoria inativa atual pode ser mantida na edição.",
+      );
     let saved: Product;
     if (id) {
       const current = dataStore.get().products.find((p) => p.id === id);
@@ -130,7 +151,7 @@ const orders: OrderService = {
     await delay();
     return dataStore.get().orders.find((o) => o.number === number) ?? null;
   },
-  async createOnlineOrder(rawInput, lines) {
+  async createOnlineOrder(rawInput, lines, expectedItems) {
     await delay();
     const parsed = checkoutSchema.safeParse(rawInput);
     if (!parsed.success)
@@ -138,6 +159,7 @@ const orders: OrderService = {
     const input = parsed.data;
     const { products, categories, orders: all } = dataStore.get();
     const items = buildOrderItems(lines, products, categories);
+    if (expectedItems) assertOrderQuote(expectedItems, items);
     const now = new Date().toISOString();
     const order: Order = {
       id: newId("o"),

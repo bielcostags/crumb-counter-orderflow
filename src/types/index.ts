@@ -69,6 +69,8 @@ export interface Order {
 
 export interface CartLine {
   productId: ID;
+  /** Último preço visto ao adicionar/revisar o item; não é fonte do total. */
+  reviewedPriceCents?: number;
   quantity: number;
   notes?: string | undefined;
 }

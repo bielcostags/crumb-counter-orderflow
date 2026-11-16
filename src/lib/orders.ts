@@ -135,6 +135,24 @@ export function buildOrderItems(
   });
 }
 
+/** Rejeita mudanças entre a prévia confirmada e o registro, inclusive durante a latência local. */
+export function assertOrderQuote(expected: OrderItem[], current: OrderItem[]): void {
+  const signature = (items: OrderItem[]) =>
+    JSON.stringify(
+      items.map((item) => [
+        item.productId,
+        item.name,
+        item.unitPriceCents,
+        item.quantity,
+        item.notes ?? "",
+      ]),
+    );
+  if (signature(expected) !== signature(current))
+    throw new OrderValidationError(
+      "O cardápio mudou durante a confirmação. Revise os itens e o total atualizado antes de confirmar novamente.",
+    );
+}
+
 export function calcTotalCents(items: Pick<OrderItem, "subtotalCents">[]): number {
   return items.reduce((sum, i) => {
     const total = sum + i.subtotalCents;

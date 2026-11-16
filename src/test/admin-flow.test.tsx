@@ -142,8 +142,11 @@ describe("Sessão e layout administrativo", () => {
   it("reutiliza sessão e recolhe o menu sem disponibilizar funcionalidades futuras", async () => {
     await open("/admin/");
     await screen.findByRole("heading", { name: "Visão geral", level: 1 });
-    expect(screen.getByLabelText("Produtos: em breve")).toHaveTextContent("Em breve");
-    expect(screen.queryByRole("link", { name: "Produtos" })).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Atendimento no balcão: em breve")).toHaveTextContent("Em breve");
+    expect(screen.getByRole("link", { name: "Produtos" })).toHaveAttribute(
+      "href",
+      "/admin/produtos",
+    );
     fireEvent.click(screen.getByRole("button", { name: "Recolher menu" }));
     expect(screen.getByRole("button", { name: "Expandir menu" })).toHaveAttribute(
       "aria-expanded",

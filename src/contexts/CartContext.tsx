@@ -8,7 +8,8 @@ import {
 } from "react";
 
 import { MAX_ITEM_QUANTITY, MAX_NOTES_LENGTH } from "@/lib/orders";
-import { cartStore } from "@/services/local/store";
+import { useStore } from "@/contexts/StoreContext";
+import { cartStore, dataStore } from "@/services/local/store";
 import type { CartLine, ID } from "@/types";
 
 interface CartContextValue {
@@ -20,6 +21,7 @@ interface CartContextValue {
   setNotes: (productId: ID, notes: string) => void;
   removeItem: (productId: ID) => void;
   clear: () => void;
+  acknowledgePrices: (onlyMissing?: boolean) => void;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -37,7 +39,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
           l.productId === productId ? { ...l, quantity: clampQty(l.quantity + quantity) } : l,
         );
       }
-      return [...prev, { productId, quantity: clampQty(quantity) }];
+      const price = dataStore.get().products.find((p) => p.id === productId)?.priceCents;
+      return [
+        ...prev,
+        {
+          productId,
+          quantity: clampQty(quantity),
+          ...(price !== undefined ? { reviewedPriceCents: price } : {}),
+        },
+      ];
     });
   }, []);
 
@@ -59,6 +69,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
     cartStore.set((prev) => prev.filter((l) => l.productId !== productId));
   }, []);
 
+  const { data } = useStore();
+  const acknowledgePrices = useCallback(
+    (onlyMissing = false) => {
+      if (!data) return;
+      cartStore.set((prev) =>
+        prev.map((line) => {
+          const product = data.products.find((p) => p.id === line.productId);
+          return product && (!onlyMissing || line.reviewedPriceCents === undefined)
+            ? { ...line, reviewedPriceCents: product.priceCents }
+            : line;
+        }),
+      );
+    },
+    [data],
+  );
+
   const clear = useCallback(() => cartStore.set([]), []);
 
   const value = useMemo<CartContextValue>(
@@ -70,8 +96,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setNotes,
       removeItem,
       clear,
+      acknowledgePrices,
     }),
-    [lines, addItem, setQuantity, setNotes, removeItem, clear],
+    [lines, addItem, setQuantity, setNotes, removeItem, clear, acknowledgePrices],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
