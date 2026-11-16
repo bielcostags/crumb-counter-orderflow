@@ -118,7 +118,7 @@ export function createSeedOrders(
       items,
       totalCents: calcTotalCents(items),
       createdAt: created.toISOString(),
-      updatedAt: history[history.length - 1].at,
+      updatedAt: history.at(-1)?.at ?? created.toISOString(),
       history,
     } satisfies Order;
   });

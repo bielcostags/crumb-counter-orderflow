@@ -14,10 +14,10 @@ export const dataStore = createPersistentStore<StoreData>(
   (raw) => {
     if (
       isObj(raw) &&
-      raw.version === STORE_VERSION &&
-      Array.isArray(raw.categories) &&
-      Array.isArray(raw.products) &&
-      Array.isArray(raw.orders)
+      raw["version"] === STORE_VERSION &&
+      Array.isArray(raw["categories"]) &&
+      Array.isArray(raw["products"]) &&
+      Array.isArray(raw["orders"])
     ) {
       return raw as unknown as StoreData;
     }
@@ -31,7 +31,7 @@ export const cartStore = createPersistentStore<CartLine[]>(
   (raw) =>
     Array.isArray(raw)
       ? (raw.filter(
-          (l) => isObj(l) && typeof l.productId === "string" && typeof l.quantity === "number",
+          (l) => isObj(l) && typeof l["productId"] === "string" && typeof l["quantity"] === "number",
         ) as CartLine[])
       : null,
 );
@@ -45,5 +45,5 @@ export interface AdminSession {
 export const adminSessionStore = createPersistentStore<AdminSession>(
   ADMIN_SESSION_KEY,
   () => ({ signedIn: false, mode: "demo" }),
-  (raw) => (isObj(raw) && typeof raw.signedIn === "boolean" ? (raw as unknown as AdminSession) : null),
+  (raw) => (isObj(raw) && typeof raw["signedIn"] === "boolean" ? (raw as unknown as AdminSession) : null),
 );

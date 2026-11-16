@@ -8,7 +8,7 @@ export type ID = string;
 export interface Category {
   id: ID;
   name: string;
-  description?: string;
+  description?: string | undefined;
   active: boolean;
   sortOrder: number;
 }
@@ -43,7 +43,7 @@ export interface OrderItem {
   name: string;
   unitPriceCents: number;
   quantity: number;
-  notes?: string;
+  notes?: string | undefined;
   subtotalCents: number;
 }
 
@@ -61,10 +61,10 @@ export interface Order {
   status: OrderStatus;
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
-  customerName?: string;
-  customerPhone?: string;
-  address?: string;
-  notes?: string;
+  customerName?: string | undefined;
+  customerPhone?: string | undefined;
+  address?: string | undefined;
+  notes?: string | undefined;
   items: OrderItem[];
   totalCents: number;
   createdAt: string; // ISO
@@ -75,7 +75,7 @@ export interface Order {
 export interface CartLine {
   productId: ID;
   quantity: number;
-  notes?: string;
+  notes?: string | undefined;
 }
 
 export interface StoreData {

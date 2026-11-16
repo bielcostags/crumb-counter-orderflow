@@ -72,7 +72,7 @@ export function getNextStatus(order: Pick<Order, "status" | "fulfillment">): Ord
   const flow = getStatusFlow(order.fulfillment);
   const idx = flow.indexOf(order.status);
   if (idx === -1 || idx === flow.length - 1) return null;
-  return flow[idx + 1];
+  return flow[idx + 1] ?? null;
 }
 
 export function canCancel(order: Pick<Order, "status">): boolean {
