@@ -9,9 +9,15 @@ export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
       { title: "Área da equipe (demo) — Padaria Digital" },
-      { name: "description", content: "Gestão de pedidos, produtos e balcão — acesso de demonstração." },
+      {
+        name: "description",
+        content: "Gestão de pedidos, produtos e balcão — acesso de demonstração.",
+      },
       { property: "og:title", content: "Área da equipe (demo) — Padaria Digital" },
-      { property: "og:description", content: "Gestão de pedidos, produtos e balcão — acesso de demonstração." },
+      {
+        property: "og:description",
+        content: "Gestão de pedidos, produtos e balcão — acesso de demonstração.",
+      },
       { property: "og:type", content: "website" },
       { name: "robots", content: "noindex" },
       { name: "twitter:card", content: "summary" },
@@ -28,7 +34,11 @@ function AdminPage() {
         icon={LayoutDashboard}
         title="Área da equipe em construção"
         description="Painel, fila de pedidos, produtos, categorias e balcão ainda não foram concluídos nesta versão."
-        action={<Button asChild variant="outline"><Link to="/">Voltar ao cardápio</Link></Button>}
+        action={
+          <Button asChild variant="outline">
+            <Link to="/">Voltar ao cardápio</Link>
+          </Button>
+        }
       />
     </div>
   );

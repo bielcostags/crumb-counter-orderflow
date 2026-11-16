@@ -34,9 +34,20 @@ export function EmptyState({
   );
 }
 
-export function ErrorState({ title, description, action }: { title: string; description?: string; action?: ReactNode }) {
+export function ErrorState({
+  title,
+  description,
+  action,
+}: {
+  title: string;
+  description?: string;
+  action?: ReactNode;
+}) {
   return (
-    <div role="alert" className="flex flex-col items-center rounded-xl border border-destructive/30 bg-destructive/5 px-6 py-10 text-center">
+    <div
+      role="alert"
+      className="flex flex-col items-center rounded-xl border border-destructive/30 bg-destructive/5 px-6 py-10 text-center"
+    >
       <AlertTriangle className="h-8 w-8 text-destructive" aria-hidden />
       <h2 className="mt-3 text-base font-semibold">{title}</h2>
       {description && <p className="mt-1 max-w-sm text-sm text-muted-foreground">{description}</p>}
@@ -47,7 +58,11 @@ export function ErrorState({ title, description, action }: { title: string; desc
 
 export function LoadingGrid({ count = 6, className }: { count?: number; className?: string }) {
   return (
-    <div className={cn("grid gap-4 sm:grid-cols-2 lg:grid-cols-3", className)} aria-busy="true" aria-label="Carregando">
+    <div
+      className={cn("grid gap-4 sm:grid-cols-2 lg:grid-cols-3", className)}
+      aria-busy="true"
+      aria-label="Carregando"
+    >
       {Array.from({ length: count }).map((_, i) => (
         <div key={i} className="overflow-hidden rounded-xl border bg-card">
           <Skeleton className="aspect-[4/3] w-full rounded-none" />
@@ -64,7 +79,10 @@ export function LoadingGrid({ count = 6, className }: { count?: number; classNam
 
 export function LoadingBlock({ label = "Carregando dados de demonstração…" }: { label?: string }) {
   return (
-    <div className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground" role="status">
+    <div
+      className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground"
+      role="status"
+    >
       <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
       {label}
     </div>

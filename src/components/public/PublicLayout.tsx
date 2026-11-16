@@ -28,13 +28,22 @@ export function PublicLayout({ children }: { children: ReactNode }) {
                 Acompanhar pedido
               </Link>
             </Button>
-            <Button asChild variant="ghost" size="icon" className="sm:hidden" aria-label="Acompanhar pedido">
+            <Button
+              asChild
+              variant="ghost"
+              size="icon"
+              className="sm:hidden"
+              aria-label="Acompanhar pedido"
+            >
               <Link to="/acompanhar">
                 <ClipboardList />
               </Link>
             </Button>
             <Button asChild size="sm" className="relative">
-              <Link to="/carrinho" aria-label={`Carrinho com ${itemCount} ${itemCount === 1 ? "item" : "itens"}`}>
+              <Link
+                to="/carrinho"
+                aria-label={`Carrinho com ${itemCount} ${itemCount === 1 ? "item" : "itens"}`}
+              >
                 <ShoppingBasket />
                 <span className="hidden sm:inline">Carrinho</span>
                 {itemCount > 0 && (
@@ -53,7 +62,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
       <footer className="border-t bg-card">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
-            Padaria Digital · Protótipo de demonstração (fase 01). Dados fictícios, sem pagamentos reais.
+            Padaria Digital · Protótipo de demonstração (fase 01). Dados fictícios, sem pagamentos
+            reais.
           </p>
           <Link to="/admin" className="font-medium text-primary underline-offset-4 hover:underline">
             Área da equipe (demo)

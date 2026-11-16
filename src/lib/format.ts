@@ -23,9 +23,14 @@ export function formatTime(iso: string): string {
 
 /** Converte "12,50" ou "12.50" em centavos. Retorna NaN se inválido. */
 export function parseBRLToCents(value: string): number {
-  const normalized = value.replace(/\s|R\$/g, "").replace(/\./g, "").replace(",", ".");
+  const cleaned = value.replace(/\s|R\$/g, "");
+  // Vírgula identifica o formato brasileiro; ponto isolado é decimal.
+  if (cleaned.includes(",") && !/^\d{1,3}(\.\d{3})*,\d{1,2}$|^\d+,\d{1,2}$/.test(cleaned))
+    return Number.NaN;
+  const normalized = cleaned.includes(",") ? cleaned.replace(/\./g, "").replace(",", ".") : cleaned;
   if (!/^\d+(\.\d{1,2})?$/.test(normalized)) return Number.NaN;
-  return Math.round(Number(normalized) * 100);
+  const cents = Math.round(Number(normalized) * 100);
+  return Number.isSafeInteger(cents) ? cents : Number.NaN;
 }
 
 export function centsToInput(cents: number): string {
