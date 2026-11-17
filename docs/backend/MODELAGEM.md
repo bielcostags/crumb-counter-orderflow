@@ -1,5 +1,7 @@
 # Modelagem física — proposta para uma padaria
 
+> Atualização Sprint 06.2A: para o Supabase externo `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1), vale a exceção específica de AGENTS.md. A administração ocorre pela CLI do proprietário, sem modificar o bloco gerenciado do Lovable. As migrações versionadas de fundação estão preparadas, mas não foram aplicadas ao remoto. A proposta histórica abaixo não é uma migração pronta. Ver [Sprint 06.2A](../sprints/SPRINT-06.2A.md).
+
 SQL de referência em [PROPOSTA-SQL.md](PROPOSTA-SQL.md); controles em [SEGURANCA.md](SEGURANCA.md). Não existe banco configurado nesta sprint. Não é um modelo multi-tenant.
 
 ```mermaid

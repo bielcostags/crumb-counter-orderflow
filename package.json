@@ -12,7 +12,11 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "supabase:check": "bun scripts/supabase/cli.ts check",
+    "supabase:link": "bun scripts/supabase/cli.ts link",
+    "supabase:dry-run": "bun scripts/supabase/cli.ts dry-run",
+    "catalog:manifest": "bun scripts/supabase/export-catalog.ts"
   },
   "overrides": {
     "rolldown": "1.2.1"
@@ -89,6 +93,7 @@
     "jsdom": "^20.0.3",
     "nitro": "3.0.260603-beta",
     "prettier": "^3.7.3",
+    "supabase": "^3.1.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1",
     "vite": "8.1.5",

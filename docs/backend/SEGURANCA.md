@@ -1,5 +1,7 @@
 # Segurança e autenticação propostas
 
+> Atualização Sprint 06.2A: para o Supabase externo `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1), vale a exceção específica de AGENTS.md. A administração ocorre pela CLI do proprietário, sem modificar o bloco gerenciado do Lovable. As migrações versionadas de fundação estão preparadas, mas não foram aplicadas ao remoto. A proposta histórica abaixo não é uma migração pronta. Ver [Sprint 06.2A](../sprints/SPRINT-06.2A.md).
+
 Não há autenticação real nem banco configurado. Esta é uma especificação de segurança para implementação/teste na Sprint 06.2, não uma garantia de que RLS já está em operação. A sessão local atual permanece intacta e jamais poderá autorizar acesso ao backend futuro.
 
 ## Matriz de permissões
