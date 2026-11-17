@@ -45,7 +45,7 @@ describe("Catálogo comercial Vila Rica", () => {
     expect(
       products.every((p) => p.available && categories.some((c) => c.id === p.categoryId)),
     ).toBe(true);
-    expect(products.every((p) => p.imageUrl === "")).toBe(true);
+    expect(products.every((p) => p.imageUrl.startsWith("/images/products/"))).toBe(true);
   });
   it.each(expected)("confere quantidades e preços oficiais de %s", (name, prices) => {
     const category = createSeedCategories().find((c) => c.name === name)!;

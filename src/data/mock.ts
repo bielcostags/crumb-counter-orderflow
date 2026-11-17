@@ -1,3 +1,4 @@
+import { CATALOG_PRODUCT_IMAGES } from "./catalog-product-images";
 /** Catálogo comercial Vila Rica; pedidos de exemplo são sempre fictícios.
  * Códigos e preços de referência: docs/catalogo-vila-rica.md.
  * O seed é usado somente em armazenamento novo ou restauração explicitamente solicitada.
@@ -6,6 +7,10 @@ import { buildOrderItems, calcTotalCents, getStatusFlow } from "@/lib/orders";
 import type { Category, Order, OrderStatus, Product, StoreData } from "@/types";
 export const STORE_VERSION = 1;
 export const PRODUCT_IMAGE_GALLERY: { url: string; label: string }[] = [
+  ...CATALOG_PRODUCT_IMAGES.map((image) => ({
+    url: image.url,
+    label: `${image.name} — ilustrativa (IA)`,
+  })),
   { url: "/images/products/pao-frances.jpg", label: "Pão francês" },
   { url: "/images/products/pao-fermentacao-natural.jpg", label: "Pão de fermentação natural" },
   { url: "/images/products/pao-integral.jpg", label: "Pão integral" },
@@ -52,7 +57,7 @@ export function createSeedProducts(): Product[] {
       description: "Hambúrguer, bacon, presunto, queijo e salada.",
       priceCents: 2400,
       categoryId: "vr-cat-lanches",
-      imageUrl: "",
+      imageUrl: "/images/products/lanches/x-bacon.webp",
       available: true,
     },
     {
@@ -61,7 +66,7 @@ export function createSeedProducts(): Product[] {
       description: "Hambúrguer, presunto, queijo, ovo e salada.",
       priceCents: 1900,
       categoryId: "vr-cat-lanches",
-      imageUrl: "",
+      imageUrl: "/images/products/lanches/x-salada.webp",
       available: true,
     },
     {
@@ -70,7 +75,7 @@ export function createSeedProducts(): Product[] {
       description: "Hambúrguer, calabresa, queijo e salada.",
       priceCents: 2300,
       categoryId: "vr-cat-lanches",
-      imageUrl: "",
+      imageUrl: "/images/products/lanches/x-calabresa.webp",
       available: true,
     },
     {
@@ -79,7 +84,7 @@ export function createSeedProducts(): Product[] {
       description: "Hambúrguer, queijo e salada.",
       priceCents: 1800,
       categoryId: "vr-cat-lanches",
-      imageUrl: "",
+      imageUrl: "/images/products/lanches/x-burguer.webp",
       available: true,
     },
     {
@@ -88,7 +93,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1800,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/pao-com-file-e-queijo.webp",
       available: true,
     },
     {
@@ -97,7 +102,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1700,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/pao-com-frango-desfiado-e-queijo.webp",
       available: true,
     },
     {
@@ -106,7 +111,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1000,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/pao-com-calabresa.webp",
       available: true,
     },
     {
@@ -115,7 +120,7 @@ export function createSeedProducts(): Product[] {
       description: "Duas fatias de queijo.",
       priceCents: 500,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/pao-com-queijo.webp",
       available: true,
     },
     {
@@ -124,7 +129,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 300,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/pao-com-manteiga.webp",
       available: true,
     },
     {
@@ -133,7 +138,7 @@ export function createSeedProducts(): Product[] {
       description: "Duas fatias de mortadela.",
       priceCents: 600,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/pao-com-mortadela.webp",
       available: true,
     },
     {
@@ -142,7 +147,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 500,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/pao-com-ovo.webp",
       available: true,
     },
     {
@@ -151,7 +156,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 700,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/misto-quente.webp",
       available: true,
     },
     {
@@ -160,7 +165,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 900,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/misto-quente-com-ovo.webp",
       available: true,
     },
     {
@@ -169,7 +174,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 980,
       categoryId: "vr-cat-sanduiches",
-      imageUrl: "",
+      imageUrl: "/images/products/sanduiches/pao-com-hamburguer.webp",
       available: true,
     },
     {
@@ -178,7 +183,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 700,
       categoryId: "vr-cat-tapiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/tapiocas/tapioca-com-manteiga.webp",
       available: true,
     },
     {
@@ -187,7 +192,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 900,
       categoryId: "vr-cat-tapiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/tapiocas/tapioca-com-ovo.webp",
       available: true,
     },
     {
@@ -196,7 +201,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1500,
       categoryId: "vr-cat-tapiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/tapiocas/tapioca-com-presunto-e-queijo.webp",
       available: true,
     },
     {
@@ -205,7 +210,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 900,
       categoryId: "vr-cat-tapiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/tapiocas/tapioca-com-queijo.webp",
       available: true,
     },
     {
@@ -214,7 +219,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1500,
       categoryId: "vr-cat-tapiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/tapiocas/tapioca-com-frango-e-requeijao.webp",
       available: true,
     },
     {
@@ -223,7 +228,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 800,
       categoryId: "vr-cat-tapiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/tapiocas/tapioca-com-leite-condensado.webp",
       available: true,
     },
     {
@@ -232,7 +237,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 2000,
       categoryId: "vr-cat-tapiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/tapiocas/tapioca-com-file-e-queijo.webp",
       available: true,
     },
     {
@@ -241,7 +246,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1400,
       categoryId: "vr-cat-crepiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/crepiocas/crepioca-de-presunto-e-queijo.webp",
       available: true,
     },
     {
@@ -250,7 +255,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1400,
       categoryId: "vr-cat-crepiocas",
-      imageUrl: "",
+      imageUrl: "/images/products/crepiocas/crepioca-de-frango.webp",
       available: true,
     },
     {
@@ -259,7 +264,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1800,
       categoryId: "vr-cat-cuscuz",
-      imageUrl: "",
+      imageUrl: "/images/products/cuscuz/cuscuz-com-charque.webp",
       available: true,
     },
     {
@@ -268,7 +273,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1600,
       categoryId: "vr-cat-cuscuz",
-      imageUrl: "",
+      imageUrl: "/images/products/cuscuz/cuscuz-com-frango-e-queijo.webp",
       available: true,
     },
     {
@@ -277,7 +282,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 900,
       categoryId: "vr-cat-cuscuz",
-      imageUrl: "",
+      imageUrl: "/images/products/cuscuz/cuscuz-com-manteiga.webp",
       available: true,
     },
     {
@@ -286,7 +291,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1100,
       categoryId: "vr-cat-cuscuz",
-      imageUrl: "",
+      imageUrl: "/images/products/cuscuz/cuscuz-com-ovo.webp",
       available: true,
     },
     {
@@ -295,7 +300,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1200,
       categoryId: "vr-cat-cuscuz",
-      imageUrl: "",
+      imageUrl: "/images/products/cuscuz/cuscuz-com-queijo.webp",
       available: true,
     },
     {
@@ -304,7 +309,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 200,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/cafezinho.webp",
       available: true,
     },
     {
@@ -313,7 +318,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 500,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/cafe-expresso.webp",
       available: true,
     },
     {
@@ -322,7 +327,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 500,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/cafe-com-leite.webp",
       available: true,
     },
     {
@@ -331,7 +336,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1400,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/mocaccino.webp",
       available: true,
     },
     {
@@ -340,7 +345,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1300,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/chocolate-quente.webp",
       available: true,
     },
     {
@@ -349,7 +354,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1500,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/capuccino-europeu.webp",
       available: true,
     },
     {
@@ -358,7 +363,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1500,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/capuccino-chocolate.webp",
       available: true,
     },
     {
@@ -367,7 +372,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1600,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/capuccino-premium.webp",
       available: true,
     },
     {
@@ -376,7 +381,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1000,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/moca-expresso.webp",
       available: true,
     },
     {
@@ -385,7 +390,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 700,
       categoryId: "vr-cat-capuccinos",
-      imageUrl: "",
+      imageUrl: "/images/products/capuccinos/cafe-com-leite-especial.webp",
       available: true,
     },
     {
@@ -394,7 +399,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1000,
       categoryId: "vr-cat-sucos",
-      imageUrl: "",
+      imageUrl: "/images/products/sucos/suco-de-laranja-copo.webp",
       available: true,
     },
     {
@@ -403,7 +408,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 2000,
       categoryId: "vr-cat-sucos",
-      imageUrl: "",
+      imageUrl: "/images/products/sucos/suco-de-laranja-jarra.webp",
       available: true,
     },
     {
@@ -412,7 +417,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 900,
       categoryId: "vr-cat-sucos",
-      imageUrl: "",
+      imageUrl: "/images/products/sucos/suco-de-polpa-copo.webp",
       available: true,
     },
     {
@@ -421,7 +426,7 @@ export function createSeedProducts(): Product[] {
       description: "",
       priceCents: 1800,
       categoryId: "vr-cat-sucos",
-      imageUrl: "",
+      imageUrl: "/images/products/sucos/suco-de-polpa-jarra.webp",
       available: true,
     },
     {
@@ -430,7 +435,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 300,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-ovo.webp",
       available: true,
     },
     {
@@ -439,7 +444,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 300,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-fatia-de-mussarela.webp",
       available: true,
     },
     {
@@ -448,7 +453,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 300,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-fatia-de-presunto.webp",
       available: true,
     },
     {
@@ -457,7 +462,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 300,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-fatia-de-mortadela.webp",
       available: true,
     },
     {
@@ -466,7 +471,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 300,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-salada.webp",
       available: true,
     },
     {
@@ -475,7 +480,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 600,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-hamburguer.webp",
       available: true,
     },
     {
@@ -484,7 +489,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 600,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-calabresa.webp",
       available: true,
     },
     {
@@ -493,7 +498,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 800,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-bacon.webp",
       available: true,
     },
     {
@@ -502,7 +507,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 1000,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-file.webp",
       available: true,
     },
     {
@@ -511,7 +516,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 800,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-frango-desfiado.webp",
       available: true,
     },
     {
@@ -520,7 +525,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 250,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-pao-de-hamburguer.webp",
       available: true,
     },
     {
@@ -529,7 +534,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 250,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-pao-de-forma.webp",
       available: true,
     },
     {
@@ -538,7 +543,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para lanches.",
       priceCents: 400,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-requeijao-cremoso.webp",
       available: true,
     },
     {
@@ -547,7 +552,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para sucos.",
       priceCents: 300,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-leite.webp",
       available: true,
     },
     {
@@ -556,7 +561,7 @@ export function createSeedProducts(): Product[] {
       description: "Adicional indicado para sucos.",
       priceCents: 700,
       categoryId: "vr-cat-adicionais",
-      imageUrl: "",
+      imageUrl: "/images/products/adicionais/adicional-nutella.webp",
       available: true,
     },
   ];

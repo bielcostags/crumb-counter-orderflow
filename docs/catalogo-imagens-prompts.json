@@ -1,0 +1,287 @@
+[
+  {
+    "productId": "vr-prod-292",
+    "path": "/images/products/lanches/x-bacon.webp",
+    "prompt": "Use case: product-mockup. Generate one square 1:1 photorealistic artisanal Brazilian bakery menu product photograph: X-Bacon hamburger on hamburger bread, only beef hamburger patty, bacon, ham, cheese and simple lettuce/tomato salad. No egg, no additional toppings, no sauces. Entire sandwich centered on simple cream ceramic plate, warm beige #F1EAE4 background, natural soft window light, appetizing realistic food textures, restrained cozy artisan styling consistent across a commercial menu photo series. No text, labels, logos, watermarks, prices, other food, props or hands. Output one individual product image, not collage."
+  },
+  {
+    "productId": "vr-prod-291",
+    "path": "/images/products/lanches/x-salada.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Plain hamburger bun with beef patty, ham, cheese, one egg and lettuce/tomato salad. No bacon, no sauces."
+  },
+  {
+    "productId": "vr-prod-293",
+    "path": "/images/products/lanches/x-calabresa.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Plain hamburger bun with beef patty, sliced calabresa sausage, cheese and lettuce/tomato salad. No ham, no egg, no sauces."
+  },
+  {
+    "productId": "vr-prod-294",
+    "path": "/images/products/lanches/x-burguer.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Plain hamburger bun with beef patty, cheese and lettuce/tomato salad only. No ham, no egg, no bacon or sauces."
+  },
+  {
+    "productId": "vr-prod-280",
+    "path": "/images/products/sanduiches/pao-com-file-e-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian pão francês crusty bread with grilled beef fillet strips and cheese only."
+  },
+  {
+    "productId": "vr-prod-282",
+    "path": "/images/products/sanduiches/pao-com-frango-desfiado-e-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian pão francês crusty bread with shredded chicken and cheese only."
+  },
+  {
+    "productId": "vr-prod-288",
+    "path": "/images/products/sanduiches/pao-com-calabresa.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian pão francês crusty bread filled with sliced calabresa sausage only."
+  },
+  {
+    "productId": "vr-prod-641",
+    "path": "/images/products/sanduiches/pao-com-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian pão francês crusty bread holding exactly two slices of cheese only."
+  },
+  {
+    "productId": "vr-prod-266",
+    "path": "/images/products/sanduiches/pao-com-manteiga.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian pão francês crusty bread cut open with butter only, no garnish."
+  },
+  {
+    "productId": "vr-prod-286",
+    "path": "/images/products/sanduiches/pao-com-mortadela.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian pão francês crusty bread holding exactly two slices of mortadella only."
+  },
+  {
+    "productId": "vr-prod-285",
+    "path": "/images/products/sanduiches/pao-com-ovo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian pão francês crusty bread filled with one cooked egg only."
+  },
+  {
+    "productId": "vr-prod-276",
+    "path": "/images/products/sanduiches/misto-quente.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A plain pressed toasted Brazilian pão francês sandwich, closed, without revealing or claiming unspecified fillings. No garnish."
+  },
+  {
+    "productId": "vr-prod-277",
+    "path": "/images/products/sanduiches/misto-quente-com-ovo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A pressed toasted Brazilian pão francês sandwich with a visible cooked egg; remaining filling discreet, no claim of unspecified ingredients."
+  },
+  {
+    "productId": "vr-prod-891",
+    "path": "/images/products/sanduiches/pao-com-hamburguer.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian pão francês crusty bread with one beef hamburger patty only."
+  },
+  {
+    "productId": "vr-prod-296",
+    "path": "/images/products/tapiocas/tapioca-com-manteiga.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: White folded tapioca starch crepe with butter only."
+  },
+  {
+    "productId": "vr-prod-295",
+    "path": "/images/products/tapiocas/tapioca-com-ovo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: White folded tapioca starch crepe with cooked egg only."
+  },
+  {
+    "productId": "vr-prod-297",
+    "path": "/images/products/tapiocas/tapioca-com-presunto-e-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: White folded tapioca starch crepe with ham and cheese only."
+  },
+  {
+    "productId": "vr-prod-299",
+    "path": "/images/products/tapiocas/tapioca-com-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: White folded tapioca starch crepe with cheese only."
+  },
+  {
+    "productId": "vr-prod-298",
+    "path": "/images/products/tapiocas/tapioca-com-frango-e-requeijao.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: White folded tapioca starch crepe with shredded chicken and Brazilian creamy requeijão cheese only."
+  },
+  {
+    "productId": "vr-prod-302",
+    "path": "/images/products/tapiocas/tapioca-com-leite-condensado.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: White folded tapioca starch crepe with condensed milk only, no fruit, no coconut."
+  },
+  {
+    "productId": "vr-prod-867",
+    "path": "/images/products/tapiocas/tapioca-com-file-e-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: White folded tapioca starch crepe with beef fillet strips and cheese only."
+  },
+  {
+    "productId": "vr-prod-300",
+    "path": "/images/products/crepiocas/crepioca-de-presunto-e-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A golden thin egg-and-tapioca crepioca folded over ham and cheese only. Distinct golden egg crepe, not white tapioca."
+  },
+  {
+    "productId": "vr-prod-301",
+    "path": "/images/products/crepiocas/crepioca-de-frango.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A golden thin egg-and-tapioca crepioca folded over shredded chicken only. No extra sauces or garnish."
+  },
+  {
+    "productId": "vr-prod-880",
+    "path": "/images/products/cuscuz/cuscuz-com-charque.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian steamed yellow corn couscous mound accompanied by shredded charque dried beef only."
+  },
+  {
+    "productId": "vr-prod-881",
+    "path": "/images/products/cuscuz/cuscuz-com-frango-e-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian steamed yellow corn couscous mound with shredded chicken and cheese only."
+  },
+  {
+    "productId": "vr-prod-877",
+    "path": "/images/products/cuscuz/cuscuz-com-manteiga.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian steamed yellow corn couscous mound with a little melted butter only."
+  },
+  {
+    "productId": "vr-prod-878",
+    "path": "/images/products/cuscuz/cuscuz-com-ovo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian steamed yellow corn couscous mound accompanied by one fried egg only."
+  },
+  {
+    "productId": "vr-prod-879",
+    "path": "/images/products/cuscuz/cuscuz-com-queijo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Brazilian steamed yellow corn couscous mound with cheese only."
+  },
+  {
+    "productId": "vr-prod-358",
+    "path": "/images/products/capuccinos/cafezinho.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Black brewed coffee in a small plain white coffee cup, no milk, no pastries."
+  },
+  {
+    "productId": "vr-prod-359",
+    "path": "/images/products/capuccinos/cafe-expresso.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A single espresso with natural crema in a small plain white demitasse, no other food."
+  },
+  {
+    "productId": "vr-prod-360",
+    "path": "/images/products/capuccinos/cafe-com-leite.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Coffee with milk in a simple cream ceramic cup, no topping."
+  },
+  {
+    "productId": "vr-prod-361",
+    "path": "/images/products/capuccinos/mocaccino.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Neutral warm mocha-colored coffee beverage in a plain cream cup, subtle foam, no visible toppings or invented recipe."
+  },
+  {
+    "productId": "vr-prod-362-chocolate-quente",
+    "path": "/images/products/capuccinos/chocolate-quente.webp",
+    "prompt": "Use case: product-mockup. Individual square 1:1 photorealistic food menu photo. A cream ceramic cup filled with DRINKABLE LIQUID hot chocolate, smooth fluid dark chocolate surface with a tiny natural ripple, NOT pudding, NOT a mousse, NOT thick whipped topping, no sculpted swirl. Subtle warm steam. Simple saucer, warm cream beige #F1EAE4 tabletop and backdrop, soft natural window light, centered complete cup, artisanal appetizing realistic sharp textures. No text, logos, watermarks, prices, marshmallows, whipped cream, garnish, extra food or hands. One standalone product photograph, not collage."
+  },
+  {
+    "productId": "vr-prod-363",
+    "path": "/images/products/capuccinos/capuccino-europeu.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Neutral cappuccino in a simple white ceramic cup with smooth milk foam. European style name has no specified exact recipe; no toppings."
+  },
+  {
+    "productId": "vr-prod-364",
+    "path": "/images/products/capuccinos/capuccino-chocolate.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Chocolate-colored cappuccino in a cream cup, restrained foam, no cookies, whipped cream or invented toppings."
+  },
+  {
+    "productId": "vr-prod-365",
+    "path": "/images/products/capuccinos/capuccino-premium.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Neutral cappuccino in an elegant cream cup and saucer, fine foam, premium presentation without adding unspecified ingredients or toppings."
+  },
+  {
+    "productId": "vr-prod-362-moca-expresso",
+    "path": "/images/products/capuccinos/moca-expresso.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Neutral espresso-like coffee beverage in a small elegant cream cup. Exact Moça Expresso recipe is unspecified, so no visible invented ingredients or toppings."
+  },
+  {
+    "productId": "vr-prod-910",
+    "path": "/images/products/capuccinos/cafe-com-leite-especial.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Coffee with milk in a plain clear heat-safe glass on a saucer, special presentation without toppings or unspecified ingredients."
+  },
+  {
+    "productId": "vr-prod-268",
+    "path": "/images/products/sucos/suco-de-laranja-copo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Fresh orange juice in one clear drinking glass, no fruit garnish, no claims about volume."
+  },
+  {
+    "productId": "vr-prod-273",
+    "path": "/images/products/sucos/suco-de-laranja-jarra.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Fresh orange juice in a clear serving pitcher, no additional glass, no fruit garnish, no claims about volume."
+  },
+  {
+    "productId": "vr-prod-271",
+    "path": "/images/products/sucos/suco-de-polpa-copo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A neutral opaque pale straw-colored pulp fruit juice in a clear glass. Flavor is unspecified, no fruit props, no garnish, no visible named fruit."
+  },
+  {
+    "productId": "vr-prod-566",
+    "path": "/images/products/sucos/suco-de-polpa-jarra.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A neutral opaque pale straw-colored pulp fruit juice in a clear pitcher. Flavor is unspecified, no fruit props or garnish."
+  },
+  {
+    "productId": "vr-prod-304",
+    "path": "/images/products/adicionais/adicional-ovo.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: One cooked egg presented individually on a small cream plate, no garnish or extra food."
+  },
+  {
+    "productId": "vr-prod-305",
+    "path": "/images/products/adicionais/adicional-fatia-de-mussarela.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: One slice of mozzarella cheese on a small cream plate, no garnish."
+  },
+  {
+    "productId": "vr-prod-306",
+    "path": "/images/products/adicionais/adicional-fatia-de-presunto.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: One slice of ham on a small cream plate, no garnish."
+  },
+  {
+    "productId": "vr-prod-307",
+    "path": "/images/products/adicionais/adicional-fatia-de-mortadela.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: One slice of Brazilian mortadella on a small cream plate, no garnish."
+  },
+  {
+    "productId": "vr-prod-308",
+    "path": "/images/products/adicionais/adicional-salada.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A simple portion of lettuce and tomato salad on a small cream plate, no dressing or extra toppings."
+  },
+  {
+    "productId": "vr-prod-309",
+    "path": "/images/products/adicionais/adicional-hamburguer.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: One cooked beef hamburger patty on a small cream plate, no bread, no sauces."
+  },
+  {
+    "productId": "vr-prod-310",
+    "path": "/images/products/adicionais/adicional-calabresa.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A small portion of cooked sliced calabresa sausage on a cream plate, no garnish."
+  },
+  {
+    "productId": "vr-prod-312",
+    "path": "/images/products/adicionais/adicional-bacon.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A small portion of cooked bacon strips on a cream plate, no garnish."
+  },
+  {
+    "productId": "vr-prod-313",
+    "path": "/images/products/adicionais/adicional-file.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A small portion of grilled beef fillet strips on a cream plate, no garnish."
+  },
+  {
+    "productId": "vr-prod-314",
+    "path": "/images/products/adicionais/adicional-frango-desfiado.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A small portion of plain cooked shredded chicken on a cream plate, no garnish."
+  },
+  {
+    "productId": "vr-prod-315",
+    "path": "/images/products/adicionais/adicional-pao-de-hamburguer.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: One plain hamburger bun on a small cream plate, no filling, no sesame or toppings."
+  },
+  {
+    "productId": "vr-prod-617",
+    "path": "/images/products/adicionais/adicional-pao-de-forma.webp",
+    "prompt": "Use case: product-mockup. Individual square 1:1 photorealistic food menu photo. A small representative portion of plain Brazilian sandwich loaf bread (pão de forma): two separate simple soft white bread slices on a cream ceramic plate. NO whole loaf, no filling, no butter, no seeds, no garnish or other food. Warm cream beige #F1EAE4 tabletop/backdrop, soft natural window light, centered full plate and subject, artisanal appetizing realistic sharp textures, minimalist composition. No text, logos, watermarks, prices, hands. One standalone photo, not collage."
+  },
+  {
+    "productId": "vr-prod-687",
+    "path": "/images/products/adicionais/adicional-requeijao-cremoso.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A small plain cream bowl of Brazilian requeijão creamy cheese, no bread or garnish."
+  },
+  {
+    "productId": "vr-prod-575",
+    "path": "/images/products/adicionais/adicional-leite.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: Milk in one small clear glass, no fruit or garnish."
+  },
+  {
+    "productId": "vr-prod-634",
+    "path": "/images/products/adicionais/adicional-nutella.webp",
+    "prompt": "Use case: product-mockup. Asset: one individual square 1:1 realistic food product photograph for an artisanal Brazilian bakery menu. Warm cream/beige #F1EAE4 backdrop, simple cream tableware, softly lit natural window light, centered complete subject with breathing room, high sharpness and realistic appetizing textures, minimalist consistent commercial photography, warm olive/brown palette accents only if natural. No text, labels, logos, watermarks, prices, hands, unrelated props or other food. No garnish or ingredients beyond those explicitly specified. Not a collage. Subject: A small cream bowl containing a glossy portion of chocolate hazelnut spread, no branded jar, no visible nuts or extra foods."
+  }
+]

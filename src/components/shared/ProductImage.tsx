@@ -30,8 +30,8 @@ export function ProductImage({ src, alt, className, eager }: Props) {
       src={src}
       alt={alt}
       loading={eager ? "eager" : "lazy"}
-      width={816}
-      height={816}
+      width={800}
+      height={800}
       onError={() => setFailedSrc(src)}
       className={cn("object-cover", className)}
     />

@@ -1,5 +1,7 @@
-import { createContext, useContext, useSyncExternalStore, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useSyncExternalStore, type ReactNode } from "react";
 
+import { fillMissingCatalogImages } from "@/lib/fill-catalog-images";
+import { CATALOG_PRODUCT_IMAGES } from "@/data/catalog-product-images";
 import type { AppServices } from "@/services/contracts";
 import { localServices } from "@/services/local";
 import { dataStore } from "@/services/local/store";
@@ -17,6 +19,11 @@ const getServerSnapshot = () => null;
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const data = useSyncExternalStore(dataStore.subscribe, dataStore.get, getServerSnapshot);
+  useEffect(() => {
+    if (!data) return;
+    const updated = fillMissingCatalogImages(data, CATALOG_PRODUCT_IMAGES);
+    if (updated !== data) dataStore.set(updated);
+  }, [data]);
   return (
     <StoreContext.Provider value={{ data, services: localServices }}>
       {children}

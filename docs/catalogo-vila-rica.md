@@ -4,7 +4,7 @@ Transcrição fornecida pelo proprietário no escopo da Sprint 05.1. Após a imp
 
 57 produtos em 8 categorias, todos inicialmente disponíveis e ativos somente no ambiente demonstrativo. Isso não declara disponibilidade comercial real. IDs internos novos não reutilizam os produtos antigos; códigos comerciais são documentados aqui, sem campo de SKU no domínio.
 
-Os produtos usam placeholders, sem fotos individuais oficiais ou genéricas apresentadas como oficiais. Descrições ausentes permanecem vazias. A galeria antiga continua disponível na administração para seleção posterior, com aviso de imagem ilustrativa.
+Os 57 produtos possuem imagens individuais geradas por IA, sempre identificadas como ilustrativas, sem serem apresentadas como fotos oficiais. Descrições ausentes permanecem vazias. A galeria antiga continua disponível junto às novas imagens. Consulte [inventário de imagens](catalogo-imagens.md).
 
 ## Lanches
 
@@ -113,7 +113,7 @@ O código comercial **362** é usado para **Chocolate Quente (R$ 13,00)** e **Mo
 
 Adicionais são 15 produtos comuns na mesma categoria, com indicação lanches/sucos na descrição. Não há relações obrigatórias, sabores, tamanhos, ingredientes adicionais ou regras novas de preço.
 
-A marca oficial foi recebida e está integrada a partir de `public/images/brand/logo.jpeg` (1600×1333), sem recorte, redesenho ou alteração de cores. Aparece no cabeçalho, acesso/menu administrativo, destaque do cardápio e comprovante. Favicon específico e fotos individuais ainda permanecem pendentes.
+A marca oficial foi recebida e está integrada a partir de `public/images/brand/logo.jpeg` (1600×1333), sem recorte, redesenho ou alteração de cores. Aparece no cabeçalho, acesso/menu administrativo, destaque do cardápio e comprovante. Favicon específico e fotos individuais oficiais do estabelecimento ainda permanecem pendentes; o catálogo já possui imagens ilustrativas geradas por IA.
 
 O seed não sobrescreve o localStorage existente: versão/chaves e parser foram preservados. Pedidos e catálogos anteriores continuam intactos. Para conhecer o novo seed, prefira um perfil de navegador novo, preservando os dados anteriores. O serviço existente `localServices.demo.resetDemoData()` restaura o catálogo/pedidos e limpa o carrinho público: é destrutivo para dados locais e só deve ser chamado deliberadamente, após guardar qualquer informação necessária. O rascunho do PDV usa chave própria; não o reutilize sem revisão após uma restauração.
 

@@ -6,7 +6,7 @@ Sistema frontend personalizado para Vila Rica — Padaria e Confeitaria Artesana
 
 A Sprint 05.1 mantém os módulos e regras das cinco sprints e aplica identificação comercial, tokens de cores e o catálogo Vila Rica. São 8 categorias e 57 produtos: Lanches (4), Sanduíches (10), Tapiocas (7), Crepiocas (2), Cuscuz (5), Capuccinos (10), Sucos (4) e Adicionais (15). Preços em centavos, IDs novos e disponibilidade inicial apenas para a demo. Os pedidos de exemplo foram adaptados ao novo catálogo, sem representar vendas reais.
 
-A logomarca e as quatro páginas do cardápio foram recebidas posteriormente na conversa. A conferência visual confirmou os 57 itens e preços, incluindo o código 362 duplicado. A logo oficial está em `public/images/brand/logo.jpeg` e é usada no cabeçalho público, acesso/menu administrativo, destaque do cardápio e comprovante. A imagem original é preservada sem recorte, filtros ou distorção, com `object-contain`, dimensões 1600×1333 e texto alternativo. A identificação textual permanece como apoio e fallback. Favicon oficial também está pendente. Todos os novos produtos usam placeholders; a galeria existente permanece disponível e suas fotos são identificadas como ilustrativas.
+A logomarca e as quatro páginas do cardápio foram recebidas posteriormente na conversa. A conferência visual confirmou os 57 itens e preços, incluindo o código 362 duplicado. A logo oficial está em `public/images/brand/logo.jpeg` e é usada no cabeçalho público, acesso/menu administrativo, destaque do cardápio e comprovante. A imagem original é preservada sem recorte, filtros ou distorção, com `object-contain`, dimensões 1600×1333 e texto alternativo. A identificação textual permanece como apoio e fallback. Favicon oficial também está pendente. Todos os 57 produtos possuem imagens individuais ilustrativas geradas por IA, em WebP 800×800, armazenadas localmente. A galeria administrativa contém as novas imagens e preserva as anteriores. Ver [inventário e origem das imagens](docs/catalogo-imagens.md).
 
 O código comercial 362 consta em Chocolate Quente (R$ 13,00) e Moça Expresso (R$ 10,00). Ambos foram preservados com IDs internos distintos; confirmar a duplicidade com o proprietário. Códigos e todos os preços estão em [catálogo Vila Rica](docs/catalogo-vila-rica.md), sem novo campo de SKU no modelo.
 
@@ -15,6 +15,12 @@ O catálogo existente no navegador não é migrado, sobrescrito ou limpo automat
 Os avisos de demonstração, sessão sem autenticação real e comprovante não fiscal permanecem conforme o escopo de personalização. Não houve alteração das regras de pedidos, pagamentos, adicionais, preços ou persistência.
 
 A validação da personalização passou com **162 testes em 10 arquivos** (146 anteriores + 16 novos), typecheck e build aprovados, lint sem erros e com nove avisos preexistentes. Revisão visual em navegador permanece pendente; a logo oficial já está integrada. Veja [Sprint 05.1](docs/sprints/SPRINT-05.1.md).
+
+## Imagens individuais do catálogo
+
+Foram geradas e revisadas 57 fotos ilustrativas por IA (ferramenta integrada image_gen), com dois refinamentos, sem contratação de banco externo. Os arquivos em `public/images/products/<categoria>/` somam aproximadamente 2,26 MiB. Prompts, limitações de composição, caminhos e tamanhos estão em [catalogo-imagens.md](docs/catalogo-imagens.md) e [catalogo-imagens-prompts.json](docs/catalogo-imagens-prompts.json).
+
+O seed e a galeria usam imagens distintas por produto. Ao abrir a aplicação, imagens ausentes de produtos Vila Rica já existentes podem ser preenchidas automaticamente, somente quando ID, nome e categoria correspondem ao catálogo. Imagens personalizadas e todos os demais dados são preservados. Essa atualização não importa categorias/produtos ausentes nem restaura o catálogo antigo do navegador. Não há mudança de preços, pedidos ou regras de checkout. Validação: 169 testes aprovados (162 anteriores + 7 novos), typecheck/build/diff aprovados e lint sem erros, com nove avisos preexistentes. A revisão dos arquivos de imagem foi realizada; a revisão no navegador permanece pendente por indisponibilidade do host.
 
 ## Execução com Bun
 

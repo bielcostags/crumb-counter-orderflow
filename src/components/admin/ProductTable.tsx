@@ -37,11 +37,16 @@ export function ProductTable({
               <tr key={product.id} className="border-b last:border-0">
                 <td className="p-3">
                   <div className="flex min-w-56 gap-3">
-                    <ProductImage
-                      src={product.imageUrl}
-                      alt={product.name}
-                      className="h-16 w-16 shrink-0 rounded-lg"
-                    />
+                    <div className="shrink-0">
+                      <ProductImage
+                        src={product.imageUrl}
+                        alt={product.name}
+                        className="h-16 w-16 rounded-lg"
+                      />
+                      {product.imageUrl.startsWith("/images/products/") && (
+                        <p className="mt-1 text-[10px] text-muted-foreground">Ilustrativa</p>
+                      )}
+                    </div>
                     <div>
                       <p className="font-semibold">{product.name}</p>
                       <p className="line-clamp-2 text-muted-foreground">
