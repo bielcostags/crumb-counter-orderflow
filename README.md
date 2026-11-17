@@ -40,6 +40,10 @@ Foram preparadas duas migrações com dez tabelas, RLS de leitura e bloqueio int
 
 Use `bun run supabase:check`, `bun run supabase:link` e `bun run supabase:dry-run` para o alvo fixo; `bun run catalog:manifest` emite somente o catálogo para revisão. Não há script de aplicação automática. Veja [instruções e segurança da CLI](supabase/README.md) e [relatório da Sprint 06.2A](docs/sprints/SPRINT-06.2A.md), incluindo validações (200 testes aprovados), limites e autorização exigida antes de qualquer alteração remota.
 
+## Validação PostgreSQL — Sprint 06.2B
+
+A fundação passou na stack local: **121 testes PostgreSQL (34 anteriores + 87 novos)** e **200 testes da aplicação**, com typecheck/build aprovados e lint sem erros, mantendo nove avisos preexistentes. As duas migrações não precisaram de alteração. O novo dry run confirmou somente os dois arquivos previstos no projeto São Paulo `yzxsuoxthkbzbkcumauz`; **nenhuma migração hospedada foi aplicada**. A aplicação remota aguarda aprovação explícita para os hashes e plano em [SPRINT-06.2B.md](docs/sprints/SPRINT-06.2B.md). Frontend, Lovable e dados locais permanecem preservados.
+
 ## Execução com Bun
 
 Use Bun 1.4.4 (versão utilizada nesta validação) e Node.js 24 para os scripts das ferramentas. O `bun.lock` existente é a referência das dependências; não é necessário gerar lockfile npm.
