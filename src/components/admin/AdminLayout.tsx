@@ -16,7 +16,7 @@ import { useAdminClock } from "./use-admin-clock";
 
 export function AdminLayout({ children }: { children: ReactNode }) {
   const [expanded, setExpanded] = useState(true);
-  const { signOut } = useAdminSession();
+  const { signOut, mode, profile } = useAdminSession();
   const pathname = useLocation({ select: (l) => l.pathname });
   const now = useAdminClock();
   const section = pathname.endsWith("balcao")
@@ -82,18 +82,27 @@ export function AdminLayout({ children }: { children: ReactNode }) {
               { to: "/admin/categorias", label: "Categorias", Icon: Tags },
               { to: "/admin/balcao", label: "Atendimento no balcão", Icon: Store },
             ] as const
-          ).map(({ to, label, Icon }) => (
-            <Button key={to} asChild variant={section === label ? "secondary" : "ghost"}>
-              <Link
-                to={to}
-                aria-label={label}
-                aria-current={section === label ? "page" : undefined}
-              >
-                <Icon />
-                {expanded && label}
-              </Link>
+          )
+            .filter(
+              ({ to }) => mode === "demo" || profile?.role === "admin" || to === "/admin/balcao",
+            )
+            .map(({ to, label, Icon }) => (
+              <Button key={to} asChild variant={section === label ? "secondary" : "ghost"}>
+                <Link
+                  to={to}
+                  aria-label={label}
+                  aria-current={section === label ? "page" : undefined}
+                >
+                  <Icon />
+                  {expanded && label}
+                </Link>
+              </Button>
+            ))}
+          {mode === "supabase" && profile?.role === "admin" && (
+            <Button asChild variant={pathname.endsWith("funcionarios") ? "secondary" : "ghost"}>
+              <Link to="/admin/funcionarios">Funcionários</Link>
             </Button>
-          ))}
+          )}
           <Button asChild variant="outline">
             <Link to="/" aria-label="Voltar ao cardápio">
               <ShoppingBag />

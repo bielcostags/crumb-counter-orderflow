@@ -1,5 +1,13 @@
 # Plano de importação e transição dos dados
 
+## Atualização de 17/11/2026 — Sprint 06.3
+
+A fundação hospedada (duas migrações) foi aplicada anteriormente após autorização e continua com escrita comercial bloqueada. Nesta sprint, a autenticação servidor-centrada por cookies e a preparação de perfis foram implementadas/testadas **somente localmente**. SDKs oficiais estão instalados; demo continua padrão, sem SDK administrativo no browser, sem ativação real automática e sem alteração de catálogo/localStorage.
+
+O proprietário confirmou no painel **public e graphql_public** como Exposed schemas (private ausente na lista informada); isso é evidência manual, não uma prova da CLI. Auth hospedado, primeira conta/admin e nova migração 00300 não foram ativados. A migração nova, funções de perfis e bootstrap privado aguardam aprovação própria. Convites por endpoint não estão implementados/liberados. Resultados locais: **247 testes da aplicação, 155 SQL e 12 checks com Auth/REST reais locais**; browser indisponível.
+
+Ver [guia de autenticação](AUTENTICACAO.md) e [Sprint 06.3](../sprints/SPRINT-06.3.md) para modos, flags, matriz, bootstrap, hash/plano e limites. O histórico/planejamento abaixo não deve ser interpretado como declaração de que Auth remoto está homologado ou de que a fundação ainda está pendente.
+
 > Atualização Sprint 06.2A: para o Supabase externo `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1), vale a exceção específica de AGENTS.md. A administração ocorre pela CLI do proprietário, sem modificar o bloco gerenciado do Lovable. As migrações versionadas de fundação estão preparadas, mas não foram aplicadas ao remoto. A proposta histórica abaixo não é uma migração pronta. Ver [Sprint 06.2A](../sprints/SPRINT-06.2A.md).
 
 Nenhum dado foi importado, removido ou extraído do navegador. O manifesto é uma preparação pura, criada com `createCatalogImportManifest()` em `src/services/backend/catalog-manifest.ts`. Usa funções de seed do catálogo, sem createSeedStore, pedidos fictícios ou acesso a localStorage. Não executa SQL nem rede.

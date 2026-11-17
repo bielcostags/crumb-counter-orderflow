@@ -1,21 +1,26 @@
-import { createContext, useContext, useSyncExternalStore, type ReactNode } from "react";
+import { lazy, Suspense, useSyncExternalStore, type ReactNode } from "react";
+import { AdminSessionContext } from "./admin-session";
+import { LoadingBlock } from "@/components/shared/States";
+const StaffSessionProvider = lazy(() =>
+  import("./StaffSessionContext").then((module) => ({ default: module.StaffSessionProvider })),
+);
+import { isRealAuth } from "@/services/auth/config";
+export { useAdminSession } from "./admin-session";
 
 import { adminSessionStore } from "@/services/local/store";
 
-/**
- * Sessão de DEMONSTRAÇÃO. Não há autenticação real: qualquer pessoa com acesso
- * ao navegador entra. Substituir por Supabase Auth + papéis (RLS) na próxima fase.
- */
-interface AdminSessionValue {
-  status: "loading" | "signed-in" | "signed-out";
-  signInDemo: () => void;
-  signOut: () => void;
-}
-
-const AdminSessionContext = createContext<AdminSessionValue | null>(null);
 const getServerSnapshot = () => null;
 
 export function AdminSessionProvider({ children }: { children: ReactNode }) {
+  return isRealAuth() ? (
+    <Suspense fallback={<LoadingBlock />}>
+      <StaffSessionProvider>{children}</StaffSessionProvider>
+    </Suspense>
+  ) : (
+    <DemoSessionProvider>{children}</DemoSessionProvider>
+  );
+}
+function DemoSessionProvider({ children }: { children: ReactNode }) {
   const session = useSyncExternalStore(
     adminSessionStore.subscribe,
     adminSessionStore.get,
@@ -26,6 +31,13 @@ export function AdminSessionProvider({ children }: { children: ReactNode }) {
     <AdminSessionContext.Provider
       value={{
         status,
+        mode: "demo",
+        profile: null,
+        error: "",
+        signIn: async () => {
+          throw new Error("Login real não habilitado no modo demonstrativo.");
+        },
+        refresh: () => {},
         signInDemo: () => adminSessionStore.set({ signedIn: true, mode: "demo" }),
         signOut: () => adminSessionStore.set({ signedIn: false, mode: "demo" }),
       }}
@@ -33,10 +45,4 @@ export function AdminSessionProvider({ children }: { children: ReactNode }) {
       {children}
     </AdminSessionContext.Provider>
   );
-}
-
-export function useAdminSession() {
-  const ctx = useContext(AdminSessionContext);
-  if (!ctx) throw new Error("useAdminSession deve ser usado dentro de <AdminSessionProvider>.");
-  return ctx;
 }

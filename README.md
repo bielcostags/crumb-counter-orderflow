@@ -1,5 +1,13 @@
 # Vila Rica — Padaria e Confeitaria Artesanal
 
+## Atualização de 17/11/2026 — Sprint 06.3
+
+A fundação hospedada (duas migrações) foi aplicada anteriormente após autorização e continua com escrita comercial bloqueada. Nesta sprint, a autenticação servidor-centrada por cookies e a preparação de perfis foram implementadas/testadas **somente localmente**. SDKs oficiais estão instalados; demo continua padrão, sem SDK administrativo no browser, sem ativação real automática e sem alteração de catálogo/localStorage.
+
+O proprietário confirmou no painel **public e graphql_public** como Exposed schemas (private ausente na lista informada); isso é evidência manual, não uma prova da CLI. Auth hospedado, primeira conta/admin e nova migração 00300 não foram ativados. A migração nova, funções de perfis e bootstrap privado aguardam aprovação própria. Convites por endpoint não estão implementados/liberados. Resultados locais: **247 testes da aplicação, 155 SQL e 12 checks com Auth/REST reais locais**; browser indisponível.
+
+Ver [guia de autenticação](docs/backend/AUTENTICACAO.md) e [Sprint 06.3](docs/sprints/SPRINT-06.3.md) para modos, flags, matriz, bootstrap, hash/plano e limites. O histórico/planejamento abaixo não deve ser interpretado como declaração de que Auth remoto está homologado ou de que a fundação ainda está pendente.
+
 Sistema frontend personalizado para Vila Rica — Padaria e Confeitaria Artesanal, iniciado no Lovable. Cardápio comercial conforme o texto fornecido pelo proprietário, com pedidos/clientes fictícios, gestão online e de balcão em ambiente demonstrativo local. Não é adequado para produção.
 
 ## Identidade Vila Rica e catálogo inicial

@@ -16,7 +16,8 @@
     "supabase:check": "bun scripts/supabase/cli.ts check",
     "supabase:link": "bun scripts/supabase/cli.ts link",
     "supabase:dry-run": "bun scripts/supabase/cli.ts dry-run",
-    "catalog:manifest": "bun scripts/supabase/export-catalog.ts"
+    "catalog:manifest": "bun scripts/supabase/export-catalog.ts",
+    "auth:test-local": "bun scripts/supabase/test-auth-local.ts"
   },
   "overrides": {
     "rolldown": "1.2.1"
@@ -49,6 +50,8 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.0",
     "@tailwindcss/vite": "^4.2.1",
     "@tanstack/react-query": "^5.101.1",
     "@tanstack/react-router": "1.170.41",
