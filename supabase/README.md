@@ -37,7 +37,7 @@ A configuração CLI define Auth local com signup desabilitado, login anônimo d
 
 ## Banco local e pgTAP
 
-Requer Docker compatível em execução; não foi encontrado PostgreSQL local disponível nesta execução. Os comandos abaixo são exclusivamente para stack local descartável, nunca acrescente `--remote`:
+Requer Docker compatível em execução. Na Sprint 06.2B, a stack local foi confirmada com PostgreSQL 17.11 e os testes passaram; o banco hospedado ainda aguarda aprovação para aplicação. Os comandos abaixo são exclusivamente para stack local descartável, nunca acrescente `--remote`:
 
 ```sh
 bunx --no-install supabase start
@@ -46,7 +46,15 @@ bunx --no-install supabase db test
 
 start prepara a stack local e aplica as migrações localmente. Seeds estão desabilitados; não executar reset contra banco compartilhado. A suíte `tests/database/foundation.test.sql` usa pgTAP, transação/rollback, dados inteiramente fictícios e desabilita temporariamente a trava como owner só para fixtures locais. Verifica RLS, grants, papéis ativos/inativos, catálogo público, código 362 duplicado, restrições e bloqueios de escrita. Não executar esse arquivo no remoto; ele é teste com preparação de dados, não dry run.
 
-A tentativa local desta sprint falhou por falta de PostgreSQL em 127.0.0.1:54322. O dry run remoto não executa as migrations e não prova correção sintática/semântica, RLS, triggers ou constraints; testes reais permanecem pendentes.
+A Sprint 06.2A encontrou o banco local indisponível. Na Sprint 06.2B, foram reproduzidos os 34 testes anteriores e acrescentadas 87 verificações em `tests/database/security_audit.test.sql`: **121 testes SQL aprovados** em dois arquivos, além de **200 testes da aplicação**. A nova suíte verifica privilégios efetivos/herdados, owners, search_path vazio dos helpers, RLS, bloqueios ALWAYS e proteção privada. Os avisos de grant_pg_cron_access/grant_pg_net_access na fixture são não fatais e as permissões de teste são revertidas. Não os corrija ampliando permissões do provedor.
+
+Se Docker Desktop não estiver no PATH, use somente no comando local:
+
+```sh
+env PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH" bunx --no-install supabase db test
+```
+
+O novo dry run remoto listou exatamente as duas migrações, ainda pendentes. Consultas de metadados read-only não encontraram tabelas public/private ou funções conflitantes. **Não houve aplicação hospedada.** O dry run não executa SQL; os controles foram testados na stack local, e precisarão ser conferidos no remoto após aprovação. O [relatório 06.2B](../docs/sprints/SPRINT-06.2B.md) contém hashes, escopo de privilégios, plano exato e recuperação sem reset.
 
 ## Plano antes de qualquer aplicação remota
 

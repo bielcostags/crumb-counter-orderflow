@@ -1,5 +1,13 @@
 # Segurança e autenticação propostas
 
+## Estado validado — Sprint 06.2B
+
+Em 17/11/2026, a fundação passou em PostgreSQL local 17.11: **121 testes SQL em dois arquivos (34 anteriores + 87 novos)** e **200 testes da aplicação**. Foram conferidos RLS nas dez tabelas, vinte triggers ALWAYS, privilégios efetivos, owner dos helpers e search_path vazio, papéis ativos/inativos e bloqueio de acesso direto às três tabelas privadas. A modelagem e as duas migrações não precisaram de correção.
+
+O remoto `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1) foi inspecionado somente em read-only e por dry run: as duas migrações estão pendentes, sem tabelas public/private ou funções conflitantes encontradas. A aplicação hospedada **aguarda aprovação explícita**. Não confundir testes locais com comprovação de RLS hospedada. O frontend continua local, sem SDK/Auth real ou operações de venda. Os controles de RPCs/transações/retenção e os fluxos de autenticação abaixo continuam proposta futura, não foram liberados por esta validação.
+
+Ver [Sprint 06.2B](../sprints/SPRINT-06.2B.md) para auditoria, limitações, hashes e plano de implantação/recuperação. O texto das etapas anteriores abaixo é contexto histórico e planejamento, sujeito a esse estado atualizado.
+
 > Atualização Sprint 06.2A: para o Supabase externo `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1), vale a exceção específica de AGENTS.md. A administração ocorre pela CLI do proprietário, sem modificar o bloco gerenciado do Lovable. As migrações versionadas de fundação estão preparadas, mas não foram aplicadas ao remoto. A proposta histórica abaixo não é uma migração pronta. Ver [Sprint 06.2A](../sprints/SPRINT-06.2A.md).
 
 Não há autenticação real nem banco configurado. Esta é uma especificação de segurança para implementação/teste na Sprint 06.2, não uma garantia de que RLS já está em operação. A sessão local atual permanece intacta e jamais poderá autorizar acesso ao backend futuro.
