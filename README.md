@@ -12,7 +12,7 @@ O código comercial 362 consta em Chocolate Quente (R$ 13,00) e Moça Expresso (
 
 O catálogo existente no navegador não é migrado, sobrescrito ou limpo automaticamente. Para conhecer o novo seed sem perder dados, prefira um perfil de navegador novo. A restauração deliberada pelo serviço existente descarta produtos/categorias/pedidos locais e limpa o carrinho público; o procedimento e o cuidado com o rascunho do PDV estão documentados no [catálogo](docs/catalogo-vila-rica.md#restauração-deliberada-no-ambiente-local). Nenhuma restauração foi executada nos dados do usuário nesta sprint.
 
-Os avisos de demonstração, sessão sem autenticação real e comprovante não fiscal permanecem conforme o escopo de personalização. Não houve alteração das regras de pedidos, pagamentos, adicionais, preços ou persistência.
+A interface não exibe mais os avisos de demonstração, conforme solicitação posterior do proprietário; o comprovante mantém “SEM VALOR FISCAL”. Essa alteração de apresentação não implementa autenticação real, backend ou processamento financeiro, cujas limitações permanecem documentadas aqui. Não houve alteração das regras de pedidos, pagamentos, adicionais, preços ou persistência.
 
 A validação da personalização passou com **162 testes em 10 arquivos** (146 anteriores + 16 novos), typecheck e build aprovados, lint sem erros e com nove avisos preexistentes. Revisão visual em navegador permanece pendente; a logo oficial já está integrada. Veja [Sprint 05.1](docs/sprints/SPRINT-05.1.md).
 

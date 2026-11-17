@@ -6,7 +6,6 @@ import { CartPriceNotice } from "@/components/public/CartPriceNotice";
 import { useCartPriceReview } from "@/hooks/use-cart-price-review";
 import { PublicLayout } from "@/components/public/PublicLayout";
 import { OrderSummary } from "@/components/public/OrderSummary";
-import { DemoNotice } from "@/components/shared/DemoNotice";
 import { EmptyState, LoadingBlock } from "@/components/shared/States";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -92,7 +91,7 @@ function CheckoutPage() {
         structuredClone(preview),
       );
       setCompleted(order);
-      toast.success(`Pedido #${order.number} registrado na demonstração.`);
+      toast.success(`Pedido #${order.number} registrado.`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Não foi possível registrar. Tente novamente.");
     } finally {
@@ -103,7 +102,6 @@ function CheckoutPage() {
   return (
     <PublicLayout>
       <div className="mx-auto max-w-3xl space-y-6 px-4 py-8">
-        <DemoNotice />
         {completed ? (
           <>
             <h1
@@ -114,7 +112,7 @@ function CheckoutPage() {
               <CheckCircle2 aria-hidden />
               Pedido registrado com sucesso!
             </h1>
-            <p role="status">Guarde o número do pedido. Nenhum pagamento foi processado.</p>
+            <p role="status">Guarde o número do pedido para acompanhar o andamento.</p>
             <OrderSummary order={completed} />
             <div className="flex flex-wrap gap-3">
               <Button asChild>
@@ -176,7 +174,7 @@ function CheckoutPage() {
             <CartPriceNotice disabled={busy} />
             <form onSubmit={submit} noValidate className="space-y-4" aria-busy={busy}>
               <fieldset disabled={busy} className="space-y-4">
-                <legend className="mb-4 font-semibold">Dados fictícios para demonstração</legend>
+                <legend className="mb-4 font-semibold">Dados do pedido</legend>
                 {(
                   [
                     ["customerName", "Nome do cliente", 60],
@@ -223,7 +221,7 @@ function CheckoutPage() {
                     <Input
                       id="address"
                       autoComplete="off"
-                      placeholder="Rua, número e bairro fictícios"
+                      placeholder="Rua, número e bairro"
                       maxLength={160}
                       value={input.address ?? ""}
                       onChange={(e) => update("address", e.target.value)}
@@ -252,9 +250,7 @@ function CheckoutPage() {
                     <option value="dinheiro">Dinheiro</option>
                     <option value="cartao">Cartão</option>
                   </select>
-                  <p className="text-sm text-muted-foreground">
-                    Demonstração: não há cobrança ou pagamento online.
-                  </p>
+                  <p className="text-sm text-muted-foreground">Pagamento no recebimento.</p>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="notes">Observações gerais (opcional)</Label>
@@ -272,7 +268,7 @@ function CheckoutPage() {
                 </p>
               )}
               <Button type="submit" disabled={busy || !!catalogError || changes.length > 0}>
-                {busy ? "Registrando pedido…" : "Confirmar pedido demonstrativo"}
+                {busy ? "Registrando pedido…" : "Confirmar pedido"}
               </Button>
             </form>
           </>

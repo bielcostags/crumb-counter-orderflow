@@ -5,7 +5,6 @@ import { Bike, Search, SearchX, ShoppingBag, ShoppingBasket, Wallet, X } from "l
 import { ProductCard } from "@/components/public/ProductCard";
 import { PublicLayout } from "@/components/public/PublicLayout";
 import { BrandLogo } from "@/components/shared/Brand";
-import { DemoNotice } from "@/components/shared/DemoNotice";
 import { EmptyState, LoadingGrid } from "@/components/shared/States";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,14 +18,12 @@ export const Route = createFileRoute("/")({
       { title: "Cardápio — Vila Rica" },
       {
         name: "description",
-        content:
-          "Vila Rica — lanches, sanduíches, tapiocas, cuscuz, cafés e sucos. Pedidos em demonstração.",
+        content: "Vila Rica — lanches, sanduíches, tapiocas, cuscuz, cafés e sucos.",
       },
       { property: "og:title", content: "Cardápio — Vila Rica" },
       {
         property: "og:description",
-        content:
-          "Vila Rica — lanches, sanduíches, tapiocas, cuscuz, cafés e sucos. Pedidos em demonstração.",
+        content: "Vila Rica — lanches, sanduíches, tapiocas, cuscuz, cafés e sucos.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -87,7 +84,6 @@ function MenuPage() {
                 Pague ao receber
               </li>
             </ul>
-            <DemoNotice compact className="mt-5" />
           </div>
           <aside
             aria-label="Apresentação Vila Rica"

@@ -41,7 +41,7 @@ export function useOrderActions() {
       }
       const message =
         action === "paid"
-          ? "Recebimento demonstrativo registrado. Nenhuma cobrança realizada."
+          ? "Recebimento registrado."
           : action === "cancel"
             ? "Pedido cancelado. Não houve estorno financeiro."
             : "Status atualizado.";

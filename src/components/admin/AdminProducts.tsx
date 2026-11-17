@@ -43,7 +43,7 @@ export function AdminProducts() {
         <div>
           <h1 className="text-2xl font-semibold text-primary">Produtos</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Gerencie o cardápio demonstrativo. Disponibilidade não representa estoque.
+            Gerencie os produtos, preços e a disponibilidade do cardápio.
           </p>
         </div>
         <Button disabled={!hasActive || mutation.pending} onClick={() => edit("new")}>

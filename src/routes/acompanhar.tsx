@@ -22,7 +22,7 @@ export const Route = createFileRoute("/acompanhar")({
       { title: "Acompanhar pedido — Vila Rica" },
       {
         name: "description",
-        content: "Acompanhe o status do seu pedido pelo número (demonstração).",
+        content: "Acompanhe o status do seu pedido pelo número.",
       },
       { property: "og:title", content: "Acompanhar pedido — Vila Rica" },
       { property: "og:description", content: "Acompanhe o status do seu pedido pelo número." },
@@ -57,8 +57,8 @@ function TrackPage() {
       <div className="mx-auto max-w-3xl space-y-6 px-4 py-8">
         <h1 className="text-2xl font-semibold text-primary">Acompanhar pedido</h1>
         <p className="text-sm text-muted-foreground">
-          Consulta apenas no ambiente demonstrativo deste navegador, com atualização local entre
-          abas. Não há sincronização entre dispositivos. Use somente dados fictícios.
+          Consulte o pedido pelo número recebido na confirmação. As atualizações são exibidas neste
+          navegador.
         </p>
         <form onSubmit={search} className="space-y-2">
           <Label htmlFor="order-number">Número do pedido</Label>
@@ -93,7 +93,7 @@ function TrackPage() {
             <EmptyState
               icon={ClipboardList}
               title="Pedido não encontrado"
-              description="Confira o número. Somente pedidos deste ambiente demonstrativo podem ser consultados."
+              description="Confira o número e tente novamente."
             />
           </div>
         ) : (

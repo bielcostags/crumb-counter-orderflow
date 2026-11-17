@@ -48,7 +48,7 @@ export function POSCheckout({
         <DialogHeader>
           <DialogTitle>Confirmar pedido de balcão</DialogTitle>
           <DialogDescription>
-            Pagamento exclusivamente demonstrativo, sem cobrança real. Retirada no balcão.
+            Confira os itens e a forma de pagamento. Retirada no balcão.
           </DialogDescription>
         </DialogHeader>
         <p>{draft.customerName.trim() || "Cliente não informado"}</p>
@@ -168,7 +168,7 @@ export function POSCheckout({
                 !quote.items.length
               }
             >
-              {pending ? "Registrando venda…" : "Registrar venda demonstrativa"}
+              {pending ? "Registrando venda…" : "Registrar venda"}
             </Button>
             <Button type="button" variant="outline" disabled={pending} onClick={onClose}>
               Voltar ao atendimento

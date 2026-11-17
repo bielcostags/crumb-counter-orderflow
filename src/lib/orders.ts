@@ -186,7 +186,7 @@ export const checkoutSchema = z
     customerName: z
       .string()
       .trim()
-      .min(2, "Informe um nome (fictício) com ao menos 2 letras.")
+      .min(2, "Informe um nome com ao menos 2 letras.")
       .max(60, "Nome muito longo."),
     customerPhone: z.string().refine((v) => {
       const d = onlyDigits(v);

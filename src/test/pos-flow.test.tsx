@@ -46,7 +46,7 @@ async function checkout() {
   return screen.findByRole("dialog");
 }
 async function register(dialog: HTMLElement) {
-  fireEvent.click(within(dialog).getByRole("button", { name: "Registrar venda demonstrativa" }));
+  fireEvent.click(within(dialog).getByRole("button", { name: "Registrar venda" }));
   await screen.findByRole("heading", { name: "Venda registrada com sucesso!" });
 }
 
@@ -133,7 +133,7 @@ describe("PDV: navegação e seleção", () => {
   it("mantém atendimento na navegação e após sair/entrar na sessão demo", async () => {
     const router = await openCatalog("/admin/balcao");
     await addBread();
-    fireEvent.change(screen.getByLabelText("Nome fictício do cliente (opcional)"), {
+    fireEvent.change(screen.getByLabelText("Nome do cliente (opcional)"), {
       target: { value: "Mesa Exemplo" },
     });
     await act(async () => {
@@ -142,18 +142,14 @@ describe("PDV: navegação e seleção", () => {
     await act(async () => {
       await router.navigate({ to: "/admin/balcao" });
     });
-    expect(await screen.findByLabelText("Nome fictício do cliente (opcional)")).toHaveValue(
-      "Mesa Exemplo",
-    );
+    expect(await screen.findByLabelText("Nome do cliente (opcional)")).toHaveValue("Mesa Exemplo");
     fireEvent.click(screen.getByRole("button", { name: "Sair" }));
     await screen.findByRole("heading", { name: "Acesso da equipe" });
     expect(counterCartStore.get().lines).toHaveLength(1);
-    fireEvent.click(screen.getByRole("button", { name: "Entrar na demonstração" }));
+    fireEvent.click(screen.getByRole("button", { name: "Acessar painel" }));
     await screen.findByRole("heading", { name: "Visão geral", level: 1 });
     fireEvent.click(screen.getByRole("link", { name: "Atendimento no balcão" }));
-    expect(await screen.findByLabelText("Nome fictício do cliente (opcional)")).toHaveValue(
-      "Mesa Exemplo",
-    );
+    expect(await screen.findByLabelText("Nome do cliente (opcional)")).toHaveValue("Mesa Exemplo");
   });
   it("limpa apenas após confirmação, preservando o carrinho público", async () => {
     cartStore.set([{ productId: "p-cafe", quantity: 3 }]);
@@ -199,15 +195,15 @@ describe("PDV: pagamento e registro", () => {
       expect(dataStore.get().orders[0]?.customerName).toBeUndefined();
       expect(cartStore.get()).toEqual(online);
       expect(counterCartStore.get().lines).toEqual([]);
-      expect(screen.getByRole("region", { name: "Comprovante demonstrativo" })).toHaveTextContent(
-        "COMPROVANTE DEMONSTRATIVO — SEM VALOR FISCAL",
+      expect(screen.getByRole("region", { name: "Comprovante" })).toHaveTextContent(
+        "COMPROVANTE — SEM VALOR FISCAL",
       );
     },
   );
   it("salva nome, observações, pagamento pendente e permite nova venda sem duplicar", async () => {
     const router = await openCatalog("/admin/balcao");
     await addBread();
-    fireEvent.change(screen.getByLabelText("Nome fictício do cliente (opcional)"), {
+    fireEvent.change(screen.getByLabelText("Nome do cliente (opcional)"), {
       target: { value: "Mesa Exemplo" },
     });
     fireEvent.change(screen.getByLabelText("Observações gerais do balcão (opcional)"), {
@@ -231,7 +227,7 @@ describe("PDV: pagamento e registro", () => {
     await screen.findByRole("heading", { name: "Venda registrada com sucesso!" });
     expect(dataStore.get().orders).toHaveLength(15);
     const print = vi.spyOn(window, "print").mockImplementation(() => {});
-    fireEvent.click(screen.getByRole("button", { name: "Imprimir comprovante demonstrativo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Imprimir comprovante" }));
     expect(print).toHaveBeenCalledTimes(1);
     fireEvent.click(screen.getByRole("button", { name: "Nova venda" }));
     expect(screen.getByRole("button", { name: "Finalizar pedido de balcão" })).toBeDisabled();
@@ -249,9 +245,7 @@ describe("PDV: pagamento e registro", () => {
     });
     for (const value of ["1,00", "-2", "abc"]) {
       fireEvent.change(within(dialog).getByLabelText(/Valor entregue/), { target: { value } });
-      expect(
-        within(dialog).getByRole("button", { name: "Registrar venda demonstrativa" }),
-      ).toBeDisabled();
+      expect(within(dialog).getByRole("button", { name: "Registrar venda" })).toBeDisabled();
     }
     fireEvent.change(within(dialog).getByLabelText(/Valor entregue/), {
       target: { value: "5,00" },
@@ -289,12 +283,10 @@ describe("PDV: pagamento e registro", () => {
     await openCatalog("/admin/balcao");
     await addBread();
     const dialog = await checkout();
-    fireEvent.click(within(dialog).getByRole("button", { name: "Registrar venda demonstrativa" }));
+    fireEvent.click(within(dialog).getByRole("button", { name: "Registrar venda" }));
     expect(await within(dialog).findByRole("alert")).toHaveTextContent("Falha simulada");
     expect(counterCartStore.get().lines).toHaveLength(1);
-    const form = within(dialog)
-      .getByRole("button", { name: "Registrar venda demonstrativa" })
-      .closest("form")!;
+    const form = within(dialog).getByRole("button", { name: "Registrar venda" }).closest("form")!;
     fireEvent.submit(form);
     fireEvent.submit(form);
     fireEvent.submit(form);
@@ -347,7 +339,7 @@ describe("PDV: catálogo, fila e indicadores", () => {
     const dialog = await checkout();
     const product = dataStore.get().products[0]!;
     const updating = localServices.catalog.saveProduct({ ...product, priceCents: 150 }, product.id);
-    fireEvent.click(within(dialog).getByRole("button", { name: "Registrar venda demonstrativa" }));
+    fireEvent.click(within(dialog).getByRole("button", { name: "Registrar venda" }));
     await act(async () => {
       await updating;
     });

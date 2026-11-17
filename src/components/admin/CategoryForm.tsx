@@ -46,7 +46,7 @@ export function CategoryForm({
             { ...parsed.data, description: parsed.data.description ?? "" },
             category?.id,
           ),
-        "Categoria salva no cardápio demonstrativo.",
+        "Categoria salva no cardápio.",
       )
     ) {
       setConfirm(false);

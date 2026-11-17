@@ -117,6 +117,19 @@ describe("Catálogo comercial Vila Rica", () => {
 });
 
 describe("Identidade e jornadas Vila Rica", () => {
+  it("oferece acesso destacado ao painel e não exibe avisos de demonstração no cardápio", async () => {
+    await openCatalog("/");
+    const access = await screen.findByRole("link", { name: "Acessar painel administrativo" });
+    expect(access).toHaveAttribute("href", "/admin");
+    expect(access).toHaveTextContent("Painel administrativo");
+    expect(screen.getByRole("link", { name: "Abrir painel administrativo" })).toHaveAttribute(
+      "href",
+      "/admin",
+    );
+    expect(
+      screen.queryByText(/ambiente demonstrativo|protótipo|demonstração/i),
+    ).not.toBeInTheDocument();
+  });
   it("renderiza a logo oficial com proporções originais e identificação acessível", () => {
     render(<BrandMark />);
     expect(screen.getByText("Vila Rica")).toBeInTheDocument();
@@ -147,7 +160,7 @@ describe("Identidade e jornadas Vila Rica", () => {
     fireEvent.change(screen.getByLabelText(/Telefone com DDD/), {
       target: { value: "00900000000" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido" }));
     await screen.findByText("Pedido registrado com sucesso!");
     expect(dataStore.get().orders[0]?.items[0]).toMatchObject({
       name: "X-Bacon",
@@ -163,13 +176,13 @@ describe("Identidade e jornadas Vila Rica", () => {
     fireEvent.click(screen.getByRole("button", { name: "Finalizar pedido de balcão" }));
     fireEvent.click(
       within(await screen.findByRole("dialog")).getByRole("button", {
-        name: "Registrar venda demonstrativa",
+        name: "Registrar venda",
       }),
     );
     await screen.findByText("Venda registrada com sucesso!");
-    const receipt = screen.getByRole("region", { name: "Comprovante demonstrativo" });
+    const receipt = screen.getByRole("region", { name: "Comprovante" });
     expect(receipt).toHaveTextContent("Vila Rica");
-    expect(receipt).toHaveTextContent("COMPROVANTE DEMONSTRATIVO — SEM VALOR FISCAL");
+    expect(receipt).toHaveTextContent("COMPROVANTE — SEM VALOR FISCAL");
     await waitFor(() => expect(dataStore.get().orders[0]?.totalCents).toBe(200));
   });
 });

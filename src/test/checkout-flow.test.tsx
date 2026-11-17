@@ -61,8 +61,7 @@ function fill() {
   });
   fireEvent.change(screen.getByLabelText(/Telefone com DDD/), { target: { value: "00900000000" } });
 }
-const submit = () =>
-  fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" }));
+const submit = () => fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido" }));
 beforeEach(() => {
   dataStore.set(createTechnicalStore(new Date()));
   cartStore.set([{ productId: "p-pao-frances", quantity: 2 }]);

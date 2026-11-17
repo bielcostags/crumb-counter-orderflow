@@ -63,9 +63,7 @@ export function OrderDetails({ actions }: { actions: Actions }) {
           >
             <DialogHeader>
               <DialogTitle>Pedido #{order.number}</DialogTitle>
-              <DialogDescription>
-                Dados fictícios disponíveis na área demonstrativa da equipe.
-              </DialogDescription>
+              <DialogDescription>Informações do pedido e ações da equipe.</DialogDescription>
             </DialogHeader>
             <div className="flex flex-wrap gap-2">
               <StatusBadge status={order.status} />
@@ -79,12 +77,12 @@ export function OrderDetails({ actions }: { actions: Actions }) {
                 <dd>{order.customerName || "Não informado"}</dd>
               </div>
               <div>
-                <dt className="text-muted-foreground">Telefone fictício</dt>
+                <dt className="text-muted-foreground">Telefone</dt>
                 <dd>{order.customerPhone || "Não informado"}</dd>
               </div>
               {order.fulfillment === "entrega" && (
                 <div className="sm:col-span-2">
-                  <dt className="text-muted-foreground">Endereço fictício</dt>
+                  <dt className="text-muted-foreground">Endereço</dt>
                   <dd>{order.address || "Não informado"}</dd>
                 </div>
               )}
@@ -134,7 +132,7 @@ export function OrderDetails({ actions }: { actions: Actions }) {
             </section>
             {order.status === "cancelado" && order.paymentStatus === "pago" && (
               <p className="text-sm text-destructive">
-                Pagamento demonstrativo preservado. Não houve estorno financeiro.
+                Registro do pagamento preservado. Não houve estorno financeiro.
               </p>
             )}
             {feedback && (
@@ -191,8 +189,8 @@ export function OrderDetails({ actions }: { actions: Actions }) {
             </AlertDialogTitle>
             <AlertDialogDescription>
               {confirmation === "cancel"
-                ? `O pedido #${order?.number} será cancelado e não poderá ser reaberto. Os dados e o histórico serão preservados. ${order?.paymentStatus === "pago" ? "Já foi marcado como pago: não haverá estorno. " : ""}Esta operação é apenas demonstrativa.`
-                : `Marcar o pedido #${order?.number} como pago registra um recebimento demonstrativo de ${formatBRL(order?.totalCents ?? 0)}. Nenhuma cobrança real será processada.`}
+                ? `O pedido #${order?.number} será cancelado e não poderá ser reaberto. Os dados e o histórico serão preservados. ${order?.paymentStatus === "pago" ? "Já foi marcado como pago: não haverá estorno. " : ""}`
+                : `Marcar o pedido #${order?.number} como pago registra o recebimento de ${formatBRL(order?.totalCents ?? 0)}.`}
             </AlertDialogDescription>
           </AlertDialogHeader>
           {feedback?.error && (

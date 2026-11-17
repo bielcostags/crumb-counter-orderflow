@@ -83,18 +83,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Vila Rica — Protótipo de demonstração" },
+      { title: "Vila Rica — Padaria e Confeitaria Artesanal" },
       {
         name: "description",
         content:
-          "Vila Rica — Padaria e Confeitaria Artesanal. Cardápio e pedidos em ambiente demonstrativo.",
+          "Vila Rica — Padaria e Confeitaria Artesanal. Consulte o cardápio e faça seu pedido.",
       },
       { name: "author", content: "Vila Rica" },
-      { property: "og:title", content: "Vila Rica — Protótipo de demonstração" },
+      { property: "og:title", content: "Vila Rica — Padaria e Confeitaria Artesanal" },
       {
         property: "og:description",
         content:
-          "Vila Rica — Padaria e Confeitaria Artesanal. Cardápio e pedidos em ambiente demonstrativo.",
+          "Vila Rica — Padaria e Confeitaria Artesanal. Consulte o cardápio e faça seu pedido.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

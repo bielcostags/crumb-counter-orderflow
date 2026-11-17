@@ -60,10 +60,6 @@ export function AdminDashboard() {
           <Link to="/admin/pedidos">Gerenciar pedidos</Link>
         </Button>
       </div>
-      <div className="rounded-lg border border-gold bg-gold-soft p-3 text-sm">
-        Demonstração sem autenticação real. Não há cobranças, estornos ou sincronização entre
-        dispositivos.
-      </div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {indicators.map(([label, value]) => (
           <section key={label} aria-label={String(label)} className="rounded-xl border bg-card p-4">

@@ -126,7 +126,7 @@ describe("Sessão e layout administrativo", () => {
     expect(
       screen.queryByRole("navigation", { name: "Área administrativa" }),
     ).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Entrar na demonstração" }));
+    fireEvent.click(screen.getByRole("button", { name: "Acessar painel" }));
     await screen.findByRole("heading", { name: "Visão geral", level: 1 });
     expect(JSON.parse(localStorage.getItem(ADMIN_SESSION_KEY)!)).toMatchObject({
       signedIn: true,
@@ -371,7 +371,7 @@ describe("Operações da equipe", () => {
     fireEvent.change(screen.getByLabelText(/Telefone com DDD/), {
       target: { value: "00900000000" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido" }));
     await screen.findByText("Pedido registrado com sucesso!");
     const order = dataStore.get().orders[0]!;
     await act(async () => {

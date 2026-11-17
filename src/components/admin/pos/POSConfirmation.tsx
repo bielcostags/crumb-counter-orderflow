@@ -20,9 +20,7 @@ export function POSConfirmation({ order }: { order: Order }) {
       >
         Venda registrada com sucesso!
       </h1>
-      <p role="status">
-        Origem: Balcão · Retirada · Status inicial: Pendente. Nenhuma cobrança real foi processada.
-      </p>
+      <p role="status">Origem: Balcão · Retirada · Status inicial: Pendente.</p>
       <OrderSummary order={order} />
       {draft?.lastSale?.changeCents !== null && draft?.lastSale?.changeCents !== undefined && (
         <div className="rounded-lg border border-gold bg-gold-soft p-4">
@@ -43,7 +41,7 @@ export function POSConfirmation({ order }: { order: Order }) {
       </div>
       <POSReceipt order={order} />
       <Button variant="outline" onClick={() => window.print()}>
-        Imprimir comprovante demonstrativo
+        Imprimir comprovante
       </Button>
       <OrderDetails actions={actions} />
     </div>

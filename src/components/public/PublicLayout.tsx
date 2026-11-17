@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { ClipboardList, ShoppingBasket } from "lucide-react";
+import { ClipboardList, ShoppingBasket, LayoutDashboard, ArrowRight } from "lucide-react";
 
 import { BrandMark } from "@/components/shared/Brand";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,20 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             <BrandMark />
           </Link>
           <nav className="flex items-center gap-1 sm:gap-2" aria-label="Principal">
+            <Button
+              asChild
+              variant="outline"
+              size="icon"
+              className="shrink-0 border-primary/25 text-primary"
+            >
+              <Link
+                to="/admin"
+                aria-label="Abrir painel administrativo"
+                title="Painel administrativo"
+              >
+                <LayoutDashboard aria-hidden />
+              </Link>
+            </Button>
             <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
               <Link to="/acompanhar">
                 <ClipboardList />
@@ -61,13 +75,21 @@ export function PublicLayout({ children }: { children: ReactNode }) {
       </main>
       <footer className="border-t bg-card">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            Vila Rica · Padaria e Confeitaria Artesanal. Ambiente demonstrativo, com pedidos
-            fictícios e sem pagamentos reais.
-          </p>
-          <Link to="/admin" className="font-medium text-primary underline-offset-4 hover:underline">
-            Área da equipe (demo)
-          </Link>
+          <div>
+            <p className="font-semibold text-primary">Vila Rica</p>
+            <p>Padaria e Confeitaria Artesanal</p>
+          </div>
+          <Button
+            asChild
+            variant="default"
+            className="min-h-12 w-full gap-3 rounded-xl px-5 shadow-sm sm:w-auto"
+          >
+            <Link to="/admin" aria-label="Acessar painel administrativo">
+              <LayoutDashboard aria-hidden />
+              <span>Painel administrativo</span>
+              <ArrowRight aria-hidden className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       </footer>
     </div>

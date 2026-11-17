@@ -126,7 +126,7 @@ export function POSCart({ disabled, onCheckout }: { disabled: boolean; onCheckou
         <span>{quote.error ? "Revise os itens" : formatBRL(quote.total)}</span>
       </div>
       <div className="space-y-2">
-        <Label htmlFor="pos-customer">Nome fictício do cliente (opcional)</Label>
+        <Label htmlFor="pos-customer">Nome do cliente (opcional)</Label>
         <Input
           id="pos-customer"
           autoComplete="off"

@@ -110,7 +110,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
         <header className="flex flex-wrap items-center justify-between gap-2 border-b bg-card px-4 py-4 sm:px-6">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-caramel">
-              Vila Rica · Ambiente demonstrativo · Equipe
+              Vila Rica · Painel administrativo
             </p>
             <p className="font-display font-semibold text-primary">{section}</p>
           </div>

@@ -47,9 +47,7 @@ export function CatalogEditor({
         <DialogContent className="max-h-[90dvh] w-[calc(100%_-_2rem)] max-w-2xl overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
-            <DialogDescription>
-              Alterações apenas no ambiente demonstrativo deste navegador.
-            </DialogDescription>
+            <DialogDescription>Atualize as informações e salve as alterações.</DialogDescription>
           </DialogHeader>
           {children(close)}
         </DialogContent>

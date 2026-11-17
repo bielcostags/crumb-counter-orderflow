@@ -263,7 +263,7 @@ describe("Carrinho, confirmação e imagens", () => {
     expect(await screen.findByText("O preço de itens do carrinho mudou")).toBeInTheDocument();
     await waitFor(() => expect(cartStore.get()[1]?.reviewedPriceCents).toBe(550));
     expect(cartStore.get()[0]?.reviewedPriceCents).toBe(100);
-    expect(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Confirmar pedido" })).toBeDisabled();
   });
   it("reflete edição e indisponibilidade reativamente no cardápio já aberto", async () => {
     await openCatalog("/");
@@ -304,15 +304,13 @@ describe("Carrinho, confirmação e imagens", () => {
     await act(async () => {
       await router.navigate({ to: "/checkout" });
     });
-    expect(
-      await screen.findByRole("button", { name: "Confirmar pedido demonstrativo" }),
-    ).toBeDisabled();
+    expect(await screen.findByRole("button", { name: "Confirmar pedido" })).toBeDisabled();
     fireEvent.click(screen.getByRole("button", { name: "Revisei os preços atualizados" }));
-    expect(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Confirmar pedido" })).toBeEnabled();
     await act(async () => {
       await localServices.catalog.setProductAvailable(product.id, false);
     });
-    expect(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Confirmar pedido" })).toBeDisabled();
     expect(screen.getByText(/está indisponível/)).toBeInTheDocument();
     await act(async () => {
       await router.navigate({ to: "/carrinho" });
@@ -333,7 +331,7 @@ describe("Carrinho, confirmação e imagens", () => {
     // Inicia a mudança primeiro: o serviço aplica o preço durante a latência da confirmação.
     const product = dataStore.get().products[0]!;
     const update = localServices.catalog.saveProduct({ ...product, priceCents: 150 }, product.id);
-    fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido" }));
     await act(async () => {
       await update;
     });
@@ -341,7 +339,7 @@ describe("Carrinho, confirmação e imagens", () => {
     expect(cartStore.get()).toHaveLength(1);
     expect(dataStore.get().orders).toHaveLength(14);
     fireEvent.click(screen.getByRole("button", { name: "Revisei os preços atualizados" }));
-    fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido" }));
     await screen.findByText("Pedido registrado com sucesso!");
     expect(dataStore.get().orders[0]?.totalCents).toBe(150);
   });

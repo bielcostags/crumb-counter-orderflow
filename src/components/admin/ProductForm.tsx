@@ -55,7 +55,7 @@ export function ProductForm({
     if (
       await mutation.execute(
         () => services.catalog.saveProduct(parsed.data, product?.id),
-        "Produto salvo no cardápio demonstrativo.",
+        "Produto salvo no cardápio.",
       )
     )
       onClose();

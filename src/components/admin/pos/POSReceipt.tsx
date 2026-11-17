@@ -7,11 +7,11 @@ export function POSReceipt({ order }: { order: Order }) {
   return (
     <section
       className="pos-receipt space-y-3 rounded-xl border bg-card p-5 text-sm"
-      aria-label="Comprovante demonstrativo"
+      aria-label="Comprovante"
     >
       <BrandLogo className="h-20 w-24" />
       <h2 className="font-display text-lg font-semibold text-primary">Vila Rica</h2>
-      <p className="font-semibold">COMPROVANTE DEMONSTRATIVO — SEM VALOR FISCAL</p>
+      <p className="font-semibold">COMPROVANTE — SEM VALOR FISCAL</p>
       <p>
         Pedido #{order.number} · {formatDateTime(order.createdAt)}
       </p>
@@ -31,7 +31,7 @@ export function POSReceipt({ order }: { order: Order }) {
       <p className="border-t pt-3 font-semibold">Total: {formatBRL(order.totalCents)}</p>
       <p>
         {PAYMENT_METHOD_LABELS[order.paymentMethod]} ·{" "}
-        {order.paymentStatus === "pago" ? "Pagamento recebido (demo)" : "Pagamento pendente"}
+        {order.paymentStatus === "pago" ? "Pagamento recebido" : "Pagamento pendente"}
       </p>
       <p>Origem: Balcão · Sem processamento financeiro ou emissão fiscal.</p>
     </section>

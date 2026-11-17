@@ -17,7 +17,7 @@ export const Route = createFileRoute("/carrinho")({
       { title: "Carrinho — Vila Rica" },
       {
         name: "description",
-        content: "Revise itens, quantidades e observações do seu pedido (demonstração).",
+        content: "Revise itens, quantidades e observações do seu pedido.",
       },
       { property: "og:title", content: "Carrinho — Vila Rica" },
       {

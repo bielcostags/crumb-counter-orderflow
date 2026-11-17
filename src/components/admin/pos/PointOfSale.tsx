@@ -70,8 +70,7 @@ export function PointOfSale() {
       <div className="space-y-4">
         <h1 className="text-2xl font-semibold">Último pedido não encontrado</h1>
         <p>
-          Os dados da demonstração podem ter sido restaurados. Nenhuma venda será reenviada
-          automaticamente.
+          Os dados locais podem ter sido restaurados. Nenhuma venda será reenviada automaticamente.
         </p>
         <Button onClick={clear}>Nova venda</Button>
       </div>
@@ -81,8 +80,8 @@ export function PointOfSale() {
       <div>
         <h1 className="text-2xl font-semibold text-primary">Atendimento no balcão</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          PDV demonstrativo. Use apenas dados fictícios. Pedido salvo neste navegador, independente
-          do carrinho online.
+          Selecione os produtos e registre o atendimento. O pedido do balcão é independente do
+          carrinho online.
         </p>
       </div>
       <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1.3fr)_minmax(340px,1fr)]">
