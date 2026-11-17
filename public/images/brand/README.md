@@ -1,5 +1,7 @@
 # Identidade Vila Rica
 
-A logomarca oficial foi recebida visualmente na conversa, mas seu arquivo original ainda não está acessível no diretório de anexos ou no projeto. Nenhuma arte foi inventada ou redesenhada; BrandMark permanece como identificação textual provisória.
+`logo.jpeg` é a arte oficial fornecida pelo proprietário (1600×1333). O arquivo original foi preservado, sem recorte, filtros, redesenho ou alteração de cores.
 
-Quando o arquivo for disponibilizado, guardá-lo nesta pasta, preservar proporções/cores e usar object-contain com texto alternativo “Vila Rica — Padaria e Confeitaria Artesanal”. A arte recebida contém bolo, suporte verde, trigos e nome Vila Rica sobre fundo creme. Favicon oficial depende de derivação adequada do arquivo; o favicon genérico preexistente ainda não foi substituído.
+BrandLogo usa object-contain e texto alternativo “Vila Rica — Padaria e Confeitaria Artesanal”. BrandMark combina a logo com identificação textual legível nos espaços pequenos. A arte também aparece no destaque do cardápio e no comprovante. Em caso de falha, a identificação textual continua disponível.
+
+O favicon oficial ainda depende de uma versão própria para dimensões pequenas; o favicon genérico preexistente não foi substituído por uma redução ilegível da arte completa.

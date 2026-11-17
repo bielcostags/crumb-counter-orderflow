@@ -4,6 +4,7 @@ import { Bike, Search, SearchX, ShoppingBag, ShoppingBasket, Wallet, X } from "l
 
 import { ProductCard } from "@/components/public/ProductCard";
 import { PublicLayout } from "@/components/public/PublicLayout";
+import { BrandLogo } from "@/components/shared/Brand";
 import { DemoNotice } from "@/components/shared/DemoNotice";
 import { EmptyState, LoadingGrid } from "@/components/shared/States";
 import { Button } from "@/components/ui/button";
@@ -90,13 +91,9 @@ function MenuPage() {
           </div>
           <aside
             aria-label="Apresentação Vila Rica"
-            className="order-1 flex aspect-[2/1] flex-col justify-center rounded-xl border border-gold bg-gold-soft p-6 text-primary md:order-2"
+            className="order-1 flex items-center justify-center rounded-xl border bg-background p-4 md:order-2"
           >
-            <p className="font-display text-2xl font-semibold text-secondary-foreground">
-              Vila Rica Artesanal
-            </p>
-            <p className="mt-2 text-sm">Lanches, sanduíches, tapiocas e cafés.</p>
-            <p className="mt-4 text-xs">Imagens oficiais em breve.</p>
+            <BrandLogo className="h-auto max-h-72 w-full max-w-sm" />
           </aside>
         </div>
       </section>

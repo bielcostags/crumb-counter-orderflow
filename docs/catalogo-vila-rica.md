@@ -113,7 +113,7 @@ O código comercial **362** é usado para **Chocolate Quente (R$ 13,00)** e **Mo
 
 Adicionais são 15 produtos comuns na mesma categoria, com indicação lanches/sucos na descrição. Não há relações obrigatórias, sabores, tamanhos, ingredientes adicionais ou regras novas de preço.
 
-A marca oficial foi recebida visualmente: bolo com suporte verde, trigos, nome Vila Rica e texto Padaria e Confeitaria Artesanal sobre fundo creme. Sua integração depende do arquivo original local, que não foi disponibilizado pelo ambiente junto às imagens da conversa. Não foi redesenhada ou inventada. A identificação textual permanece provisória. Favicon oficial e fotos individuais ainda aguardam arquivos adequados.
+A marca oficial foi recebida e está integrada a partir de `public/images/brand/logo.jpeg` (1600×1333), sem recorte, redesenho ou alteração de cores. Aparece no cabeçalho, acesso/menu administrativo, destaque do cardápio e comprovante. Favicon específico e fotos individuais ainda permanecem pendentes.
 
 O seed não sobrescreve o localStorage existente: versão/chaves e parser foram preservados. Pedidos e catálogos anteriores continuam intactos. Para conhecer o novo seed, prefira um perfil de navegador novo, preservando os dados anteriores. O serviço existente `localServices.demo.resetDemoData()` restaura o catálogo/pedidos e limpa o carrinho público: é destrutivo para dados locais e só deve ser chamado deliberadamente, após guardar qualquer informação necessária. O rascunho do PDV usa chave própria; não o reutilize sem revisão após uma restauração.
 

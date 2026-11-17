@@ -117,10 +117,17 @@ describe("Catálogo comercial Vila Rica", () => {
 });
 
 describe("Identidade e jornadas Vila Rica", () => {
-  it("renderiza identificação textual e complemento sem inventar logomarca", () => {
+  it("renderiza a logo oficial com proporções originais e identificação acessível", () => {
     render(<BrandMark />);
     expect(screen.getByText("Vila Rica")).toBeInTheDocument();
     expect(screen.getByText("Padaria e Confeitaria Artesanal")).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: "Vila Rica — Padaria e Confeitaria Artesanal" }),
+    ).toHaveAttribute("src", "/images/brand/logo.jpeg");
+    expect(screen.getByRole("img")).toHaveAttribute("width", "1600");
+    expect(screen.getByRole("img")).toHaveAttribute("height", "1333");
+    fireEvent.error(screen.getByRole("img"));
+    expect(screen.getByText("Vila Rica")).toBeInTheDocument();
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
   it("integra produto comercial ao carrinho e ao checkout online", async () => {

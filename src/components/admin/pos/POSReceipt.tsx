@@ -1,3 +1,4 @@
+import { BrandLogo } from "@/components/shared/Brand";
 import { formatBRL, formatDateTime } from "@/lib/format";
 import { PAYMENT_METHOD_LABELS } from "@/lib/orders";
 import type { Order } from "@/types";
@@ -8,6 +9,7 @@ export function POSReceipt({ order }: { order: Order }) {
       className="pos-receipt space-y-3 rounded-xl border bg-card p-5 text-sm"
       aria-label="Comprovante demonstrativo"
     >
+      <BrandLogo className="h-20 w-24" />
       <h2 className="font-display text-lg font-semibold text-primary">Vila Rica</h2>
       <p className="font-semibold">COMPROVANTE DEMONSTRATIVO — SEM VALOR FISCAL</p>
       <p>

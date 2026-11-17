@@ -140,3 +140,9 @@ Foram recebidas posteriormente as quatro páginas do cardápio e a logomarca ofi
 A logo recebida apresenta bolo, suporte verde, trigos e nome Vila Rica sobre fundo creme, compatível com a direção visual definida. As cinco imagens estão visíveis na conversa, mas não foram disponibilizadas como arquivos no diretório de anexos ou no projeto. Portanto, a logo não foi instalada nem convertida; permanece a identificação textual provisória até o recebimento do arquivo acessível. Não foram criadas cópias aproximadas ou imagens substitutas.
 
 Esta atualização altera somente documentação de conferência das artes. Não foram executados novos testes de código, pois não houve alteração funcional ou de componentes.
+
+## Atualização — integração do arquivo original da logo
+
+O proprietário disponibilizou `public/images/brand/logo.jpeg` (1600×1333). A arte foi inspecionada e integrada sem editar o arquivo original. BrandLogo preserva cores e proporção com object-contain; BrandMark mantém texto de apoio/fallback para espaços pequenos e falhas de carregamento. Aplicação no cabeçalho público, acesso/menu administrativo, destaque do cardápio e comprovante. O aviso de imagens oficiais em breve foi removido do destaque porque a marca já está disponível. Fotos individuais dos produtos e favicon específico permanecem pendentes.
+
+O teste de identidade foi atualizado para verificar origem, dimensões, texto alternativo e fallback da logo, mantendo os demais cenários.
