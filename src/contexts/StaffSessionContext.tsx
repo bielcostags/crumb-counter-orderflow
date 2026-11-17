@@ -10,7 +10,9 @@ export function StaffSessionProvider({ children }: { children: ReactNode }) {
   });
   const epoch = useRef(0);
   const mounted = useRef(true);
+  const mutationPending = useRef(false);
   const refresh = useCallback(async () => {
+    if (mutationPending.current) return;
     const request = ++epoch.current;
     // Remove private component trees while identity/active status is being revalidated.
     setSession({ status: "loading", profile: null, error: "" });
@@ -41,6 +43,8 @@ export function StaffSessionProvider({ children }: { children: ReactNode }) {
     };
   }, [refresh]);
   const signIn = async (email: string, password: string) => {
+    if (mutationPending.current) return;
+    mutationPending.current = true;
     const request = ++epoch.current;
     setSession({ status: "loading", profile: null, error: "" });
     try {
@@ -53,13 +57,19 @@ export function StaffSessionProvider({ children }: { children: ReactNode }) {
           profile: null,
           error: "Não foi possível entrar. Confira os dados ou tente novamente.",
         });
+    } finally {
+      mutationPending.current = false;
     }
   };
   const signOut = async () => {
+    if (mutationPending.current) return;
+    mutationPending.current = true;
     const request = ++epoch.current;
-    setSession({ status: "signed-out", profile: null, error: "" });
+    setSession({ status: "loading", profile: null, error: "" });
     try {
       await logoutStaff();
+      if (mounted.current && request === epoch.current)
+        setSession({ status: "signed-out", profile: null, error: "" });
     } catch {
       if (mounted.current && request === epoch.current)
         setSession({
@@ -67,6 +77,8 @@ export function StaffSessionProvider({ children }: { children: ReactNode }) {
           profile: null,
           error: "Não foi possível confirmar a saída. Tente sair novamente.",
         });
+    } finally {
+      mutationPending.current = false;
     }
   };
   return (

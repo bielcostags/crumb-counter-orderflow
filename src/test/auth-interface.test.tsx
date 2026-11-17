@@ -190,3 +190,48 @@ describe("rotas internas no modo real", () => {
     expect(screen.getByText(/Nenhum dado demonstrativo é exibido/)).toBeInTheDocument();
   });
 });
+
+describe("concorrência entre autenticação e revalidação", () => {
+  it("foco não restaura sessão enquanto logout aguarda resposta", async () => {
+    f.current.mockResolvedValue({ status: "signed-in", profile: person });
+    let finish!: () => void;
+    f.logout.mockImplementation(
+      () =>
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+    );
+    render(
+      <StaffSessionProvider>
+        <Probe />
+      </StaffSessionProvider>,
+    );
+    await screen.findByText("Privado: Equipe teste");
+    fireEvent.click(screen.getByText("Sair"));
+    await act(async () => window.dispatchEvent(new Event("focus")));
+    expect(screen.queryByText(/Privado:/)).not.toBeInTheDocument();
+    expect(f.current).toHaveBeenCalledTimes(1);
+    await act(async () => finish());
+    await screen.findByText("signed-out");
+  });
+  it("foco não invalida o resultado do login pendente", async () => {
+    let finish!: (value: unknown) => void;
+    f.login.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+    );
+    render(
+      <StaffSessionProvider>
+        <Probe />
+      </StaffSessionProvider>,
+    );
+    await screen.findByText("signed-out");
+    fireEvent.click(screen.getByText("Entrar"));
+    await act(async () => window.dispatchEvent(new Event("focus")));
+    expect(f.current).toHaveBeenCalledTimes(1);
+    await act(async () => finish({ status: "signed-in", profile: person }));
+    expect(await screen.findByText("Privado: Equipe teste")).toBeInTheDocument();
+  });
+});
