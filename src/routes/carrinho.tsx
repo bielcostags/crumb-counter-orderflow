@@ -14,12 +14,12 @@ import { formatBRL } from "@/lib/format";
 export const Route = createFileRoute("/carrinho")({
   head: () => ({
     meta: [
-      { title: "Carrinho — Padaria Digital" },
+      { title: "Carrinho — Vila Rica" },
       {
         name: "description",
         content: "Revise itens, quantidades e observações do seu pedido (demonstração).",
       },
-      { property: "og:title", content: "Carrinho — Padaria Digital" },
+      { property: "og:title", content: "Carrinho — Vila Rica" },
       {
         property: "og:description",
         content: "Revise itens, quantidades e observações do seu pedido.",

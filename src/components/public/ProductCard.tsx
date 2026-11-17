@@ -23,6 +23,11 @@ export function ProductCard({ product, sellable }: { product: Product; sellable:
           alt={product.name}
           className={`h-full w-full sm:aspect-[4/3] sm:h-auto ${sellable ? "" : "opacity-60 grayscale-[40%]"}`}
         />
+        {product.imageUrl.startsWith("/images/products/") && (
+          <span className="absolute bottom-1 left-1 rounded bg-card px-1.5 py-0.5 text-[10px] text-foreground">
+            Imagem ilustrativa
+          </span>
+        )}
         {!sellable && (
           <Badge variant="muted" className="absolute left-2 top-2 hidden bg-card/95 sm:inline-flex">
             Indisponível

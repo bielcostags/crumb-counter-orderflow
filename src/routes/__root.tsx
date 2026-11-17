@@ -83,22 +83,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Padaria Digital — Protótipo de demonstração" },
+      { title: "Vila Rica — Protótipo de demonstração" },
       {
         name: "description",
         content:
-          "Cardápio digital e gestão de pedidos online e de balcão para padarias (demonstração).",
+          "Vila Rica — Padaria e Confeitaria Artesanal. Cardápio e pedidos em ambiente demonstrativo.",
       },
-      { name: "author", content: "Padaria Digital" },
-      { property: "og:title", content: "Padaria Digital — Protótipo de demonstração" },
+      { name: "author", content: "Vila Rica" },
+      { property: "og:title", content: "Vila Rica — Protótipo de demonstração" },
       {
         property: "og:description",
         content:
-          "Cardápio digital e gestão de pedidos online e de balcão para padarias (demonstração).",
+          "Vila Rica — Padaria e Confeitaria Artesanal. Cardápio e pedidos em ambiente demonstrativo.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#543629" },
+      { name: "theme-color", content: "#2B3E1E" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

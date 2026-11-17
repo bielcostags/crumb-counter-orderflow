@@ -1,5 +1,5 @@
 /**
- * Tipos de domínio da Padaria Digital.
+ * Tipos de domínio da Vila Rica.
  * Espelham o futuro esquema PostgreSQL (ver README → Próximas etapas).
  */
 

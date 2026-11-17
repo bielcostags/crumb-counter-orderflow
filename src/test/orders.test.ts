@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createSeedCategories, createSeedProducts, createSeedStore } from "@/data/mock";
+import { createSeedCategories, createSeedProducts, createSeedStore } from "@/test/fixtures/catalog";
 import {
   buildOrderItems,
   calcTotalCents,

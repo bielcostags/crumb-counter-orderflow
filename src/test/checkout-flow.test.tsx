@@ -1,3 +1,4 @@
+import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
@@ -63,7 +64,7 @@ function fill() {
 const submit = () =>
   fireEvent.click(screen.getByRole("button", { name: "Confirmar pedido demonstrativo" }));
 beforeEach(() => {
-  dataStore.reset();
+  dataStore.set(createTechnicalStore(new Date()));
   cartStore.set([{ productId: "p-pao-frances", quantity: 2 }]);
 });
 afterEach(() => {

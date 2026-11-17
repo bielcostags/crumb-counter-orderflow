@@ -25,7 +25,7 @@ import { formatBRL } from "@/lib/format";
 import type { Order } from "@/types";
 
 export const Route = createFileRoute("/checkout")({
-  head: () => ({ meta: [{ title: "Finalizar pedido — Padaria Digital" }] }),
+  head: () => ({ meta: [{ title: "Finalizar pedido — Vila Rica" }] }),
   component: CheckoutPage,
 });
 

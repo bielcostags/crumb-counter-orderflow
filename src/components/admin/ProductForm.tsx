@@ -189,8 +189,8 @@ export function ProductForm({
                 className="h-32 w-40 rounded-lg"
               />
               <p className="text-xs text-muted-foreground">
-                Sem upload. URLs remotas dependem dos servidores de origem; falhas exibem uma imagem
-                padrão.
+                Sem upload. Fotos da galeria são ilustrativas, não imagens oficiais da Vila Rica.
+                URLs remotas dependem dos servidores de origem; falhas exibem uma imagem padrão.
               </p>
             </div>
             <Label className="flex items-center gap-2">

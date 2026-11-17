@@ -1,3 +1,4 @@
+import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { localServices } from "@/services/local";
 import { cartStore, dataStore } from "@/services/local/store";
@@ -23,7 +24,7 @@ async function complete<T>(operation: Promise<T>) {
 beforeEach(() => {
   vi.useFakeTimers();
   vi.setSystemTime(new Date("2026-11-16T16:00:00Z"));
-  dataStore.reset();
+  dataStore.set(createTechnicalStore(new Date()));
   cartStore.reset();
 });
 afterEach(() => vi.useRealTimers());

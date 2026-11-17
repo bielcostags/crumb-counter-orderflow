@@ -18,7 +18,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
       </a>
       <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4">
-          <Link to="/" className="rounded-md text-primary" aria-label="Padaria Digital — cardápio">
+          <Link to="/" className="rounded-md text-primary" aria-label="Vila Rica — cardápio">
             <BrandMark />
           </Link>
           <nav className="flex items-center gap-1 sm:gap-2" aria-label="Principal">
@@ -62,8 +62,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
       <footer className="border-t bg-card">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
-            Padaria Digital · Protótipo de demonstração (fase 01). Dados fictícios, sem pagamentos
-            reais.
+            Vila Rica · Padaria e Confeitaria Artesanal. Ambiente demonstrativo, com pedidos
+            fictícios e sem pagamentos reais.
           </p>
           <Link to="/admin" className="font-medium text-primary underline-offset-4 hover:underline">
             Área da equipe (demo)

@@ -2,7 +2,7 @@ import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { localServices } from "@/services/local";
 import { dataStore, cartStore, STORE_KEY, parseStoreData } from "@/services/local/store";
 import { createPersistentStore } from "@/lib/persistent-store";
-import { createSeedStore } from "@/data/mock";
+import { createSeedStore } from "@/test/fixtures/catalog";
 import { isValidProductImage } from "@/lib/catalog";
 import { buildOrderItems } from "@/lib/orders";
 import type { StoreData } from "@/types";
@@ -34,7 +34,7 @@ async function complete<T>(operation: Promise<T>) {
 }
 beforeEach(() => {
   vi.useFakeTimers();
-  dataStore.reset();
+  dataStore.set(createSeedStore(new Date()));
   cartStore.reset();
 });
 afterEach(() => vi.useRealTimers());

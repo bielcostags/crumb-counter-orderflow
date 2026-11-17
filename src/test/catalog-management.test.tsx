@@ -1,3 +1,4 @@
+import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { act, cleanup, fireEvent, render, screen, within, waitFor } from "@testing-library/react";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { openCatalog } from "./helpers/catalog-router";
@@ -7,7 +8,7 @@ import { ProductImage } from "@/components/shared/ProductImage";
 import { formatBRL } from "@/lib/format";
 
 beforeEach(() => {
-  dataStore.reset();
+  dataStore.set(createTechnicalStore(new Date()));
   cartStore.reset();
   adminSessionStore.set({ signedIn: true, mode: "demo" });
 });

@@ -8,11 +8,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Padaria Digital — design system
- * Paleta: marrom #543629, caramelo #B77945, dourado #E8C18B,
- * bege #F9F5EF, verde #66866A, branco #FFFFFF. Sem gradientes.
- */
+/* Vila Rica Artesanal — tokens baseados na paleta comercial fornecida.
+ * A marca oficial não foi redesenhada. Estados semânticos permanecem distintos. */
 
 @theme inline {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -74,29 +71,31 @@
   --radius: 0.75rem;
 
   /* Brand */
-  --brown: oklch(0.365 0.048 44.2);
-  --caramel: oklch(0.63 0.103 59.3);
+  --brown: #4c2f11;
+  --olive: #2b3e1e;
+  --wine: #680d0d;
+  --caramel: var(--brown);
   --caramel-foreground: oklch(1 0 0);
-  --gold: oklch(0.832 0.083 75.3);
-  --gold-soft: oklch(0.93 0.04 78);
-  --beige: oklch(0.972 0.009 78.3);
-  --green: oklch(0.587 0.056 148.2);
+  --gold: #e4a326;
+  --gold-soft: #f0d6a4;
+  --beige: #f1eae4;
+  --green: var(--olive);
 
   --background: var(--beige);
-  --foreground: oklch(0.28 0.035 44);
+  --foreground: var(--brown);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.28 0.035 44);
+  --card-foreground: var(--brown);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.28 0.035 44);
-  --primary: var(--brown);
+  --popover-foreground: var(--brown);
+  --primary: var(--olive);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.935 0.022 76);
+  --secondary: #f0d6a4;
   --secondary-foreground: var(--brown);
-  --muted: oklch(0.945 0.014 78);
-  --muted-foreground: oklch(0.47 0.03 50);
+  --muted: #f1eae4;
+  --muted-foreground: #64513e;
   --accent: var(--gold-soft);
   --accent-foreground: var(--brown);
-  --destructive: oklch(0.53 0.17 28);
+  --destructive: var(--wine);
   --destructive-foreground: oklch(1 0 0);
   /* verde escurecido para contraste AA em texto */
   --success: oklch(0.5 0.06 148.2);
@@ -105,20 +104,20 @@
   --warning-foreground: oklch(1 0 0);
   --border: oklch(0.9 0.02 70);
   --input: oklch(0.86 0.025 65);
-  --ring: var(--caramel);
-  --chart-1: var(--caramel);
+  --ring: var(--olive);
+  --chart-1: var(--brown);
   --chart-2: var(--green);
   --chart-3: var(--brown);
   --chart-4: var(--gold);
   --chart-5: oklch(0.7 0.05 50);
 
-  --sidebar: oklch(0.32 0.042 44);
+  --sidebar: var(--olive);
   --sidebar-foreground: oklch(0.95 0.015 78);
   --sidebar-primary: var(--gold);
   --sidebar-primary-foreground: var(--brown);
-  --sidebar-accent: oklch(0.4 0.045 44);
+  --sidebar-accent: var(--brown);
   --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: oklch(0.4 0.04 44);
+  --sidebar-border: var(--brown);
   --sidebar-ring: var(--gold);
 
   --shadow-soft: 0 1px 2px oklch(0.365 0.048 44.2 / 6%), 0 2px 8px oklch(0.365 0.048 44.2 / 6%);
@@ -147,6 +146,7 @@
   h3,
   h4 {
     font-family: var(--font-display);
+    color: var(--brown);
     letter-spacing: -0.01em;
   }
 

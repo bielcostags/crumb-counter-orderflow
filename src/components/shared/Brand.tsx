@@ -1,21 +1,20 @@
-import { Wheat } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 
+/** Identificação textual provisória; substituir pela arte oficial somente quando fornecida. */
 export function BrandMark({ className, inverted }: { className?: string; inverted?: boolean }) {
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
-      <span
-        className={cn(
-          "flex h-9 w-9 items-center justify-center rounded-lg",
-          inverted ? "bg-gold text-primary" : "bg-primary text-gold",
-        )}
-        aria-hidden
-      >
-        <Wheat className="h-5 w-5" />
+    <span
+      className={cn(
+        "inline-flex max-w-52 flex-col gap-1",
+        inverted ? "text-gold-soft" : "text-primary",
+        className,
+      )}
+    >
+      <span className="font-display text-xl font-semibold leading-none tracking-tight sm:text-2xl">
+        Vila Rica
       </span>
-      <span className="font-display text-lg font-semibold leading-none tracking-tight">
-        Padaria Digital
+      <span className="text-[9px] font-medium leading-snug sm:text-[10px]">
+        Padaria e Confeitaria Artesanal
       </span>
     </span>
   );

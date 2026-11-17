@@ -1,6 +1,20 @@
-# Padaria Digital
+# Vila Rica — Padaria e Confeitaria Artesanal
 
-Protótipo frontend para uma única padaria, iniciado no Lovable. O objetivo é oferecer cardápio digital e gestão demonstrativa de pedidos online e de balcão. Esta versão usa apenas dados fictícios no navegador e não é adequada para produção.
+Sistema frontend personalizado para Vila Rica — Padaria e Confeitaria Artesanal, iniciado no Lovable. Cardápio comercial conforme o texto fornecido pelo proprietário, com pedidos/clientes fictícios, gestão online e de balcão em ambiente demonstrativo local. Não é adequado para produção.
+
+## Identidade Vila Rica e catálogo inicial
+
+A Sprint 05.1 mantém os módulos e regras das cinco sprints e aplica identificação comercial, tokens de cores e o catálogo Vila Rica. São 8 categorias e 57 produtos: Lanches (4), Sanduíches (10), Tapiocas (7), Crepiocas (2), Cuscuz (5), Capuccinos (10), Sucos (4) e Adicionais (15). Preços em centavos, IDs novos e disponibilidade inicial apenas para a demo. Os pedidos de exemplo foram adaptados ao novo catálogo, sem representar vendas reais.
+
+A logomarca e as quatro páginas do cardápio foram recebidas posteriormente na conversa. A conferência visual confirmou os 57 itens e preços, incluindo o código 362 duplicado. As imagens ainda não estão disponíveis como arquivos locais acessíveis; por isso, a integração da logo aguarda o arquivo original, mantendo identificação textual provisória sem recriar a marca. Arquivos oficiais devem ser colocados em `public/images/brand/` quando fornecidos, preservando proporções e cores. Favicon oficial também está pendente. Todos os novos produtos usam placeholders; a galeria existente permanece disponível e suas fotos são identificadas como ilustrativas.
+
+O código comercial 362 consta em Chocolate Quente (R$ 13,00) e Moça Expresso (R$ 10,00). Ambos foram preservados com IDs internos distintos; confirmar a duplicidade com o proprietário. Códigos e todos os preços estão em [catálogo Vila Rica](docs/catalogo-vila-rica.md), sem novo campo de SKU no modelo.
+
+O catálogo existente no navegador não é migrado, sobrescrito ou limpo automaticamente. Para conhecer o novo seed sem perder dados, prefira um perfil de navegador novo. A restauração deliberada pelo serviço existente descarta produtos/categorias/pedidos locais e limpa o carrinho público; o procedimento e o cuidado com o rascunho do PDV estão documentados no [catálogo](docs/catalogo-vila-rica.md#restauração-deliberada-no-ambiente-local). Nenhuma restauração foi executada nos dados do usuário nesta sprint.
+
+Os avisos de demonstração, sessão sem autenticação real e comprovante não fiscal permanecem conforme o escopo de personalização. Não houve alteração das regras de pedidos, pagamentos, adicionais, preços ou persistência.
+
+A validação da personalização passou com **162 testes em 10 arquivos** (146 anteriores + 16 novos), typecheck e build aprovados, lint sem erros e com nove avisos preexistentes. Revisão visual e aplicação da arte oficial permanecem pendentes. Veja [Sprint 05.1](docs/sprints/SPRINT-05.1.md).
 
 ## Execução com Bun
 
@@ -26,7 +40,7 @@ bun run preview
 ## Arquitetura
 
 - React 19 e TypeScript, com TanStack Start/Router para SSR e rotas por arquivo.
-- Tailwind CSS v4, shadcn/ui, Radix e Lucide. Identidade visual em `src/styles.css`: marrom, caramelo, dourado, bege e verde; fontes Poppins e Inter.
+- Tailwind CSS v4, shadcn/ui, Radix e Lucide. Identidade visual em `src/styles.css`: oliva #2B3E1E, marrom #4C2F11, dourado #E4A326, creme #F1EAE4, amarelo #F0D6A4 e vinho #680D0D; fontes Poppins e Inter.
 - `src/routes/`: cardápio (`/`), carrinho (`/carrinho`), checkout (`/checkout`), acompanhamento (`/acompanhar`) e equipe (`/admin`). O arquivo `routeTree.gen.ts` é gerado pelo TanStack e não deve ser editado manualmente.
 - `src/types/`: tipos de catálogo, carrinho e pedidos.
 - `src/lib/catalog.ts`: schemas Zod, normalização, validação de imagens e atribuição de categorias.
@@ -36,7 +50,7 @@ bun run preview
 - `src/lib/persistent-store.ts`: armazenamento externo consumido por `useSyncExternalStore`, persistido em localStorage e sincronizado entre abas do mesmo navegador.
 - `src/components/admin/`: layout, dashboard, fila, detalhes, tabela compartilhada e coordenação de operações administrativas.
 - `src/contexts/`: catálogo/serviços, carrinho e sessão demonstrativa. Durante SSR, os providers expõem estado de carregamento para evitar divergência de hidratação.
-- `src/data/mock.ts`: quatro categorias, 12 produtos e 14 pedidos fictícios iniciais.
+- `src/data/mock.ts`: oito categorias, 57 produtos Vila Rica e 14 pedidos fictícios iniciais. As fixtures técnicas do catálogo anterior ficam em `src/test/fixtures/catalog.ts`.
 - `src/server.ts`, `src/start.ts` e `src/lib/error-*`: tratamento de falhas SSR e middleware CSRF do scaffold.
 
 Os contratos facilitam uma futura implementação remota. A leitura reativa atual ainda depende diretamente do store local; a integração futura precisará adaptar os providers e a atualização dos dados, além de implementar os serviços.

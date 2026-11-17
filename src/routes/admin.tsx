@@ -5,7 +5,7 @@ import { useAdminSession } from "@/contexts/AdminSessionContext";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
-    meta: [{ title: "Área da equipe — Padaria Digital" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Área da equipe — Vila Rica" }, { name: "robots", content: "noindex" }],
   }),
   component: AdminPage,
 });

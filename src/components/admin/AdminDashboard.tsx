@@ -95,7 +95,7 @@ export function AdminDashboard() {
                 type="monotone"
                 dataKey="pedidos"
                 name="Valor dos pedidos"
-                stroke="#B77945"
+                stroke="var(--chart-1)"
                 strokeWidth={2}
                 isAnimationActive={false}
               />
@@ -103,7 +103,7 @@ export function AdminDashboard() {
                 type="monotone"
                 dataKey="pagas"
                 name="Vendas pagas"
-                stroke="#66866A"
+                stroke="var(--chart-2)"
                 strokeWidth={2}
                 isAnimationActive={false}
               />

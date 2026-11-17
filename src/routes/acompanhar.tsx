@@ -19,12 +19,12 @@ export const Route = createFileRoute("/acompanhar")({
   },
   head: () => ({
     meta: [
-      { title: "Acompanhar pedido — Padaria Digital" },
+      { title: "Acompanhar pedido — Vila Rica" },
       {
         name: "description",
         content: "Acompanhe o status do seu pedido pelo número (demonstração).",
       },
-      { property: "og:title", content: "Acompanhar pedido — Padaria Digital" },
+      { property: "og:title", content: "Acompanhar pedido — Vila Rica" },
       { property: "og:description", content: "Acompanhe o status do seu pedido pelo número." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -72,6 +72,9 @@ export function POSProductGrid({ disabled }: { disabled: boolean }) {
                 className="aspect-[3/2] w-full"
               />
               <div className="space-y-2 p-3">
+                {product.imageUrl.startsWith("/images/products/") && (
+                  <p className="text-xs text-muted-foreground">Imagem ilustrativa</p>
+                )}
                 <h3 className="font-semibold">{product.name}</h3>
                 <p className="line-clamp-2 text-sm text-muted-foreground">{product.description}</p>
                 <p className="font-semibold text-primary">{formatBRL(product.priceCents)}</p>

@@ -15,17 +15,17 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cardápio — Padaria Digital" },
+      { title: "Cardápio — Vila Rica" },
       {
         name: "description",
         content:
-          "Pães, bolos, salgados e bebidas. Peça online para retirada ou entrega (demonstração).",
+          "Vila Rica — lanches, sanduíches, tapiocas, cuscuz, cafés e sucos. Pedidos em demonstração.",
       },
-      { property: "og:title", content: "Cardápio — Padaria Digital" },
+      { property: "og:title", content: "Cardápio — Vila Rica" },
       {
         property: "og:description",
         content:
-          "Pães, bolos, salgados e bebidas. Peça online para retirada ou entrega (demonstração).",
+          "Vila Rica — lanches, sanduíches, tapiocas, cuscuz, cafés e sucos. Pedidos em demonstração.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -68,9 +68,9 @@ function MenuPage() {
       <section className="border-b bg-card">
         <div className="mx-auto grid max-w-6xl gap-6 px-4 py-6 md:grid-cols-[1.1fr_1fr] md:items-center md:py-10">
           <div className="order-2 md:order-1">
-            <p className="text-sm font-medium text-caramel">Feito hoje, desde cedo</p>
+            <p className="text-sm font-medium text-caramel">Vila Rica Artesanal</p>
             <h1 className="mt-1 text-3xl font-semibold leading-tight text-primary md:text-4xl">
-              Pães, bolos e cafés para levar ou receber em casa
+              Padaria e Confeitaria Artesanal
             </h1>
             <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-1.5">
@@ -88,13 +88,16 @@ function MenuPage() {
             </ul>
             <DemoNotice compact className="mt-5" />
           </div>
-          <img
-            src="/images/padaria-hero.jpg"
-            alt="Balcão da padaria com pães, pão de queijo e bolos"
-            width={1600}
-            height={800}
-            className="order-1 aspect-[2/1] w-full rounded-xl object-cover md:order-2"
-          />
+          <aside
+            aria-label="Apresentação Vila Rica"
+            className="order-1 flex aspect-[2/1] flex-col justify-center rounded-xl border border-gold bg-gold-soft p-6 text-primary md:order-2"
+          >
+            <p className="font-display text-2xl font-semibold text-secondary-foreground">
+              Vila Rica Artesanal
+            </p>
+            <p className="mt-2 text-sm">Lanches, sanduíches, tapiocas e cafés.</p>
+            <p className="mt-4 text-xs">Imagens oficiais em breve.</p>
+          </aside>
         </div>
       </section>
 
@@ -109,7 +112,7 @@ function MenuPage() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar no cardápio (ex.: pão de queijo)"
+              placeholder="Buscar no cardápio (ex.: X-Bacon)"
               aria-label="Buscar produtos"
               className="h-11 bg-card pl-9 pr-9"
             />

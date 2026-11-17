@@ -1,3 +1,4 @@
+import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { act, cleanup, fireEvent, render, screen, within, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
@@ -91,7 +92,7 @@ async function details(number: number) {
   return screen.findByRole("dialog");
 }
 beforeEach(() => {
-  dataStore.reset();
+  dataStore.set(createTechnicalStore(new Date()));
   cartStore.reset();
   adminSessionStore.set({ signedIn: true, mode: "demo" });
   // Apenas a medição de layout é suprida no jsdom; dados e operações são reais.

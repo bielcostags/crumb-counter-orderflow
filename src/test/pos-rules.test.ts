@@ -1,3 +1,4 @@
+import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { calculateCashChange } from "@/lib/pos";
 import { buildOrderItems, computeDayMetrics, computeLastDays } from "@/lib/orders";
@@ -14,7 +15,7 @@ import { createPersistentStore } from "@/lib/persistent-store";
 
 beforeEach(() => {
   vi.useFakeTimers();
-  dataStore.reset();
+  dataStore.set(createTechnicalStore(new Date()));
   cartStore.reset();
   counterCartStore.reset();
 });
