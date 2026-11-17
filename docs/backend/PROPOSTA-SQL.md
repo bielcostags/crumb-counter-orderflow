@@ -1,5 +1,7 @@
 # Proposta SQL para revisão — NÃO APLICAR
 
+> Atualização Sprint 06.2A: para o Supabase externo `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1), vale a exceção específica de AGENTS.md. A administração ocorre pela CLI do proprietário, sem modificar o bloco gerenciado do Lovable. As migrações versionadas de fundação estão preparadas, mas não foram aplicadas ao remoto. A proposta histórica abaixo não é uma migração pronta. Ver [Sprint 06.2A](../sprints/SPRINT-06.2A.md).
+
 Documento de modelagem, não migração executável de produção. Nenhum SQL foi enviado a banco; não há arquivos em supabase/migrations ou drizzle. A aplicação futura depende de autorização e do fluxo de banco do Lovable. O DDL abaixo cobre estrutura e uma base de leitura RLS; **as funções de negócio, triggers de integridade e endpoints descritos adiante ainda precisam ser implementados e testados**. Escritas da API ficam bloqueadas até lá. Rever versão PostgreSQL/extensões do projeto autorizado antes de gerar migração.
 
 ## Estrutura relacional proposta

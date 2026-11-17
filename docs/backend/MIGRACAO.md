@@ -1,5 +1,7 @@
 # Plano de importação e transição dos dados
 
+> Atualização Sprint 06.2A: para o Supabase externo `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1), vale a exceção específica de AGENTS.md. A administração ocorre pela CLI do proprietário, sem modificar o bloco gerenciado do Lovable. As migrações versionadas de fundação estão preparadas, mas não foram aplicadas ao remoto. A proposta histórica abaixo não é uma migração pronta. Ver [Sprint 06.2A](../sprints/SPRINT-06.2A.md).
+
 Nenhum dado foi importado, removido ou extraído do navegador. O manifesto é uma preparação pura, criada com `createCatalogImportManifest()` em `src/services/backend/catalog-manifest.ts`. Usa funções de seed do catálogo, sem createSeedStore, pedidos fictícios ou acesso a localStorage. Não executa SQL nem rede.
 
 ## Fonte e identidade

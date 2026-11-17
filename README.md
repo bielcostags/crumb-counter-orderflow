@@ -32,6 +32,14 @@ As preparações em `src/services/backend/` são isoladas: contratos remotos seg
 
 Validação desta etapa: **188 testes aprovados em 12 arquivos (170 anteriores + 18 novos)**, instalação congelada/typecheck/build/diff aprovados e lint sem erros, com nove avisos preexistentes. O navegador foi consultado, mas o host estava indisponível. Não houve teste de banco, RLS ou Auth real. Confirmação de modelagem, permissões, fuso America/Porto_Velho, retenção e autorização de ambiente são pré-requisitos para a Sprint 06.2.
 
+## Supabase próprio — Sprint 06.2A
+
+O projeto externo de desenvolvimento **vila-rica-dev** (`yzxsuoxthkbzbkcumauz`, São Paulo/sa-east-1) está vinculado à CLI oficial, preservando o Lovable e o frontend local. A regra específica de administração externa está em AGENTS.md, fora do bloco gerenciado. Não utilizar o projeto anterior da Virginia.
+
+Foram preparadas duas migrações com dez tabelas, RLS de leitura e bloqueio integral de escrita de negócio. O dry run remoto listou ambas sem aplicá-las; a execução SQL e os testes reais de RLS permanecem pendentes de stack PostgreSQL local disponível. Não foram criadas contas/admin, importados dados ou ativados checkout/PDV remoto. Configurações Auth locais não foram enviadas ao remoto.
+
+Use `bun run supabase:check`, `bun run supabase:link` e `bun run supabase:dry-run` para o alvo fixo; `bun run catalog:manifest` emite somente o catálogo para revisão. Não há script de aplicação automática. Veja [instruções e segurança da CLI](supabase/README.md) e [relatório da Sprint 06.2A](docs/sprints/SPRINT-06.2A.md), incluindo validações (200 testes aprovados), limites e autorização exigida antes de qualquer alteração remota.
+
 ## Execução com Bun
 
 Use Bun 1.4.4 (versão utilizada nesta validação) e Node.js 24 para os scripts das ferramentas. O `bun.lock` existente é a referência das dependências; não é necessário gerar lockfile npm.

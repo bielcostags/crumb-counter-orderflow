@@ -1,5 +1,7 @@
 # Arquitetura do backend — proposta da Sprint 06.1
 
+> Atualização Sprint 06.2A: para o Supabase externo `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1), vale a exceção específica de AGENTS.md. A administração ocorre pela CLI do proprietário, sem modificar o bloco gerenciado do Lovable. As migrações versionadas de fundação estão preparadas, mas não foram aplicadas ao remoto. A proposta histórica abaixo não é uma migração pronta. Ver [Sprint 06.2A](../sprints/SPRINT-06.2A.md).
+
 Estado: preparação para revisão, sem Supabase provisionado, SDK instalado, conexão, autenticação real ou alteração do comportamento local. Lovable, SSR/Nitro, CSRF, rotas e ferramentas permanecem intactos. A Sprint 05.2 foi cancelada definitivamente.
 
 ## Auditoria do código atual
