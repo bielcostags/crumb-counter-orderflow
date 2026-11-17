@@ -1,5 +1,13 @@
 # Arquitetura do backend — proposta da Sprint 06.1
 
+## Estado reconferido — Sprint 06.2C (17/11/2026)
+
+As duas migrações de fundação **já estavam aplicadas**, após autorização explícita na etapa anterior. A conferência desta sprint foi somente de leitura/dry run no remoto: histórico com ambas as versões, hashes esperados, **upToDate: true e migrations: []**. Não houve nova aplicação, reparação, importação ou alteração de configuração. O texto histórico abaixo que menciona aplicação pendente deve ser lido conforme esse estado atualizado.
+
+A stack local iniciou normalmente e passou nos **121 testes SQL**. A suíte da aplicação passou nos **200 testes na repetição isolada**; a primeira execução concorrente teve nove falhas, registradas sem alterar testes/timeouts. A auditoria hospedada reconfirmou dez tabelas/RLS/PKs, 71 constraints, 33 índices, nove policies de leitura e vinte triggers ALWAYS, com bloqueio de escrita para os papéis de API e proteção das tabelas privadas.
+
+A ausência de grants privados foi comprovada; a lista completa de “Exposed schemas” da Data API hospedada não foi comprovada pela consulta de parâmetros/diff e permanece como verificação operacional antes de ampliar acesso. Não confundir configuração local com remota. Frontend e Lovable continuam preservados, sem SDK/Auth real/vendas remotas. Ver [relatório 06.2C](../sprints/SPRINT-06.2C.md) para evidências, divergência documental, avisos e limites. Nenhuma nova autorização de aplicação é solicitada para migrações já executadas; mudanças futuras exigem plano próprio.
+
 ## Estado validado — Sprint 06.2B
 
 Em 17/11/2026, a fundação passou em PostgreSQL local 17.11: **121 testes SQL em dois arquivos (34 anteriores + 87 novos)** e **200 testes da aplicação**. Foram conferidos RLS nas dez tabelas, vinte triggers ALWAYS, privilégios efetivos, owner dos helpers e search_path vazio, papéis ativos/inativos e bloqueio de acesso direto às três tabelas privadas. A modelagem e as duas migrações não precisaram de correção.
