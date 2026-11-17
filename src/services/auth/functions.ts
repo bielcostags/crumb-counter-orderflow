@@ -21,7 +21,10 @@ export const loginStaff = createServerFn({ method: "POST" })
 export const logoutStaff = createServerFn({ method: "POST" }).handler(async () => {
   const client = createAuthServerClient();
   try {
-    await client.auth.signOut({ scope: "local" });
+    const result = await client.auth.signOut({ scope: "local" });
+    if (result.error) throw new Error("Logout could not be confirmed");
+  } catch {
+    throw new Error("Não foi possível confirmar a saída. Tente novamente.");
   } finally {
     clearAuthCookies();
   }
