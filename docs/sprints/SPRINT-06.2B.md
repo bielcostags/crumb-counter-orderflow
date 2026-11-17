@@ -1,5 +1,39 @@
 # Sprint 06.2B — Validação PostgreSQL e plano de implantação
 
+## Implantação autorizada — concluída em 17/11/2026
+
+Após a entrega do plano pré-implantação abaixo, o proprietário respondeu **“autorizo”**. A autorização foi limitada às duas migrações e aos hashes registrados neste relatório, no projeto `vila-rica-dev`, ref `yzxsuoxthkbzbkcumauz` (sa-east-1). Os hashes foram recalculados e corresponderam exatamente; a pasta continha somente os dois arquivos aprovados. O vínculo foi reconfirmado, o dry run voltou a listar somente essas duas versões, com seeds/roles vazios e Vault ignorado. Uma consulta read-only confirmou novamente ausência de tabelas de negócio/schema private/funções conflitantes antes da aplicação.
+
+Foi então executado, **somente após a aprovação explícita**:
+
+```sh
+bunx --no-install supabase db push --remote=yzxsuoxthkbzbkcumauz --skip-vault --yes --agent yes
+```
+
+Resultado: exit 0, `dryRun: false`, ambas as migrações aplicadas, `seeds: []`, `roles: []`. Não houve config push, reset, repair, criação de contas, importação ou alterações Vault. O uso de --yes atendeu à confirmação da CLI para a operação já aprovada, sem ampliar seu escopo.
+
+### Verificação hospedada posterior, exclusivamente read-only
+
+O histórico remoto passou a corresponder ao local nas versões **20261117000100** e **20261117000200**. A inspeção de pg_catalog e dos privilégios efetivos retornou:
+
+| Controle                 | Resultado no hospedado                                                                                    |
+| ------------------------ | --------------------------------------------------------------------------------------------------------- |
+| Tabelas / RLS / PKs      | 10 / 10 habilitadas / 10                                                                                  |
+| Constraints / índices    | 71 / 33, correspondentes à stack local auditada                                                           |
+| Políticas                | 9 de leitura, nenhuma de escrita/ALL; nenhuma em tabelas privadas                                         |
+| Triggers                 | 20 ALWAYS vinculados à função reject_foundation_write                                                     |
+| Owners                   | postgres nas dez tabelas e nos dois helpers                                                               |
+| Helpers                  | SECURITY DEFINER com search_path vazio; EXECUTE negado a anon/service_role e permitido a authenticated    |
+| Escrita efetiva          | Zero grants de INSERT/UPDATE/DELETE/TRUNCATE para anon/authenticated/service_role nas dez tabelas         |
+| Leitura anônima interna  | Zero grants de SELECT nas tabelas internas/privadas; catálogo público com SELECT previsto                 |
+| Leitura privada direta   | Zero grants de SELECT para os três papéis de API                                                          |
+| Sequência                | Zero grants de USAGE/UPDATE para os três papéis de API                                                    |
+| Relações/valores gerados | FKs RESTRICT, FK de tentativa deferida, order_number ALWAYS identity e subtotal STORED gerado confirmados |
+
+Essas verificações comprovaram a estrutura e os controles por metadados hospedados; **não foram executadas fixtures pgTAP, inserts negativos ou testes de login/REST no remoto**. Os 121 testes comportamentais/de catálogo continuam sendo resultado da stack local. A fundação hospedada não habilita vendas, administração de funcionários, SDK ou autenticação real na aplicação. Nenhum registro comercial foi inserido por esta implantação.
+
+Documentação atualizada após a implantação; arquivos SQL e frontend continuam intactos. Não foi necessário recuperar falha ou executar operação destrutiva. Sem commit, push, merge ou publicação nesta execução. Os parágrafos seguintes registram a fase pré-implantação e sua fronteira de autorização naquele momento; a pendência de aprovação/aplicação foi resolvida por esta seção. As funcionalidades de negócio futuras continuam pendentes.
+
 Data: **17/11/2026** (America/Porto_Velho). Branch: `feature/backend-validacao-postgresql`, criada de `origin/main` atualizada em `fecb370` (PR #7). Working tree inicialmente limpo. Nenhum commit, push, merge, force push, publicação ou aplicação de migração remota nesta execução.
 
 ## Resultado e fronteira de autorização

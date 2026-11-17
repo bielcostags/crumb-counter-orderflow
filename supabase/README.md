@@ -1,5 +1,11 @@
 # Supabase externo — vila-rica-dev
 
+## Estado hospedado após aprovação — 17/11/2026
+
+As duas migrações foram **aplicadas com autorização explícita** em `yzxsuoxthkbzbkcumauz`, após reconfirmação dos hashes e dry run. O histórico registra ambas as versões. A inspeção read-only confirmou dez tabelas com RLS, 71 constraints, 33 índices, nove políticas de leitura e vinte triggers ALWAYS; os privilégios efetivos de escrita permanecem bloqueados para os papéis de API. Nenhum seed, conta, importação, Vault ou config push foi executado. O frontend continua local e não usa o banco para vendas.
+
+Os 121 testes pgTAP continuam sendo exclusivamente locais; a verificação hospedada foi de histórico/catálogos/permissões, sem executar fixtures ou cadastrar dados. O [relatório 06.2B](../docs/sprints/SPRINT-06.2B.md) registra o comando aplicado, os hashes e o resultado. As referências a aprovação pendente abaixo descrevem a fase anterior; **qualquer nova migração ou configuração remota precisa de autorização própria**.
+
 Alvo único autorizado: `yzxsuoxthkbzbkcumauz`, São Paulo / sa-east-1. O nome local em config.toml não vincula um projeto remoto; o vínculo da CLI fica em `.temp/project-ref`, ignorado pelo Git. O projeto anterior da Virginia não é utilizado.
 
 ## Comandos seguros preparados

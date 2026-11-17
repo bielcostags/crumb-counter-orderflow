@@ -1,5 +1,11 @@
 # Segurança e autenticação propostas
 
+## Fundação hospedada — atualização após autorização
+
+Em **17/11/2026**, após aprovação explícita do proprietário e reconfirmação dos hashes/dry run, as duas migrações de fundação foram aplicadas em `vila-rica-dev` (`yzxsuoxthkbzbkcumauz`, sa-east-1). O histórico e a inspeção read-only hospedada confirmaram dez tabelas com RLS, 71 constraints, 33 índices, nove policies de leitura e vinte triggers ALWAYS. Não há permissões DML para anon/authenticated/service_role ou leitura direta das tabelas privadas; owners e search_path dos helpers foram conferidos.
+
+O frontend permanece local, sem SDK, Auth real ou vendas remotas; nenhuma conta, produto ou pedido foi importado/criado. Os **121 testes SQL foram executados somente localmente**; no remoto foram conferidos metadados/privilégios, sem fixtures. A aprovação foi exclusiva para essa fundação, sem liberar operações de negócio ou configuração Auth. Ver [relatório e evidências de implantação](../sprints/SPRINT-06.2B.md). Os estados “aguarda aprovação” abaixo registram a fase histórica anterior a essa autorização.
+
 ## Estado validado — Sprint 06.2B
 
 Em 17/11/2026, a fundação passou em PostgreSQL local 17.11: **121 testes SQL em dois arquivos (34 anteriores + 87 novos)** e **200 testes da aplicação**. Foram conferidos RLS nas dez tabelas, vinte triggers ALWAYS, privilégios efetivos, owner dos helpers e search_path vazio, papéis ativos/inativos e bloqueio de acesso direto às três tabelas privadas. A modelagem e as duas migrações não precisaram de correção.

@@ -42,6 +42,8 @@ Use `bun run supabase:check`, `bun run supabase:link` e `bun run supabase:dry-ru
 
 ## Validação PostgreSQL — Sprint 06.2B
 
+**Atualização após autorização (17/11/2026):** as duas migrações de fundação foram aplicadas em vila-rica-dev, com histórico e controles conferidos por consultas read-only. Foram confirmados dez tabelas/RLS e vinte triggers de bloqueio; nenhuma venda, conta ou importação foi habilitada. Os 121 testes SQL seguem como evidência local, sem fixtures no remoto. Veja a seção de implantação autorizada no relatório 06.2B. O resultado pré-implantação abaixo é histórico.
+
 A fundação passou na stack local: **121 testes PostgreSQL (34 anteriores + 87 novos)** e **200 testes da aplicação**, com typecheck/build aprovados e lint sem erros, mantendo nove avisos preexistentes. As duas migrações não precisaram de alteração. O novo dry run confirmou somente os dois arquivos previstos no projeto São Paulo `yzxsuoxthkbzbkcumauz`; **nenhuma migração hospedada foi aplicada**. A aplicação remota aguarda aprovação explícita para os hashes e plano em [SPRINT-06.2B.md](docs/sprints/SPRINT-06.2B.md). Frontend, Lovable e dados locais permanecem preservados.
 
 ## Execução com Bun
