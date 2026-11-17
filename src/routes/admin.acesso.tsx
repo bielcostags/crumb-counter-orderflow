@@ -1,10 +1,14 @@
+import { StaffLogin } from "@/components/admin/auth/StaffLogin";
+import { isRealAuth } from "@/services/auth/config";
 import { ArrowRight, LayoutDashboard } from "lucide-react";
 import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import { BrandMark } from "@/components/shared/Brand";
 import { Button } from "@/components/ui/button";
 import { useAdminSession } from "@/contexts/AdminSessionContext";
 
-export const Route = createFileRoute("/admin/acesso")({ component: AdminAccess });
+export const Route = createFileRoute("/admin/acesso")({
+  component: () => (isRealAuth() ? <StaffLogin /> : <AdminAccess />),
+});
 function AdminAccess() {
   const { status, signInDemo } = useAdminSession();
   if (status === "signed-in") return <Navigate to="/admin" replace />;

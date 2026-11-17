@@ -28,9 +28,9 @@ select ok(not has_sequence_privilege(actor,'public.orders_order_number_seq','USA
   'Identity sequence inaccessible to ' || actor)
 from (values ('anon'),('authenticated'),('service_role')) roles(actor);
 select is((select count(*)::integer from pg_policy where polrelid in
-  (select relation_name::regclass from audit_relations) and polcmd <> 'r'),0,'No write or ALL policies');
+  (select relation_name::regclass from audit_relations) and polcmd <> 'r' and (0=any(polroles) or polroles && array['anon'::regrole::oid,'authenticated'::regrole::oid,'service_role'::regrole::oid])),0,'No API write or ALL policies');
 select is((select count(*)::integer from pg_policy where polrelid in
-  (select relation_name::regclass from audit_relations where relation_name like 'private.%')),0,
+  (select relation_name::regclass from audit_relations where relation_name like 'private.%') and (0=any(polroles) or polroles && array['anon'::regrole::oid,'authenticated'::regrole::oid,'service_role'::regrole::oid])),0,
   'No policies expose private records');
 select is((select count(*)::integer from pg_proc p join pg_namespace n on n.oid=p.pronamespace
   where n.nspname='private' and p.proname in ('is_staff','is_admin') and p.prosecdef

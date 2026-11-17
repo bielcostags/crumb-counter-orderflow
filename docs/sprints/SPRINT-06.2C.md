@@ -1,5 +1,7 @@
 # Sprint 06.2C — Reconciliação e conferência da implantação PostgreSQL
 
+> Nota de atualização em 17/11/2026 — Sprint 06.3: as duas migrações de fundação foram aplicadas após autorização na interação posterior à entrega pré-implantação; a 06.2C reconfirmou o histórico e dry run vazio. Esses fatos históricos são preservados abaixo. A nova migração 00300 de perfis está somente preparada/testada localmente e não foi aplicada no hospedado. Autenticação remota não foi ativada. Ver [Sprint 06.3](SPRINT-06.3.md).
+
 Data: 17/11/2026, America/Porto_Velho. Branch: `feature/backend-implantacao-remota`, criada de `origin/main` atualizada, commit **c31fc1e**, merge do PR #8. Nenhuma alteração remota foi aplicada nesta sprint.
 
 ## Divergência entre o escopo recebido e o estado existente
