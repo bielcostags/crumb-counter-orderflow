@@ -22,6 +22,16 @@ Foram geradas e revisadas 57 fotos ilustrativas por IA (ferramenta integrada ima
 
 O seed e a galeria usam imagens distintas por produto. Ao abrir a aplicação, imagens ausentes de produtos Vila Rica já existentes podem ser preenchidas automaticamente, somente quando ID, nome e categoria correspondem ao catálogo. Imagens personalizadas e todos os demais dados são preservados. Essa atualização não importa categorias/produtos ausentes nem restaura o catálogo antigo do navegador. Não há mudança de preços, pedidos ou regras de checkout. Validação: 169 testes aprovados (162 anteriores + 7 novos), typecheck/build/diff aprovados e lint sem erros, com nove avisos preexistentes. A revisão dos arquivos de imagem foi realizada; a revisão no navegador permanece pendente por indisponibilidade do host.
 
+## Fundação do backend — Sprint 06.1
+
+A [Sprint 06.1](docs/sprints/SPRINT-06.1.md) prepara a futura integração Supabase/PostgreSQL, mantendo o frontend local e todas as configurações do Lovable. A tentativa de independência da Sprint 05.2 foi cancelada definitivamente. Nenhum banco, SDK, autenticação real ou serviço externo foi ativado.
+
+A documentação inclui [arquitetura e auditoria](docs/backend/ARQUITETURA.md), [modelo físico e diagrama ER](docs/backend/MODELAGEM.md), [proposta SQL para revisão](docs/backend/PROPOSTA-SQL.md), [segurança/permissões/RLS](docs/backend/SEGURANCA.md) e [plano de importação](docs/backend/MIGRACAO.md). O SQL existe somente em Markdown; sua aplicação futura exige autorização e o fluxo de banco gerenciado pelo Lovable.
+
+As preparações em `src/services/backend/` são isoladas: contratos remotos segregados, validação pura de configuração e manifesto determinístico de oito categorias/57 produtos, sem pedidos fictícios ou dados pessoais. `.env.example` contém somente exemplos; copiar/configurar essas variáveis **não ativa backend**. Providers, persistência, carrinhos e funcionalidades atuais permanecem inalterados. A implementação remota futura não poderá usar a sessão demo nem fazer fallback silencioso para serviços locais.
+
+Validação desta etapa: **188 testes aprovados em 12 arquivos (170 anteriores + 18 novos)**, instalação congelada/typecheck/build/diff aprovados e lint sem erros, com nove avisos preexistentes. O navegador foi consultado, mas o host estava indisponível. Não houve teste de banco, RLS ou Auth real. Confirmação de modelagem, permissões, fuso America/Porto_Velho, retenção e autorização de ambiente são pré-requisitos para a Sprint 06.2.
+
 ## Execução com Bun
 
 Use Bun 1.4.4 (versão utilizada nesta validação) e Node.js 24 para os scripts das ferramentas. O `bun.lock` existente é a referência das dependências; não é necessário gerar lockfile npm.
