@@ -1,3 +1,5 @@
+import { adminSessionStore } from "@/services/local/store";
+import { demoAdminSession } from "@/test/helpers/demo-session";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { localServices } from "@/services/local";
 import { dataStore, cartStore, STORE_KEY, parseStoreData } from "@/services/local/store";
@@ -33,6 +35,7 @@ async function complete<T>(operation: Promise<T>) {
   return settled.value;
 }
 beforeEach(() => {
+  adminSessionStore.set(demoAdminSession);
   vi.useFakeTimers();
   dataStore.set(createSeedStore(new Date()));
   cartStore.reset();

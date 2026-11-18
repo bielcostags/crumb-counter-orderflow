@@ -181,8 +181,16 @@ export function nextOrderNumber(orders: Pick<Order, "number">[]): number {
   return orders.reduce((max, o) => Math.max(max, o.number), 1000) + 1;
 }
 
+const cashAmountSchema = z.number().int().nonnegative().refine(Number.isSafeInteger).optional();
+export function validateCashAmount(total: number, amount: number | undefined): void {
+  if (amount !== undefined && (!Number.isSafeInteger(amount) || amount < total))
+    throw new OrderValidationError(
+      "O valor em dinheiro deve ser válido e igual ou superior ao total.",
+    );
+}
 export const checkoutSchema = z
   .object({
+    cashAmountCents: cashAmountSchema,
     customerName: z
       .string()
       .trim()
@@ -214,6 +222,7 @@ export const checkoutSchema = z
 export type CheckoutInput = z.infer<typeof checkoutSchema>;
 
 export const counterOrderSchema = z.object({
+  cashAmountCents: cashAmountSchema,
   customerName: z.string().trim().max(60).optional(),
   notes: z.string().trim().max(MAX_NOTES_LENGTH).optional(),
   paymentMethod: z.enum(["pix", "dinheiro", "cartao"]),
@@ -230,6 +239,7 @@ export const counterOrderSchema = z.object({
 });
 
 export interface CounterOrderInput {
+  cashAmountCents?: number | undefined;
   customerName?: string;
   notes?: string;
   paymentMethod: PaymentMethod;

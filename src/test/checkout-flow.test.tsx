@@ -110,9 +110,15 @@ describe("Checkout e navegação", () => {
     submit();
     expect(await screen.findByText(/Informe o endereço/)).toBeInTheDocument();
     expect(cartStore.get()).toHaveLength(1);
-    fireEvent.change(screen.getByLabelText(/Endereço de entrega/), {
-      target: { value: "Rua Fictícia, 123, Bairro Exemplo" },
-    });
+    for (const [label, value] of [
+      ["CEP", "00000000"],
+      ["Rua/logradouro", "Rua Fictícia"],
+      ["Número", "123"],
+      ["Bairro", "Bairro Exemplo"],
+      ["Cidade", "Cidade Exemplo"],
+      ["Estado/UF", "RO"],
+    ])
+      fireEvent.change(screen.getByLabelText(label!), { target: { value } });
     fireEvent.change(screen.getByLabelText("Forma de pagamento ao receber"), {
       target: { value: "cartao" },
     });

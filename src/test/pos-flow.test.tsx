@@ -1,3 +1,4 @@
+import { demoAdminSession, fillDemoLogin } from "@/test/helpers/demo-session";
 import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { act, cleanup, fireEvent, render, screen, within, waitFor } from "@testing-library/react";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
@@ -14,7 +15,7 @@ beforeEach(() => {
   dataStore.set(createTechnicalStore(new Date()));
   cartStore.reset();
   counterCartStore.reset();
-  adminSessionStore.set({ signedIn: true, mode: "demo" });
+  adminSessionStore.set(demoAdminSession);
   vi.stubGlobal(
     "ResizeObserver",
     class {
@@ -57,7 +58,7 @@ describe("PDV: navegação e seleção", () => {
     await screen.findByRole("heading", { name: "Acesso da equipe" });
     expect(router.state.location.pathname).toBe("/admin/acesso");
     await act(async () => {
-      adminSessionStore.set({ signedIn: true, mode: "demo" });
+      adminSessionStore.set(demoAdminSession);
       await router.navigate({ to: "/admin/produtos" });
     });
     fireEvent.click(await screen.findByRole("link", { name: "Atendimento no balcão" }));
@@ -146,7 +147,7 @@ describe("PDV: navegação e seleção", () => {
     fireEvent.click(screen.getByRole("button", { name: "Sair" }));
     await screen.findByRole("heading", { name: "Acesso da equipe" });
     expect(counterCartStore.get().lines).toHaveLength(1);
-    fireEvent.click(screen.getByRole("button", { name: "Acessar painel" }));
+    fillDemoLogin();
     await screen.findByRole("heading", { name: "Visão geral", level: 1 });
     fireEvent.click(screen.getByRole("link", { name: "Atendimento no balcão" }));
     expect(await screen.findByLabelText("Nome do cliente (opcional)")).toHaveValue("Mesa Exemplo");
@@ -184,6 +185,10 @@ describe("PDV: pagamento e registro", () => {
       fireEvent.change(within(dialog).getByLabelText("Situação do pagamento"), {
         target: { value: "paid" },
       });
+      if (paymentMethod === "dinheiro")
+        fireEvent.change(within(dialog).getByLabelText(/Valor entregue/), {
+          target: { value: "1,20" },
+        });
       await register(dialog);
       expect(dataStore.get().orders[0]).toMatchObject({
         channel: "balcao",
@@ -273,7 +278,9 @@ describe("PDV: pagamento e registro", () => {
       target: { value: "5,00" },
     });
     await register(dialog);
-    expect(screen.getByText(/Troco:/)).toHaveTextContent(money(380));
+    expect(
+      within(screen.getByRole("region", { name: "Comprovante" })).getByText(/Troco:/),
+    ).toHaveTextContent(money(380));
     expect(dataStore.get().orders[0]?.totalCents).toBe(120);
   });
   it("evita submissões duplicadas e preserva atendimento em caso de falha", async () => {

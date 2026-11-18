@@ -1,3 +1,4 @@
+import { parseDemoIdentity, type DemoIdentity } from "./demo-session";
 import { createSeedStore, STORE_VERSION } from "@/data/mock";
 import { createPersistentStore } from "@/lib/persistent-store";
 import type { CartLine, StoreData } from "@/types";
@@ -41,6 +42,7 @@ export const cartStore = createPersistentStore<CartLine[]>(
 
 export interface AdminSession {
   signedIn: boolean;
+  identity?: DemoIdentity;
   /** Sempre "demo": não há autenticação real nesta fase. */
   mode: "demo";
 }
@@ -48,6 +50,9 @@ export interface AdminSession {
 export const adminSessionStore = createPersistentStore<AdminSession>(
   ADMIN_SESSION_KEY,
   () => ({ signedIn: false, mode: "demo" }),
-  (raw) =>
-    isObj(raw) && typeof raw["signedIn"] === "boolean" ? (raw as unknown as AdminSession) : null,
+  (raw) => {
+    if (!isObj(raw) || raw["mode"] !== "demo" || raw["signedIn"] !== true) return null;
+    const identity = parseDemoIdentity(raw["identity"]);
+    return identity ? { signedIn: true, mode: "demo", identity } : null;
+  },
 );

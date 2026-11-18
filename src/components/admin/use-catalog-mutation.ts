@@ -3,12 +3,17 @@ import { toast } from "sonner";
 import { useAdminSession } from "@/contexts/AdminSessionContext";
 
 export function useCatalogMutation() {
-  const { status } = useAdminSession();
+  const { status, mode, demoIdentity } = useAdminSession();
   const locked = useRef(false);
   const [pending, setPending] = useState(false);
   const [feedback, setFeedback] = useState<{ error: boolean; message: string } | null>(null);
   async function execute(operation: () => Promise<unknown>, message: string) {
-    if (locked.current || status !== "signed-in") return false;
+    if (
+      locked.current ||
+      status !== "signed-in" ||
+      (mode === "demo" && demoIdentity?.role !== "admin")
+    )
+      return false;
     locked.current = true;
     setPending(true);
     setFeedback(null);
