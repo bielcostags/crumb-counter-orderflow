@@ -1,5 +1,13 @@
 # Vila Rica — Padaria e Confeitaria Artesanal
 
+## Executar a versão demonstrativa
+
+A Sprint DEMO.1 está na branch `feature/demo-apresentacao`. Instale as dependências com `bun install --frozen-lockfile` e execute `bun run dev`; abra a URL local exibida no terminal. Não é necessário Docker, banco ou credenciais Supabase. O modo demo continua padrão e a integração Lovable foi preservada.
+
+A área da equipe agora exige uma das duas contas fictícias: **admin@vilarica.demo / Admin@Demo2026** ou **funcionario@vilarica.demo / Funcionario@Demo2026**. Funcionário acessa pedidos/Kanban e PDV; catálogo e dashboard são exclusivos do administrador. As restrições locais são demonstrativas. Sessões antigas sem identidade válida exigem novo login, sem apagar dados comerciais.
+
+Consulte o [manual de instalação e apresentação](docs/MANUAL-DEMONSTRACAO.md) para Git, Bun, acesso ao repositório, execução, permissões, ViaCEP, troco e resolução de problemas, e o [relatório da sprint](docs/sprints/SPRINT-DEMO.1.md). Notas das sprints anteriores abaixo permanecem como histórico.
+
 ## Pré-implantação de 17/11/2026 — Sprint 06.3B
 
 A migração **00300 continua pendente no hospedado**, com SHA-256 original c79e2a16a7e1411e52c6bf0789c41fa9ac88ea9aa2346e1aba0d483289d195e5. O dry run listou somente esse arquivo; nenhuma aplicação, conta ou configuração Auth foi alterada. A execução parou no primeiro ponto de aprovação. As duas migrações anteriores permanecem aplicadas.

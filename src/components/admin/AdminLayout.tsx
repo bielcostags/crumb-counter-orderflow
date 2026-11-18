@@ -1,3 +1,4 @@
+import { mayAccessDemo } from "@/services/local/demo-session";
 import { useState, type ReactNode } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import {
@@ -16,7 +17,7 @@ import { useAdminClock } from "./use-admin-clock";
 
 export function AdminLayout({ children }: { children: ReactNode }) {
   const [expanded, setExpanded] = useState(true);
-  const { signOut, mode, profile } = useAdminSession();
+  const { signOut, mode, profile, demoIdentity } = useAdminSession();
   const pathname = useLocation({ select: (l) => l.pathname });
   const now = useAdminClock();
   const section = pathname.endsWith("balcao")
@@ -60,12 +61,18 @@ export function AdminLayout({ children }: { children: ReactNode }) {
           className={`${expanded ? "flex" : "hidden md:flex"} flex-col gap-2 p-3`}
           aria-label="Área administrativa"
         >
-          <Button asChild variant={overview ? "secondary" : "ghost"}>
-            <Link to="/admin" aria-label="Visão geral" aria-current={overview ? "page" : undefined}>
-              <LayoutDashboard />
-              {expanded && "Visão geral"}
-            </Link>
-          </Button>
+          {(mode !== "demo" || mayAccessDemo(demoIdentity, "/admin")) && (
+            <Button asChild variant={overview ? "secondary" : "ghost"}>
+              <Link
+                to="/admin"
+                aria-label="Visão geral"
+                aria-current={overview ? "page" : undefined}
+              >
+                <LayoutDashboard />
+                {expanded && "Visão geral"}
+              </Link>
+            </Button>
+          )}
           <Button asChild variant={pathname.endsWith("pedidos") ? "secondary" : "ghost"}>
             <Link
               to="/admin/pedidos"
@@ -83,8 +90,10 @@ export function AdminLayout({ children }: { children: ReactNode }) {
               { to: "/admin/balcao", label: "Atendimento no balcão", Icon: Store },
             ] as const
           )
-            .filter(
-              ({ to }) => mode === "demo" || profile?.role === "admin" || to === "/admin/balcao",
+            .filter(({ to }) =>
+              mode === "demo"
+                ? mayAccessDemo(demoIdentity, to)
+                : profile?.role === "admin" || to === "/admin/balcao",
             )
             .map(({ to, label, Icon }) => (
               <Button key={to} asChild variant={section === label ? "secondary" : "ghost"}>
@@ -122,6 +131,11 @@ export function AdminLayout({ children }: { children: ReactNode }) {
               Vila Rica · Painel administrativo
             </p>
             <p className="font-display font-semibold text-primary">{section}</p>
+            <p className="text-sm text-muted-foreground">
+              {mode === "demo"
+                ? `${demoIdentity?.name} · ${demoIdentity?.role === "admin" ? "Administrador" : "Funcionário"}`
+                : profile?.full_name}
+            </p>
           </div>
           <time dateTime={now.toISOString()} className="text-sm text-muted-foreground">
             {now.toLocaleDateString("pt-BR", { dateStyle: "full" })}

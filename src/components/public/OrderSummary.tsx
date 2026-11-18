@@ -1,3 +1,4 @@
+import { CashSummary } from "@/components/shared/CashSummary";
 import { formatBRL, formatOrderNumber } from "@/lib/format";
 import { countItems, FULFILLMENT_LABELS, PAYMENT_METHOD_LABELS } from "@/lib/orders";
 import { StatusBadge, PaymentBadge } from "@/components/shared/OrderBadges";
@@ -21,6 +22,7 @@ export function OrderSummary({ order }: { order: Order }) {
         {FULFILLMENT_LABELS[order.fulfillment]} · {PAYMENT_METHOD_LABELS[order.paymentMethod]} ao
         receber
       </p>
+      <CashSummary order={order} />
       <ul className="divide-y">
         {order.items.map((item) => (
           <li key={item.productId} className="py-3">

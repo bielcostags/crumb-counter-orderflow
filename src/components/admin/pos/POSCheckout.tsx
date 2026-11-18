@@ -32,6 +32,7 @@ export function POSCheckout({
   let change: number | null = null;
   if (cash) {
     try {
+      if (!draft.cash.trim()) throw new Error("Informe o valor recebido.");
       change = calculateCashChange(quote.total, draft.cash).changeCents;
     } catch (err) {
       cashError = err instanceof Error ? err.message : "Revise o valor recebido.";
@@ -130,7 +131,7 @@ export function POSCheckout({
             </div>
             {cash && (
               <div className="space-y-2">
-                <Label htmlFor="pos-cash">Valor entregue pelo cliente em R$ (opcional)</Label>
+                <Label htmlFor="pos-cash">Valor entregue pelo cliente em R$ (obrigatório)</Label>
                 <Input
                   id="pos-cash"
                   inputMode="decimal"
@@ -145,7 +146,7 @@ export function POSCheckout({
                 </p>
                 {change !== null && (
                   <p role="status" className="font-semibold text-success">
-                    Troco: {formatBRL(change)}
+                    Valor recebido: {formatBRL(quote.total + change)} · Troco: {formatBRL(change)}
                   </p>
                 )}
               </div>

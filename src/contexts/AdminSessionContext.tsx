@@ -1,3 +1,4 @@
+import { authenticateDemo, parseDemoIdentity } from "@/services/local/demo-session";
 import { lazy, Suspense, useSyncExternalStore, type ReactNode } from "react";
 import { AdminSessionContext } from "./admin-session";
 import { LoadingBlock } from "@/components/shared/States";
@@ -26,19 +27,28 @@ function DemoSessionProvider({ children }: { children: ReactNode }) {
     adminSessionStore.get,
     getServerSnapshot,
   );
-  const status = session === null ? "loading" : session.signedIn ? "signed-in" : "signed-out";
+  const status =
+    session === null
+      ? "loading"
+      : session.signedIn && parseDemoIdentity(session.identity)
+        ? "signed-in"
+        : "signed-out";
   return (
     <AdminSessionContext.Provider
       value={{
         status,
         mode: "demo",
         profile: null,
+        demoIdentity: session?.identity ?? null,
         error: "",
         signIn: async () => {
           throw new Error("Login real não habilitado no modo demonstrativo.");
         },
         refresh: () => {},
-        signInDemo: () => adminSessionStore.set({ signedIn: true, mode: "demo" }),
+        signInDemo: (email = "", password = "") => {
+          const identity = authenticateDemo(email, password);
+          adminSessionStore.set({ signedIn: true, mode: "demo", identity });
+        },
         signOut: () => adminSessionStore.set({ signedIn: false, mode: "demo" }),
       }}
     >

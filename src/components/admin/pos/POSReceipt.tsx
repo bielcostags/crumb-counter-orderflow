@@ -1,3 +1,4 @@
+import { CashSummary } from "@/components/shared/CashSummary";
 import { BrandLogo } from "@/components/shared/Brand";
 import { formatBRL, formatDateTime } from "@/lib/format";
 import { PAYMENT_METHOD_LABELS } from "@/lib/orders";
@@ -33,6 +34,7 @@ export function POSReceipt({ order }: { order: Order }) {
         {PAYMENT_METHOD_LABELS[order.paymentMethod]} ·{" "}
         {order.paymentStatus === "pago" ? "Pagamento recebido" : "Pagamento pendente"}
       </p>
+      <CashSummary order={order} />
       <p>Origem: Balcão · Sem processamento financeiro ou emissão fiscal.</p>
     </section>
   );

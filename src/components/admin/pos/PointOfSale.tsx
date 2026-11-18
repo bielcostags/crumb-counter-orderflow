@@ -42,9 +42,12 @@ export function PointOfSale() {
         draft.paymentMethod === "dinheiro" && draft.paid
           ? calculateCashChange(quote.total, draft.cash)
           : { receivedCents: null, changeCents: null };
+      if (draft.paymentMethod === "dinheiro" && draft.paid && cash.receivedCents === null)
+        throw new Error("Informe o valor recebido.");
       const order = await services.orders.createCounterOrder(
         {
           ...parsed.data,
+          cashAmountCents: cash.receivedCents ?? undefined,
           customerName: parsed.data.customerName ?? "",
           notes: parsed.data.notes ?? "",
           lines: parsed.data.lines.map((line) => ({ ...line, notes: line.notes ?? "" })),
