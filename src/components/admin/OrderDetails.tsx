@@ -1,3 +1,4 @@
+import { CashSummary } from "@/components/shared/CashSummary";
 import {
   Dialog,
   DialogContent,
@@ -95,6 +96,7 @@ export function OrderDetails({ actions }: { actions: Actions }) {
                 <dd>{PAYMENT_METHOD_LABELS[order.paymentMethod]}</dd>
               </div>
             </dl>
+            <CashSummary order={order} />
             <ul className="divide-y">
               {order.items.map((item) => (
                 <li key={item.productId} className="py-3">

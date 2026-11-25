@@ -1,3 +1,7 @@
+import { useDeliveryAddress } from "@/hooks/use-delivery-address";
+import { composeDeliveryAddress, deliveryAddressSchema } from "@/lib/delivery-address";
+import { DeliveryAddressFields } from "@/components/public/DeliveryAddressFields";
+import { calculateCashChange } from "@/lib/pos";
 import { useRef, useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShoppingBasket, CheckCircle2 } from "lucide-react";
@@ -40,11 +44,13 @@ function CheckoutPage() {
     paymentMethod: "pix",
     notes: "",
   });
+  const [completed, setCompleted] = useState<Order | null>(null);
+  const delivery = useDeliveryAddress(input.fulfillment === "entrega" && !completed);
+  const [cash, setCash] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const sending = useRef(false);
-  const [completed, setCompleted] = useState<Order | null>(null);
   const update = <K extends keyof CheckoutInput>(key: K, value: CheckoutInput[K]) =>
     setInput((prev) => ({ ...prev, [key]: value }));
   let preview: ReturnType<typeof buildOrderItems> = [];
@@ -58,10 +64,47 @@ function CheckoutPage() {
       catalogError = err instanceof Error ? err.message : "Revise os itens do carrinho.";
     }
   }
+  let cashError = "";
+  let cashPreview: ReturnType<typeof calculateCashChange> = {
+    receivedCents: null,
+    changeCents: null,
+  };
+  if (input.paymentMethod === "dinheiro") {
+    try {
+      cashPreview = calculateCashChange(total, cash);
+    } catch (err) {
+      cashError = err instanceof Error ? err.message : "Valor inválido.";
+    }
+  }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (sending.current || completed) return;
-    const parsed = checkoutSchema.safeParse(input);
+    let address = "";
+    if (input.fulfillment === "entrega") {
+      const result = deliveryAddressSchema.safeParse(delivery.address);
+      if (!result.success) {
+        setErrors(
+          Object.fromEntries(result.error.issues.map((issue) => [issue.path[0], issue.message])),
+        );
+        setError("Informe o endereço de entrega completo.");
+        const field = event.currentTarget.elements.namedItem(
+          String(result.error.issues[0]?.path[0]),
+        );
+        if (field instanceof HTMLElement) field.focus();
+        return;
+      }
+      address = composeDeliveryAddress(result.data);
+    }
+    if (cashError) {
+      setError(cashError);
+      return;
+    }
+    const parsed = checkoutSchema.safeParse({
+      ...input,
+      address,
+      cashAmountCents:
+        input.paymentMethod === "dinheiro" ? (cashPreview.receivedCents ?? undefined) : undefined,
+    });
     setError("");
     if (!parsed.success) {
       setErrors(
@@ -114,6 +157,7 @@ function CheckoutPage() {
             </h1>
             <p role="status">Guarde o número do pedido para acompanhar o andamento.</p>
             <OrderSummary order={completed} />
+            {completed.fulfillment === "entrega" && <p>Endereço de entrega: {completed.address}</p>}
             <div className="flex flex-wrap gap-3">
               <Button asChild>
                 <Link to="/acompanhar" search={{ numero: completed.number }}>
@@ -216,25 +260,12 @@ function CheckoutPage() {
                   </select>
                 </div>
                 {input.fulfillment === "entrega" && (
-                  <div className="space-y-2">
-                    <Label htmlFor="address">Endereço de entrega (obrigatório)</Label>
-                    <Input
-                      id="address"
-                      autoComplete="off"
-                      placeholder="Rua, número e bairro"
-                      maxLength={160}
-                      value={input.address ?? ""}
-                      onChange={(e) => update("address", e.target.value)}
-                      required
-                      aria-invalid={!!errors["address"]}
-                      aria-describedby={errors["address"] ? "address-error" : undefined}
-                    />
-                    {errors["address"] && (
-                      <p id="address-error" role="alert" className="text-sm text-destructive">
-                        {errors["address"]}
-                      </p>
-                    )}
-                  </div>
+                  <DeliveryAddressFields delivery={delivery} errors={errors} />
+                )}
+                {errors["address"] && (
+                  <p role="alert" className="text-sm text-destructive">
+                    {errors["address"]}
+                  </p>
                 )}
                 <div className="space-y-2">
                   <Label htmlFor="paymentMethod">Forma de pagamento ao receber</Label>
@@ -242,9 +273,10 @@ function CheckoutPage() {
                     id="paymentMethod"
                     className="h-10 w-full rounded-md border bg-background px-3 text-sm"
                     value={input.paymentMethod}
-                    onChange={(e) =>
-                      update("paymentMethod", e.target.value as CheckoutInput["paymentMethod"])
-                    }
+                    onChange={(e) => {
+                      update("paymentMethod", e.target.value as CheckoutInput["paymentMethod"]);
+                      setCash("");
+                    }}
                   >
                     <option value="pix">Pix</option>
                     <option value="dinheiro">Dinheiro</option>
@@ -252,6 +284,33 @@ function CheckoutPage() {
                   </select>
                   <p className="text-sm text-muted-foreground">Pagamento no recebimento.</p>
                 </div>
+                {input.paymentMethod === "dinheiro" && (
+                  <div className="space-y-2">
+                    <Label htmlFor="checkout-cash">Vai pagar com quanto? (opcional)</Label>
+                    <Input
+                      id="checkout-cash"
+                      inputMode="decimal"
+                      maxLength={30}
+                      value={cash}
+                      onChange={(e) => setCash(e.target.value)}
+                      aria-invalid={!!cashError}
+                      aria-describedby="cash-help"
+                    />
+                    <p
+                      id="cash-help"
+                      role={cashError ? "alert" : "status"}
+                      className={cashError ? "text-sm text-destructive" : "text-sm"}
+                    >
+                      {cashError ||
+                        (cashPreview.changeCents === null
+                          ? "Informe o valor em reais se precisar de troco."
+                          : `Troco necessário: ${formatBRL(cashPreview.changeCents)}${cashPreview.changeCents === 0 ? " · Sem troco" : ""}`)}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Pagamento pendente até o recebimento.
+                    </p>
+                  </div>
+                )}
                 <div className="space-y-2">
                   <Label htmlFor="notes">Observações gerais (opcional)</Label>
                   <Textarea
@@ -267,7 +326,10 @@ function CheckoutPage() {
                   {error}
                 </p>
               )}
-              <Button type="submit" disabled={busy || !!catalogError || changes.length > 0}>
+              <Button
+                type="submit"
+                disabled={busy || !!cashError || !!catalogError || changes.length > 0}
+              >
                 {busy ? "Registrando pedido…" : "Confirmar pedido"}
               </Button>
             </form>

@@ -1,3 +1,5 @@
+import { adminSessionStore } from "@/services/local/store";
+import { demoAdminSession } from "@/test/helpers/demo-session";
 import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { calculateCashChange } from "@/lib/pos";
@@ -14,6 +16,7 @@ import {
 import { createPersistentStore } from "@/lib/persistent-store";
 
 beforeEach(() => {
+  adminSessionStore.set(demoAdminSession);
   vi.useFakeTimers();
   dataStore.set(createTechnicalStore(new Date()));
   cartStore.reset();

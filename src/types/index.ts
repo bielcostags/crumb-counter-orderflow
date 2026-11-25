@@ -56,6 +56,8 @@ export interface Order {
   status: OrderStatus;
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
+  /** Local: previsão online ou valor efetivo no balcão; nunca é receita. */
+  cashAmountCents?: number | undefined;
   customerName?: string | undefined;
   customerPhone?: string | undefined;
   address?: string | undefined;

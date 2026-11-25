@@ -1,3 +1,4 @@
+import { demoAdminSession } from "@/test/helpers/demo-session";
 import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { act, cleanup, fireEvent, render, screen, within, waitFor } from "@testing-library/react";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
@@ -10,7 +11,7 @@ import { formatBRL } from "@/lib/format";
 beforeEach(() => {
   dataStore.set(createTechnicalStore(new Date()));
   cartStore.reset();
-  adminSessionStore.set({ signedIn: true, mode: "demo" });
+  adminSessionStore.set(demoAdminSession);
 });
 afterEach(() => {
   cleanup();

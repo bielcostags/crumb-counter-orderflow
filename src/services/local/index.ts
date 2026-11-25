@@ -10,6 +10,7 @@ import {
 } from "@/lib/catalog";
 import type { AppServices, CatalogService, DemoService, OrderService } from "@/services/contracts";
 import {
+  validateCashAmount,
   buildOrderItems,
   assertOrderQuote,
   calcTotalCents,
@@ -24,7 +25,8 @@ import {
 import { onlyDigits, formatPhone } from "@/lib/format";
 import type { Category, Order, Product } from "@/types";
 
-import { cartStore, dataStore } from "./store";
+import { cartStore, dataStore, adminSessionStore } from "./store";
+import { parseDemoIdentity } from "./demo-session";
 
 const LATENCY_MS = 250;
 const delay = () => new Promise((r) => setTimeout(r, LATENCY_MS));
@@ -44,6 +46,11 @@ function replaceOrder(updated: Order) {
   }));
 }
 
+function requireDemoAdmin() {
+  const session = adminSessionStore.get();
+  if (!session.signedIn || parseDemoIdentity(session.identity)?.role !== "admin")
+    throw new OrderValidationError("Acesso restrito ao administrador da demonstração.");
+}
 const catalog: CatalogService = {
   async listCategories() {
     await delay();
@@ -51,6 +58,7 @@ const catalog: CatalogService = {
   },
   async saveCategory(rawInput, id) {
     await delay();
+    requireDemoAdmin();
     const parsed = categoryInputSchema.safeParse(rawInput);
     if (!parsed.success)
       throw new OrderValidationError(parsed.error.issues[0]?.message ?? "Categoria inválida.");
@@ -94,6 +102,7 @@ const catalog: CatalogService = {
   },
   async setCategoryActive(id, active) {
     await delay();
+    requireDemoAdmin();
     const current = dataStore.get().categories.find((c) => c.id === id);
     if (!current) throw new OrderValidationError("Categoria não encontrada.");
     const saved = { ...current, active };
@@ -109,6 +118,7 @@ const catalog: CatalogService = {
   },
   async saveProduct(rawInput, id) {
     await delay();
+    requireDemoAdmin();
     const parsed = productInputSchema.safeParse(rawInput);
     if (!parsed.success)
       throw new OrderValidationError(parsed.error.issues[0]?.message ?? "Produto inválido.");
@@ -134,6 +144,7 @@ const catalog: CatalogService = {
   },
   async setProductAvailable(id, available) {
     await delay();
+    requireDemoAdmin();
     const current = dataStore.get().products.find((p) => p.id === id);
     if (!current) throw new OrderValidationError("Produto não encontrado.");
     const saved = { ...current, available };
@@ -160,8 +171,11 @@ const orders: OrderService = {
     const { products, categories, orders: all } = dataStore.get();
     const items = buildOrderItems(lines, products, categories);
     if (expectedItems) assertOrderQuote(expectedItems, items);
+    const cashAmountCents = input.paymentMethod === "dinheiro" ? input.cashAmountCents : undefined;
+    validateCashAmount(calcTotalCents(items), cashAmountCents);
     const now = new Date().toISOString();
     const order: Order = {
+      cashAmountCents,
       id: newId("o"),
       number: nextOrderNumber(all),
       channel: "online",
@@ -199,8 +213,12 @@ const orders: OrderService = {
           categoryId: products.find((p) => p.id === item.productId)!.categoryId,
         })),
       );
+    const cashAmountCents =
+      input.paymentMethod === "dinheiro" && input.paid ? input.cashAmountCents : undefined;
+    validateCashAmount(calcTotalCents(items), cashAmountCents);
     const now = new Date().toISOString();
     const order: Order = {
+      cashAmountCents,
       id: newId("o"),
       number: nextOrderNumber(all),
       channel: "balcao",

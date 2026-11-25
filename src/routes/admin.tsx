@@ -1,3 +1,4 @@
+import { mayAccessDemo } from "@/services/local/demo-session";
 import { createFileRoute, Navigate, Outlet, useLocation, redirect } from "@tanstack/react-router";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { LoadingBlock } from "@/components/shared/States";
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/admin")({
 });
 
 function AdminPage() {
-  const { status, mode, profile, refresh, signOut } = useAdminSession();
+  const { status, mode, profile, demoIdentity, refresh, signOut } = useAdminSession();
   const pathname = useLocation({ select: (l) => l.pathname });
   if (mode === "supabase" && pathname === "/admin/acesso") return <Outlet />;
   if (status === "loading") return <LoadingBlock />;
@@ -66,6 +67,7 @@ function AdminPage() {
       </AdminLayout>
     );
   }
+  if (!mayAccessDemo(demoIdentity, pathname)) return <Navigate to="/admin/pedidos" replace />;
   return (
     <AdminLayout>
       <Outlet />

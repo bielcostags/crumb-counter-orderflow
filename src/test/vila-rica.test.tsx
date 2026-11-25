@@ -1,3 +1,4 @@
+import { demoAdminSession } from "@/test/helpers/demo-session";
 import { act, cleanup, fireEvent, render, screen, within, waitFor } from "@testing-library/react";
 import { beforeEach, afterEach, describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
@@ -20,7 +21,7 @@ beforeEach(() => {
   dataStore.set(createSeedStore());
   cartStore.reset();
   counterCartStore.reset();
-  adminSessionStore.set({ signedIn: true, mode: "demo" });
+  adminSessionStore.set(demoAdminSession);
 });
 afterEach(cleanup);
 const expected = [

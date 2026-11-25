@@ -1,3 +1,4 @@
+import { demoAdminSession, fillDemoLogin } from "@/test/helpers/demo-session";
 import { createSeedStore as createTechnicalStore } from "@/test/fixtures/catalog";
 import { act, cleanup, fireEvent, render, screen, within, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -94,7 +95,7 @@ async function details(number: number) {
 beforeEach(() => {
   dataStore.set(createTechnicalStore(new Date()));
   cartStore.reset();
-  adminSessionStore.set({ signedIn: true, mode: "demo" });
+  adminSessionStore.set(demoAdminSession);
   // Apenas a medição de layout é suprida no jsdom; dados e operações são reais.
   vi.stubGlobal(
     "ResizeObserver",
@@ -126,7 +127,7 @@ describe("Sessão e layout administrativo", () => {
     expect(
       screen.queryByRole("navigation", { name: "Área administrativa" }),
     ).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Acessar painel" }));
+    fillDemoLogin();
     await screen.findByRole("heading", { name: "Visão geral", level: 1 });
     expect(JSON.parse(localStorage.getItem(ADMIN_SESSION_KEY)!)).toMatchObject({
       signedIn: true,
